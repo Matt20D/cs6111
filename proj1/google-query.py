@@ -3,7 +3,10 @@
 #
 
 import sys # command line arg parsing
+
+# these libraries come from the below source, check the google_search method
 # pip3 install google-api-python-client
+import pprint
 from googleapiclient.discovery import build # for querying google 
 
 
@@ -48,22 +51,51 @@ q/query: query input list
 cx/eid:  search engine id
 key: 	 google API key
 """
-def query_google_search(query: str, eid: str, key: str):
+def query_google_search(query: str, eid: str, key: str) -> list():
 	# source: https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
 	service = build("customsearch", "v1",
 		developerKey=key)
 
-	print("made it here\n\n\n\n")
-	print("engine_id: " + eid)
-	print("key: " + key)
 	res  = service.cse().list(
 			key = key,
 			cx = eid,
 			q  = to_string(query)
 			).execute()
 
-	print(res)	
+	# print out the whole JSON response document from google engine
+	#print(res)	
+	#pprint.pprint(res)
 
+	# get the actual queries from response document, max of 10 returned always
+	queries = res['items']
+
+	#pprint.pprint(queries)
+	#print(len(queries))
+
+	# lets parse the data thate we need URL, title, desc from the JSON object
+	clean_results = []
+	for doc in queries:
+
+		temp_list = []
+		
+		temp_list.append(doc['formattedUrl'])
+		temp_list.append(doc['title'])
+		temp_list.append(doc['snippet'])
+
+		clean_results.append(temp_list)
+	
+	#print(clean_results)
+	return clean_results
+
+# print the query results for the users
+def present_results(queries: list) -> None:
+	
+	rank = 1
+	for query in queries:
+		print("Rank " + str(rank))
+		rank += 1
+		print("URL: {}\nTitle: {}\nDescription: {}\n".format(query[0], query[1], query[2]))
+	
 # main method
 def main():
 
@@ -86,15 +118,32 @@ def main():
 		query_list.append(sys.argv[i])
 	
 	# for debugging
-	print("======")
-	print(api_key)
-	print(engine_id)
-	print(precision_at_k)
-	print(query_list)
-	print("======")
+	#print("======")
+	#print(api_key)
+	#print(engine_id)
+	#print(precision_at_k)
+	#print(query_list)
+	#print("======")
 
 	# execute query
-	query_google_search(query_list, engine_id, api_key)
+	initial_query = query_google_search(query_list, engine_id, api_key)
+
+	# edge case 1: ensure that there are 10 results on first search
+	if len(initial_query) < 10:
+		print("Query was not ambiguous, there were less than 10 results in iteration 1")
+		quit()
+	
+	# set up counter for iterations
+	num_searches = 1
+
+	# present results
+	print("Query Number: " + str(num_searches))
+	print("Searched for: " + to_string(query_list))
+	present_results(initial_query)
+
+	# prompt user for relevance
+
+	# calculate the initial precision@k value
 
 # main driver
 if __name__ == "__main__":
@@ -104,8 +153,10 @@ if __name__ == "__main__":
 Main Algorithm Idea:
 
 1) receive user query as input (list of words), and precision target for the fraction of relevant queries out of top 10 results
+	[DONE, with input error checking as well]
 2) retrieve top 10 results from google, using google API default values ...
 	If there are fewer than 10 results then terminate in first iteration
+	[DONE, and implemented the edge case in this bullet]
 3) present results to user, and get relevence feedback for the pages w.r.t. query meaning.
 	display title, URL, and description returned by Google.
 	Needs to be exact top 10 results returned by Google. Do not modify the default vals for search params
