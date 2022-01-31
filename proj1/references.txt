@@ -1,0 +1,2 @@
+1) https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
+  Gravano's provided example for querying the google search engine.
