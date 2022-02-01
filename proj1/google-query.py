@@ -95,7 +95,29 @@ def present_results(queries: list) -> None:
 		print("Rank " + str(rank))
 		rank += 1
 		print("URL: {}\nTitle: {}\nDescription: {}\n".format(query[0], query[1], query[2]))
+
+# calculate the precision for a list of queries in a given iteration
+def calc_precision(queries: list) -> float:
 	
+	num_no   	= 0
+	num_yes     = 0
+
+	for i in range(0, len(queries)):
+		while True:
+			user_input = input("Is query {} relevant? [y/n] ".format(i+1))
+			if user_input.lower() == "y":
+				num_yes += 1
+				break
+			elif user_input.lower() == "n":
+				num_no += 1
+				break
+			else:
+				print("Bad input, please redo...")
+
+	precision = (num_yes) / (num_yes + num_no)
+	print(precision)
+	return precision
+
 # main method
 def main():
 
@@ -138,16 +160,55 @@ def main():
 
 	# present results
 	print("Query Number: " + str(num_searches))
-	print("Searched for: " + to_string(query_list))
+	print("Searched for: " + to_string(query_list) + "\n")
 	present_results(initial_query)
 
-	# prompt user for relevance
+	# prompt user for relevance and calculate the initial precision@k value
+	precision_k_actual = calc_precision(initial_query)
 
-	# calculate the initial precision@k value
+	# run this loop until we hit the target precision
+	while True:
+
+		# edge case 2: I believe this only matters for the first iteration
+		if precision_k_actual == 0:
+			print("precision @ 10 for query {} is 0".format(num_searches))
+			break
+
+		# edge case 3: if we have hit the target precision, then we can terminate.
+		elif precision_k_actual >= precision_at_k:
+			print("current precision {:.2f} >= target precision {:.2f}. We are done...".format(precision_k_actual, precision_at_k))
+			break
+
+		# this is the actual point of the assignment, this is the algorithm we need to develop
+		else:
+			print("Need to run the actual algorithm now ...")
+			print("Put actual algo here!!!!!!")
+
+			#
+			# alter the query here, for next loop
+			#
+
+			# increment the iteration counter
+			num_searches += 1
+
+			# obvi delete later on
+			break
+	
+	# return from main
+	return
 
 # main driver
 if __name__ == "__main__":
+
+	# print greeting
+	print("Welcome to Relevence Feedback Query Optimizer")
+	print("Written by Matt Duran and Ethan Garry\n")
+
+	# run the program
 	main()
+
+	# print goodbye
+	print("Program will terminate now...\n")
 
 """
 Main Algorithm Idea:
@@ -155,14 +216,13 @@ Main Algorithm Idea:
 1) receive user query as input (list of words), and precision target for the fraction of relevant queries out of top 10 results
 	[DONE, with input error checking as well]
 2) retrieve top 10 results from google, using google API default values ...
-	If there are fewer than 10 results then terminate in first iteration
-	[DONE, and implemented the edge case in this bullet]
+	If there are fewer than 10 results then terminate in first iteration [DONE, and implemented the edge case in this bullet]
 3) present results to user, and get relevence feedback for the pages w.r.t. query meaning.
-	display title, URL, and description returned by Google.
-	Needs to be exact top 10 results returned by Google. Do not modify the default vals for search params
+	display title, URL, and description returned by Google. [DONE]
+	Needs to be exact top 10 results returned by Google. Do not modify the default vals for search params [DONE]
 4) calculate precision@10
-	if precision@10 greater than target value, then terminate.
-	elif precision@10 == 0, then terminate.
+	if precision@10 greater than target value, then terminate. [DONE]
+	elif precision@10 == 0, then terminate. [DONE]
 	else: use pages marked as relevant to automatically derive new words that are likely to identify more relevant pages	
 	At this point no more user input...!!!
 
@@ -180,6 +240,4 @@ just need to ensure that we cite any publication.
 techniques to use:
 	stopword elimination
 
-
-need to use Google Custom Search JSON API for querying google
 """
