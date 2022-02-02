@@ -1,7 +1,7 @@
 Matthew Duran (md3420)
 Ethan Garry (IDK_UNI)
 
-Run setup.sh if you don't have a venv or don't have all dependencies. Then run test.sh to test the program.
+Run source setup.sh if you don't have a venv or don't have all dependencies. Then run ./test.sh to test the program.
 
 When you add a package, please run:
 pip freeze > requirements.txt 
