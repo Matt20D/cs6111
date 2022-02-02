@@ -107,6 +107,9 @@ def calc_precision(queries: list) -> float:
 			user_input = input("Is query {} relevant? [y/n] ".format(i+1))
 			if user_input.lower() == "y":
 				num_yes += 1
+
+				# this is where we need to implement some strategy to determine what words to add to next query
+
 				break
 			elif user_input.lower() == "n":
 				num_no += 1
@@ -122,7 +125,7 @@ def calc_precision(queries: list) -> float:
 def main():
 
 	# ensure that there are at least 4 command line arguments + the program run name
-	if not len(sys.argv) >= 5:
+	if len(sys.argv) < 5:
 		raise Exception("usage: google-query.py <google api key> <google engine id> <precision> <query>")  
 	
 	# idk if we can even error check this... 
