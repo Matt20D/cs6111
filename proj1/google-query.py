@@ -10,6 +10,17 @@ import pprint
 from googleapiclient.discovery import build # for querying google 
 
 
+# use this method to print all relevant parameters to the console
+def print_params(api_key, eid, precision, query, iteration):
+	
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
+	print(" Client Key  		= {}".format(api_key))
+	print(" Engine Key  		= {}".format(eid))
+	print(" Desired Precision	= {}".format(precision))
+	print(" Query       		= {}".format(query))
+	print(" Iteration   		= {}".format(iteration))
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
+
 # get list of stopwords from gravano's file saved locally
 def get_stopwords() -> set():
 
@@ -72,6 +83,11 @@ def query_google_search(query: str, eid: str, key: str) -> list():
 	#pprint.pprint(queries)
 	#print(len(queries))
 
+	#
+	# TODO
+	# Need to determine what we would like to do with non html files, look at spec
+	#
+
 	# lets parse the data thate we need URL, title, desc from the JSON object
 	clean_results = []
 	for doc in queries:
@@ -87,46 +103,76 @@ def query_google_search(query: str, eid: str, key: str) -> list():
 	#print(clean_results)
 	return clean_results
 
-# print the query results for the users
-def present_results(queries: list) -> None:
+# get user input and return True or False
+def get_feedback() -> bool:
+	# normal case this loop runs once, but you need
+	# to get good input, i.e. a 'y' or 'n'
+	while True:
+		user_input = input(" Is query relevant [y/n]? ")
+		if user_input.lower() == "y":
+			return True
+		elif user_input.lower() == "n":
+			return False
+		else:
+			print(" Bad input, please redo...")
+
+# print the query results for the users,
+# ask for relevence feedback, and return the precision metric
+def present_results(queries: list) -> float:
 	
+	# track query rank
 	rank = 1
+
+	# track relevence
+	num_no  = 0
+	num_yes = 0
+
+	# display query and ask for relevence
 	for query in queries:
-		print("Rank " + str(rank))
+
+		# present the query rank
+		print(" Rank " + str(rank))
 		rank += 1
-		print("URL: {}\nTitle: {}\nDescription: {}\n".format(query[0], query[1], query[2]))
+		
+		# present query result to user
+		print(" URL: {}\n Title: {}\n Description: {}\n".format(query[0], query[1], query[2]))
 
-# calculate the precision for a list of queries in a given iteration
-def calc_precision(queries: list) -> float:
-	
-	num_no   	= 0
-	num_yes     = 0
+		# ask user if this query is relevant
+		if get_feedback() == True:
+			num_yes += 1
+		else:
+			num_no += 1
 
-	for i in range(0, len(queries)):
-		while True:
-			user_input = input("Is query {} relevant? [y/n] ".format(i+1))
-			if user_input.lower() == "y":
-				num_yes += 1
+		print("\n")
 
-				# this is where we need to implement some strategy to determine what words to add to next query
-
-				break
-			elif user_input.lower() == "n":
-				num_no += 1
-				break
-			else:
-				print("Bad input, please redo...")
-
+	# calc and return the precision
 	precision = (num_yes) / (num_yes + num_no)
-	print(precision)
 	return precision
+
+#
+# Log file stuff, This is useful for final steps
+#
+
+# use this for serializing our data
+def make_json(iter_num: int, curr: str, prec: float, res: list) -> dict:
+
+	json = {"iter": iter_num, \
+			"query string": curr, \
+			"precision": prec, \
+			"google results": res}
+
+	return json
+
+# use this for logging to file later
+def log_iteration() -> None:
+	pass
 
 # main method
 def main():
 
 	# ensure that there are at least 4 command line arguments + the program run name
-	if len(sys.argv) < 5:
-		raise Exception("usage: google-query.py <google api key> <google engine id> <precision> <query>")  
+	if len(sys.argv) > 5:
+		raise Exception(" usage: google-query.py <google api key> <google engine id> <precision> <query>")  
 	
 	# idk if we can even error check this... 
 	api_key     = str(sys.argv[1])
@@ -135,67 +181,92 @@ def main():
 	# ensure that precision is correct input
 	precision_at_k   = float(sys.argv[3])
 	if precision_at_k < 0.0 or precision_at_k > 1.0:
-		raise Exception("query precision needs to be real valued between 0 and 1")
+		raise Exception(" Query precision needs to be real valued between 0 and 1")
 	
 	# create a query list of keywords
-	query_list  = list()
-	for i in range(4, len(sys.argv)):
-		query_list.append(sys.argv[i])
+	initial_query 		= sys.argv[4]
+	query_keyword_list  = initial_query.split() # use this for keyword analysis, curr not in use TODO
 	
-	# for debugging
-	#print("======")
-	#print(api_key)
-	#print(engine_id)
-	#print(precision_at_k)
-	#print(query_list)
-	#print("======")
+	# track all of our queries by iteration
+	ALL_QUERIES = {}
 
-	# execute query
-	initial_query = query_google_search(query_list, engine_id, api_key)
-
-	# edge case 1: ensure that there are 10 results on first search
-	if len(initial_query) < 10:
-		print("Query was not ambiguous, there were less than 10 results in iteration 1")
-		quit()
-	
 	# set up counter for iterations
 	num_searches = 1
 
-	# present results
-	print("Query Number: " + str(num_searches))
-	print("Searched for: " + to_string(query_list) + "\n")
-	present_results(initial_query)
+	# store the intermediate results
+	query_results = None
 
-	# prompt user for relevance and calculate the initial precision@k value
-	precision_k_actual = calc_precision(initial_query)
+	# current query
+	current_query = initial_query
 
 	# run this loop until we hit the target precision
 	while True:
+		
+		# RUN INITIAL QUERY
+		if num_searches == 1:
+
+			# print the params to the console
+			print_params(api_key, engine_id, precision_at_k, initial_query, num_searches)
+
+			# execute query
+			query_results = query_google_search(initial_query, engine_id, api_key)
+
+			# edge case 1: ensure that there are 10 results on first search
+			if len(query_results) < 10:
+				print(" Query was not ambiguous, there were less than 10 results in iteration 1")
+				#quit()
+				break # break out of loop, and terminate program gracefully
+
+		# do all other queries post modification
+		elif num_searches > 1:
+			
+			# print the params to the console
+			#print_params(api_key, engine_id, precision_at_k, current_query, num_searches)
+
+			# execute query
+			#query_results = query_google_search(current_query, engine_id, api_key)
+
+			#TODO delete
+			print("\n Iteration number " + str(num_searches))
+			break
+
+		# prompt user for relevance and calculate the initial precision@k value
+		precision_k_actual = present_results(query_results)
+	
+		# Logging Purposes
+		# add to the ALL_QUERIES data structure, we can use this for logging to a log file later
+		ALL_QUERIES[num_searches] = make_json(num_searches, current_query, \
+									 		  precision_k_actual, query_results)
+		
+		# pprint package does a good job of formatting print, check it out
+		#pprint.pprint(ALL_QUERIES)
 
 		# edge case 2: I believe this only matters for the first iteration
 		if precision_k_actual == 0:
-			print("precision @ 10 for query {} is 0".format(num_searches))
+			print(" precision @ 10 for query {} is 0".format(num_searches))
 			break
 
 		# edge case 3: if we have hit the target precision, then we can terminate.
 		elif precision_k_actual >= precision_at_k:
-			print("current precision {:.2f} >= target precision {:.2f}. We are done...".format(precision_k_actual, precision_at_k))
+			print(" current precision {:.2f} >= target precision {:.2f}. We are done...".format(precision_k_actual, precision_at_k))
 			break
 
 		# this is the actual point of the assignment, this is the algorithm we need to develop
 		else:
-			print("Need to run the actual algorithm now ...")
-			print("Put actual algo here!!!!!!")
 
 			#
-			# alter the query here, for next loop
+			# Modify current query, for next loop using algo
 			#
+			print(" Need to run the actual algorithm now ...")
+			print(" Put actual algo here!!!!!!")
+
+			# current_query = modified_query_string
 
 			# increment the iteration counter
 			num_searches += 1
 
 			# obvi delete later on
-			break
+			#break
 	
 	# return from main
 	return
@@ -204,14 +275,22 @@ def main():
 if __name__ == "__main__":
 
 	# print greeting
-	print("Welcome to Relevence Feedback Query Optimizer")
-	print("Written by Matt Duran and Ethan Garry\n")
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
+	print("+ Welcome to Relevence Feedback Query Optimizer +")
+	print("+ Written by Matt Duran and Ethan Garry         +")
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
 
 	# run the program
-	main()
-
-	# print goodbye
-	print("Program will terminate now...\n")
+	try:
+		main()
+	except KeyboardInterrupt:
+		print("\n")
+	finally:
+		# print goodbye
+		print("+++++++++++++++++++++++++++++++++++++++++++++++++")
+		print("+ Program will terminate now...                 +")
+		print("+++++++++++++++++++++++++++++++++++++++++++++++++")
+		print("\n")
 
 """
 Main Algorithm Idea:
