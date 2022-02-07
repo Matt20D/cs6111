@@ -3,6 +3,8 @@
 #
 
 import sys # command line arg parsing
+#import requests # for downloading all of the webpages for document parsing, lets talk about this TODO delete
+import numpy as np
 
 # these libraries come from the below source, check the google_search method
 # pip3 install google-api-python-client
@@ -17,7 +19,7 @@ def print_params(api_key, eid, precision, query, iteration):
 	print(" Client Key  		= {}".format(api_key))
 	print(" Engine Key  		= {}".format(eid))
 	print(" Desired Precision	= {}".format(precision))
-	print(" Query       		= {}".format(query))
+	print(" Query       		= {}".format(to_string(query)))
 	print(" Iteration   		= {}".format(iteration))
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
 
@@ -62,7 +64,7 @@ q/query: query input list
 cx/eid:  search engine id
 key: 	 google API key
 """
-def query_google_search(query: str, eid: str, key: str) -> list():
+def query_google_search(query: list, eid: str, key: str) -> list():
 	# source: https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
 	service = build("customsearch", "v1",
 		developerKey=key)
@@ -116,10 +118,14 @@ def get_feedback() -> bool:
 		else:
 			print(" Bad input, please redo...")
 
+# global storage of documents according to label by relevance feedback
+RELEVANT_DOCS = []
+NON_RELEVANT_DOCS = []
+
 # print the query results for the users,
 # ask for relevence feedback, and return the precision metric
 def present_results(queries: list) -> float:
-	
+	global RELEVANT_DOCS, NON_RELEVANT_DOCS
 	# track query rank
 	rank = 1
 
@@ -140,8 +146,10 @@ def present_results(queries: list) -> float:
 		# ask user if this query is relevant
 		if get_feedback() == True:
 			num_yes += 1
+			RELEVANT_DOCS.append(query) # This has been labeled by user as relevant
 		else:
 			num_no += 1
+			NON_RELEVANT_DOCS.append(query) # This has been labeled by user as non-relevant
 
 		print("\n")
 
@@ -149,6 +157,43 @@ def present_results(queries: list) -> float:
 	precision = (num_yes) / (num_yes + num_no)
 	return precision
 
+# This method will return the new string, which hopefully produces better results for
+# the relevance feedback
+# This is the bulk of the assignemnt, we will run all augmentation out of here.
+def run_augmentation(curr_query: list) -> list: # return a list of keywords, after potentially adding at max 2 new
+	global RELEVANT_DOCS, NON_RELEVANT_DOCS
+	
+	#
+	# create a numpy array, with columns == RELEVANT_DOCS
+	# number of rows will be dependant on the number of words we parse
+ 	#
+	array = np.zeros(len(RELEVANT_DOCS))
+	print(array)
+
+	# of the relevant documents, lets parse the contents of it to build an inverted list data structure
+	for i in range(0, len(RELEVANT_DOCS)): # start with indexing just one of them
+		doc = RELEVANT_DOCS[i]
+		
+		# TODO delete
+		#url = doc[0]
+		# lets get the document from internet, this seems nontrivial lets talk about it.
+		# source: https://www.tutorialspoint.com/downloading-files-from-web-using-python
+		#r = requests.get(url, allow_redirects=True)
+		#for word in r.iter_lines():
+		#	print(word)
+
+		# for now lets tokenize the snippet, need to do this with regex's
+		snippet_keywords = doc[2].split() # snippet is a piece of website contents
+		title_keywords   = doc[1].split() # title is important too
+
+		# then lets create an inverted list data structure / add to one that is already made?
+		
+	# reset the relevent docs, lets only consider this iteration's pool of 
+	# relevent v non-relevent docs
+	RELEVANT_DOCS     = None
+	NON_RELEVANT_DOCS = None
+
+	return "UNDER CONSTRUCTION".split()
 #
 # Log file stuff, This is useful for final steps
 #
@@ -167,7 +212,9 @@ def make_json(iter_num: int, curr: str, prec: float, res: list) -> dict:
 def log_iteration() -> None:
 	pass
 
-# main method
+#
+# main method, do all of the dirty work
+#
 def main():
 
 	# ensure that there are at least 4 command line arguments + the program run name
@@ -185,7 +232,7 @@ def main():
 	
 	# create a query list of keywords
 	initial_query 		= sys.argv[4]
-	query_keyword_list  = initial_query.split() # use this for keyword analysis, curr not in use TODO
+	initial_query       = initial_query.split() 
 	
 	# track all of our queries by iteration
 	ALL_QUERIES = {}
@@ -220,13 +267,13 @@ def main():
 		# do all other queries post modification
 		elif num_searches > 1:
 			
-			# print the params to the console
+			# print the params to the console, current_query has been modified from iteration num_searches - 1
 			#print_params(api_key, engine_id, precision_at_k, current_query, num_searches)
 
 			# execute query
 			#query_results = query_google_search(current_query, engine_id, api_key)
 
-			#TODO delete
+			#TODO delete the break statement (for actual augmentation runs)
 			print("\n Iteration number " + str(num_searches))
 			break
 
@@ -252,6 +299,8 @@ def main():
 			break
 
 		# this is the actual point of the assignment, this is the algorithm we need to develop
+		# The precision didn't pass our pre-defined target, so lets augment the query using
+		# heuristics. Then, set current_query up for the next loop iteration.
 		else:
 
 			#
@@ -260,8 +309,11 @@ def main():
 			print(" Need to run the actual algorithm now ...")
 			print(" Put actual algo here!!!!!!")
 
-			# current_query = modified_query_string
-
+			# this function will be the entry point into getting a new query string for 
+			# next iteration. Pass the old query keywords, and receive a new one from heuristic analysis
+			augmented_query = run_augmentation(current_query)
+			current_query = augmented_query
+ 
 			# increment the iteration counter
 			num_searches += 1
 
