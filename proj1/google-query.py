@@ -2,13 +2,14 @@
 # Main Driver for Google Query Relevance Feedback
 #
 
+# Library Modules Needed
+from operator import inv
 import sys # command line arg parsing
-#import requests # for downloading all of the webpages for document parsing, lets talk about this TODO delete
-import numpy as np
-
-# these libraries come from the below source, check the google_search method
-# pip3 install google-api-python-client
-import pprint
+import numpy as np # havent decided which one yet
+import pandas as pd # havent decided which one yet
+import re # regex
+import pprint # printing out Datastructures in a readable format
+import math # for logs
 from googleapiclient.discovery import build # for querying google 
 
 
@@ -42,11 +43,9 @@ def get_stopwords() -> set():
 # global variable, store all stopwords
 STOPWORDS_SET = get_stopwords()
 
-def is_stopword():
-	pass
-
-def stop_word_elimination():
-	pass
+# use for stopword elimination
+def is_stopword(word: str):
+	return word in STOPWORDS_SET
 
 # convert the query list of keywords to a string
 def to_string(query_l: list) -> str:
@@ -157,37 +156,113 @@ def present_results(queries: list) -> float:
 	precision = (num_yes) / (num_yes + num_no)
 	return precision
 
+# return an inverted list, that contains the term_frequency of each term
+# in a given document snippet + title of document
+def get_term_frequency(documents: list) -> dict:
+	
+	# Hash Table with inverted list DS for easier indexing
+	inverted_list = {}
+
+	# of the relevant documents, lets parse the contents of it to build an inverted list data structure
+	for i in range(0, len(documents)): # start with indexing just one of them
+		doc = documents[i]
+		docname = "document_" + str(i)
+
+		# for now lets tokenize the snippet and title using reg expressions, maybe graduate to tokenizing whole html file
+		# match any alphanumeric char one or more times (i.e a word), remove all punctuation.
+		regex = "\w+" 
+		snippet_keywords = re.findall(regex, doc[2]) # snippet is a piece of website contents
+		title_keywords   = re.findall(regex, doc[1]) # title is important too
+		all_keywords     = snippet_keywords + title_keywords
+		all_keywords     = [word.lower() for word in all_keywords]
+
+		# lets add to the inverted list, essentially creating our own linked list on hash table
+		# each word will contain a row, of length len(documents). if word exists, find doc location and increment
+		for word in all_keywords:
+
+			#
+			# do stopword elimination, maybe need something more sophisticated for "New" in "New York"
+			#
+			if is_stopword(word):
+				#print("{} is a stopword".format(word))
+				continue
+
+			#
+			# Should we also straight up eliminate numbers, like 2016, ... etc? TODO
+			#
+
+			if word in inverted_list:
+				# find the keyword, then find the document location, increment value
+				inverted_list[word][i] += 1
+			else:
+				# create room for each of the documents in the relevant pool
+				# we found a completely new word
+				inverted_list[word]    = [0] * len(documents)
+				inverted_list[word][i] = 1 # ensure that the value for this word begins at 1
+
+	return inverted_list
+
+def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # return a PD DataFrame
+
+	df = pd.DataFrame()
+	#df["keyword"] = pd.Series([], dtype="string") # initialize a column
+
+	if is_relevant:
+		colnames = []
+		for i in range(0,len(RELEVANT_DOCS)):
+			colname = "R_Doc_" + str(i + 1)
+			df[colname] = pd.Series([], dtype="int") # initialize a column
+	else:
+		colnames = []
+		for i in range(0,len(NON_RELEVANT_DOCS)):
+			colname = "NR_Doc_" + str(i + 1)
+			df[colname] = pd.Series([], dtype="int") # initialize a column, specify a datatype
+	
+	# lets add rows to the dataframe
+	row_names = {}
+	for key in inv_list.keys():
+		
+		# get the keyword freq in all relevant docs
+		key_frequencies = inv_list[key]
+
+		# add row to the end of the dataframe
+		#df.loc[len(df)] = [key] + key_frequencies
+		row_names[len(df)] = key
+		df.loc[len(df)] = key_frequencies
+
+	# set the row indexes with the keyword names
+	df = df.rename(index=row_names)
+
+	return df 
+
+def do_log_term_frequency(data:pd.DataFrame) -> pd.DataFrame:
+	
+	return data.applymap(lambda x: 0 if x == 0 else (1 + math.log(x, 10)))
+
 # This method will return the new string, which hopefully produces better results for
 # the relevance feedback
 # This is the bulk of the assignemnt, we will run all augmentation out of here.
 def run_augmentation(curr_query: list) -> list: # return a list of keywords, after potentially adding at max 2 new
 	global RELEVANT_DOCS, NON_RELEVANT_DOCS
 	
+	# keep the labeled documents separate, but calculate term frequency for both
+	inverted_list_relevant     = get_term_frequency(RELEVANT_DOCS) 
+	inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS)
+
+	# create a pandas dataframe for the document vectors
+	relevant_vectors = convert_to_dataframe(inverted_list_relevant, is_relevant=True)
+	non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False)
+
+	# do log term frequency for each of the numbers in the dataframe, we want rarer terms to be more valuable
+	rel_log_tf = do_log_term_frequency(relevant_vectors)
+	non_rel_log_tf = do_log_term_frequency(non_relevant_vectors)
+
 	#
-	# create a numpy array, with columns == RELEVANT_DOCS
-	# number of rows will be dependant on the number of words we parse
- 	#
-	array = np.zeros(len(RELEVANT_DOCS))
-	print(array)
+	# do the idf weighting, would need to combine the two dataframes?, TODO I need to think more
+	# then do tf_idf(), TODO I need to think more
+	# but basically our collection will be all of the documents in this round, or in all of the rounds? IDK yet
+	#
 
-	# of the relevant documents, lets parse the contents of it to build an inverted list data structure
-	for i in range(0, len(RELEVANT_DOCS)): # start with indexing just one of them
-		doc = RELEVANT_DOCS[i]
-		
-		# TODO delete
-		#url = doc[0]
-		# lets get the document from internet, this seems nontrivial lets talk about it.
-		# source: https://www.tutorialspoint.com/downloading-files-from-web-using-python
-		#r = requests.get(url, allow_redirects=True)
-		#for word in r.iter_lines():
-		#	print(word)
-
-		# for now lets tokenize the snippet, need to do this with regex's
-		snippet_keywords = doc[2].split() # snippet is a piece of website contents
-		title_keywords   = doc[1].split() # title is important too
-
-		# then lets create an inverted list data structure / add to one that is already made?
-		
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
 	RELEVANT_DOCS     = None
@@ -306,8 +381,6 @@ def main():
 			#
 			# Modify current query, for next loop using algo
 			#
-			print(" Need to run the actual algorithm now ...")
-			print(" Put actual algo here!!!!!!")
 
 			# this function will be the entry point into getting a new query string for 
 			# next iteration. Pass the old query keywords, and receive a new one from heuristic analysis
