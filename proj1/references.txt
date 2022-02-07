@@ -1,2 +1,11 @@
+using google api, and pprint module
 1) https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
   Gravano's provided example for querying the google search engine.
+
+reg-exs for tokenization
+2) https://docs.python.org/3/library/re.html
+3) https://www.programiz.com/python-programming/regex
+
+pandas 
+4) https://www.kite.com/python/answers/how-to-append-a-list-as-a-row-to-a-pandas-dataframe-in-python
+5) https://pandas.pydata.org/docs/reference/frame.html
