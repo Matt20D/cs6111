@@ -304,6 +304,23 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	rel_tf_idf     = do_tf_idf(rel_log_tf)
 	non_rel_tf_idf = do_tf_idf(non_rel_log_tf)
 
+	# ------------
+	# Next Steps
+	# ------------
+	
+	# google heuristic
+	# figure out a way to work in google's ranking, to the weighting scheme, only a round by round basis
+	# R_Doc_1 >>  R_Doc_2 >>  R_Doc_3. Only slightly tho, but we should use googles' work that they have done.
+
+	# Here is where we choose words
+
+	# we add words and create a bunch of new queries
+
+	# see which one is estimated to have the highest weight
+
+	# Are we going to be using old relevant documents in this analysis?
+
+
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
 	RELEVANT_DOCS     = None
