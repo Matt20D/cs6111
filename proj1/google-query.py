@@ -239,6 +239,44 @@ def do_log_term_frequency(data:pd.DataFrame) -> pd.DataFrame:
 	
 	return data.applymap(lambda x: 0 if x == 0 else (1 + math.log(x, 10)))
 
+def mult_tf_idf(row):
+	# each cell * last val in col (the idf weight)
+	for i in range(0, len(row)-1):
+		row[i] = row[i] * row[len(row)-1]
+	return row
+
+def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
+
+	idf_weights = {}
+	num_cols = len(data.columns)
+	
+	# calc idf_weights using formula from slides
+	# math.log(x,10) where x = N / document frequency
+	# so for each word, we will get the inverse document frequency meaning
+	# lets see out of how many documents, this word shows up in.
+	for index, row in data.iterrows():
+		document_frequency = 0
+		for cell in row:
+			if cell > 0:
+				document_frequency += 1
+		x = num_cols / document_frequency
+		idf_weights[index] = math.log(x, 10)
+		
+	# initialize a column to store the idf weight
+	data["word_idf_weight"] = pd.Series([], dtype=float)
+	
+	# add the weight into the correct row
+	for index, row in data.iterrows():
+		row["word_idf_weight"] = idf_weights[index]
+
+	# now multiply tf * idf to get the final weight
+	new_data = data.apply(mult_tf_idf, axis=1)
+	
+	# drop the column
+	new_data = new_data.drop(columns=["word_idf_weight"])
+	
+	return new_data
+
 # This method will return the new string, which hopefully produces better results for
 # the relevance feedback
 # This is the bulk of the assignemnt, we will run all augmentation out of here.
@@ -259,9 +297,12 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 	#
 	# do the idf weighting, would need to combine the two dataframes?, TODO I need to think more
-	# then do tf_idf(), TODO I need to think more
 	# but basically our collection will be all of the documents in this round, or in all of the rounds? IDK yet
 	#
+
+	# this step will calculate the tf-idf weights but separately, lets discuss. See note above
+	rel_tf_idf     = do_tf_idf(rel_log_tf)
+	non_rel_tf_idf = do_tf_idf(non_rel_log_tf)
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
