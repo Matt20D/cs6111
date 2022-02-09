@@ -9,6 +9,9 @@ reg-exs for tokenization
 pandas 
 4) https://www.kite.com/python/answers/how-to-append-a-list-as-a-row-to-a-pandas-dataframe-in-python
 5) https://pandas.pydata.org/docs/reference/frame.html
+6) https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+used above to scrap iterrows() cuz it was taking way too long for me to manipulate the data frame.
+Thus, i used the above example to change to using list comprehensions for faster mult
 
 web-scraping/beautiful soup
 6) https://stackoverflow.com/questions/45954949/parse-text-response-from-http-request-in-python
