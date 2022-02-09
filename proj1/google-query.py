@@ -10,6 +10,9 @@ import pandas as pd # havent decided which one yet
 import re # regex
 import pprint # printing out Datastructures in a readable format
 import math # for logs
+import Tokenizer # class written to execute get request and get the keywords back
+import requests
+
 from googleapiclient.discovery import build # for querying google 
 
 
@@ -23,29 +26,6 @@ def print_params(api_key, eid, precision, query, iteration):
 	print(" Query       		= {}".format(to_string(query)))
 	print(" Iteration   		= {}".format(iteration))
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
-
-# get list of stopwords from gravano's file saved locally
-def get_stopwords() -> set():
-
-	# open the file to parse the stopwords and build a set
-	try:
-		stopwords = set()
-		with open("stopwords.txt", "r") as infile:
-			for word in infile:
-				clean_word = word.strip()
-				stopwords.add(clean_word)	
-		infile.close()
-		return stopwords
-		
-	except:
-		raise Exception("Error with parsing stopwords.txt file for building stopword set")	
-
-# global variable, store all stopwords
-STOPWORDS_SET = get_stopwords()
-
-# use for stopword elimination
-def is_stopword(word: str):
-	return word in STOPWORDS_SET
 
 # convert the query list of keywords to a string
 def to_string(query_l: list) -> str:
@@ -168,28 +148,30 @@ def get_term_frequency(documents: list) -> dict:
 		doc = documents[i]
 		docname = "document_" + str(i)
 
-		# for now lets tokenize the snippet and title using reg expressions, maybe graduate to tokenizing whole html file
-		# match any alphanumeric char one or more times (i.e a word), remove all punctuation.
-		regex = "\w+" 
-		snippet_keywords = re.findall(regex, doc[2]) # snippet is a piece of website contents
-		title_keywords   = re.findall(regex, doc[1]) # title is important too
-		all_keywords     = snippet_keywords + title_keywords
-		all_keywords     = [word.lower() for word in all_keywords]
+		#
+		# Generate Token keywords for this document
+		#
+
+		# get stored url for this document
+		doc_url      = doc[0]
+		
+		#instantiate tokenizer object
+		tk           = Tokenizer.Tokenizer(doc_url)
+
+		# try to execute get request
+		try:
+			# use method to execute get request and return clean document words in list
+			all_keywords = tk.get_words()
+		
+		# on failure just use the snippet and title
+		except requests.exceptions.HTTPError:
+
+			# use the snippet and title to get all keywords via the regex match
+			all_keywords = tk.regex_match(doc[1] + " " + doc[2])
 
 		# lets add to the inverted list, essentially creating our own linked list on hash table
 		# each word will contain a row, of length len(documents). if word exists, find doc location and increment
 		for word in all_keywords:
-
-			#
-			# do stopword elimination, maybe need something more sophisticated for "New" in "New York"
-			#
-			if is_stopword(word):
-				#print("{} is a stopword".format(word))
-				continue
-
-			#
-			# Should we also straight up eliminate numbers, like 2016, ... etc? TODO
-			#
 
 			if word in inverted_list:
 				# find the keyword, then find the document location, increment value
@@ -269,6 +251,10 @@ def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 	for index, row in data.iterrows():
 		row["word_idf_weight"] = idf_weights[index]
 
+	#
+	# (lambda x, y: x + y)(2, 3) example of what to try
+	#
+
 	# now multiply tf * idf to get the final weight
 	new_data = data.apply(mult_tf_idf, axis=1)
 	
@@ -285,15 +271,15 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	
 	# keep the labeled documents separate, but calculate term frequency for both
 	inverted_list_relevant     = get_term_frequency(RELEVANT_DOCS) 
-	inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS)
+	#inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS) # not using irrelevant docs
 
 	# create a pandas dataframe for the document vectors
 	relevant_vectors = convert_to_dataframe(inverted_list_relevant, is_relevant=True)
-	non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False)
+	#non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False) # not using irrelevant docs
 
 	# do log term frequency for each of the numbers in the dataframe, we want rarer terms to be more valuable
 	rel_log_tf = do_log_term_frequency(relevant_vectors)
-	non_rel_log_tf = do_log_term_frequency(non_relevant_vectors)
+	#non_rel_log_tf = do_log_term_frequency(non_relevant_vectors) # not using irrelevant docs
 
 	#
 	# do the idf weighting, would need to combine the two dataframes?, TODO I need to think more
@@ -302,8 +288,8 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 	# this step will calculate the tf-idf weights but separately, lets discuss. See note above
 	rel_tf_idf     = do_tf_idf(rel_log_tf)
-	non_rel_tf_idf = do_tf_idf(non_rel_log_tf)
-
+	#non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
+	print(rel_tf_idf)
 	# ------------
 	# Next Steps
 	# ------------
