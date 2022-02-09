@@ -66,7 +66,7 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 
 	#
 	# TODO
-	# Need to determine what we would like to do with non html files, look at spec
+	# Need to determine what we would like to do with non html files and Advertisements, look at spec
 	#
 
 	# lets parse the data thate we need URL, title, desc from the JSON object
@@ -193,12 +193,12 @@ def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # r
 		colnames = []
 		for i in range(0,len(RELEVANT_DOCS)):
 			colname = "R_Doc_" + str(i + 1)
-			df[colname] = pd.Series([], dtype="int") # initialize a column
+			df[colname] = pd.Series([], dtype="float") # initialize a column
 	else:
 		colnames = []
 		for i in range(0,len(NON_RELEVANT_DOCS)):
 			colname = "NR_Doc_" + str(i + 1)
-			df[colname] = pd.Series([], dtype="int") # initialize a column, specify a datatype
+			df[colname] = pd.Series([], dtype="float") # initialize a column, specify a datatype
 	
 	# lets add rows to the dataframe
 	row_names = {}
@@ -227,34 +227,31 @@ def mult_tf_idf(row):
 		row[i] = row[i] * row[len(row)-1]
 	return row
 
+def calc_idf(row: list) -> float:
+	document_frequency = 0
+	for cell in row:
+		if cell > 0:
+			document_frequency += 1
+	x = len(row) / document_frequency
+	return math.log(x, 10)
+
+# remember idf weights how rare a term is across documents
+# multiply that weight by how frequent the term is within a document
+# tf-idf weights are used to help us pick the most relevant words
 def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 
-	idf_weights = {}
-	num_cols = len(data.columns)
-	
 	# calc idf_weights using formula from slides
 	# math.log(x,10) where x = N / document frequency
 	# so for each word, we will get the inverse document frequency meaning
 	# lets see out of how many documents, this word shows up in.
-	for index, row in data.iterrows():
-		document_frequency = 0
-		for cell in row:
-			if cell > 0:
-				document_frequency += 1
-		x = num_cols / document_frequency
-		idf_weights[index] = math.log(x, 10)
+
+	# faster than iterrows()
+	# https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+	idf_weights = [calc_idf(row) for row in data[data.columns].to_numpy()]
 		
 	# initialize a column to store the idf weight
-	data["word_idf_weight"] = pd.Series([], dtype=float)
-	
-	# add the weight into the correct row
-	for index, row in data.iterrows():
-		row["word_idf_weight"] = idf_weights[index]
-
-	#
-	# (lambda x, y: x + y)(2, 3) example of what to try
-	#
-
+	data["word_idf_weight"] = idf_weights
+		
 	# now multiply tf * idf to get the final weight
 	new_data = data.apply(mult_tf_idf, axis=1)
 	
@@ -270,15 +267,18 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	global RELEVANT_DOCS, NON_RELEVANT_DOCS
 	
 	# keep the labeled documents separate, but calculate term frequency for both
-	inverted_list_relevant     = get_term_frequency(RELEVANT_DOCS) 
+	inverted_list_relevant     = get_term_frequency(RELEVANT_DOCS)
 	#inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS) # not using irrelevant docs
 
 	# create a pandas dataframe for the document vectors
 	relevant_vectors = convert_to_dataframe(inverted_list_relevant, is_relevant=True)
+
 	#non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False) # not using irrelevant docs
 
 	# do log term frequency for each of the numbers in the dataframe, we want rarer terms to be more valuable
+
 	rel_log_tf = do_log_term_frequency(relevant_vectors)
+
 	#non_rel_log_tf = do_log_term_frequency(non_relevant_vectors) # not using irrelevant docs
 
 	#
@@ -290,6 +290,8 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	rel_tf_idf     = do_tf_idf(rel_log_tf)
 	#non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
 	print(rel_tf_idf)
+	# TODO, note this is how we can pull the whole col vector out 'for (columnName, columnData) in stu_df.iteritems():'
+
 	# ------------
 	# Next Steps
 	# ------------
