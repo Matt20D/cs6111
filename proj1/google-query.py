@@ -290,7 +290,22 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	rel_tf_idf     = do_tf_idf(rel_log_tf)
 	#non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
 	print(rel_tf_idf)
-	# TODO, note this is how we can pull the whole col vector out 'for (columnName, columnData) in stu_df.iteritems():'
+	# TODO, note this is how we can pull the whole col vector out 'for (columnName, columnData) in df.iteritems():'
+	ranking = []
+	
+	for columnName, columnData in rel_tf_idf.iteritems():
+		print(columnName)
+		print(columnData)
+		print(sum(columnData))
+		ranking.append((columnName, sum(columnData)))
+	
+	ranking.sort(key=lambda x: x[1])
+	print(ranking)
+	
+	words = rel_tf_idf['R_Doc_3']
+	print(words)
+	words = list(words).sort()
+	print(words)
 
 	# ------------
 	# Next Steps
@@ -306,7 +321,8 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 	# see which one is estimated to have the highest weight
 
-	# Are we going to be using old relevant documents in this analysis?
+	# if there is only one relevant document, then we cannot use tf-idf weights, becuase it would all be zero
+		# we could 
 
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
@@ -466,13 +482,6 @@ if __name__ == "__main__":
 """
 Main Algorithm Idea:
 
-1) receive user query as input (list of words), and precision target for the fraction of relevant queries out of top 10 results
-	[DONE, with input error checking as well]
-2) retrieve top 10 results from google, using google API default values ...
-	If there are fewer than 10 results then terminate in first iteration [DONE, and implemented the edge case in this bullet]
-3) present results to user, and get relevence feedback for the pages w.r.t. query meaning.
-	display title, URL, and description returned by Google. [DONE]
-	Needs to be exact top 10 results returned by Google. Do not modify the default vals for search params [DONE]
 4) calculate precision@10
 	if precision@10 greater than target value, then terminate. [DONE]
 	elif precision@10 == 0, then terminate. [DONE]
@@ -489,8 +498,5 @@ Main Algorithm Idea:
 
 key point: step 4 will need to be fleshed out as much as possible. we can use techniques borrowed from research literature, we 
 just need to ensure that we cite any publication.
-
-techniques to use:
-	stopword elimination
 
 """
