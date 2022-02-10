@@ -276,6 +276,36 @@ def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 	
 	return new_data
 
+# emphasize the location of certain words by title (most weight), and snippet
+# which is the early part of the document (2nd most weight)
+def apply_word_zone_heuristic(colname: str, keyword: str, word_value: float) -> float:
+	weights = {'title':  1.20, 'snippet': 1.10}
+
+	# adjust the index to base 0 for array
+	doc_index = int(colname[-1]) - 1
+	
+	# get the stored relevant document
+	doc = RELEVANT_DOCS[doc_index]
+
+	# get the title and snippet
+	title   = doc[1].lower()
+	snippet = doc[2].lower()
+	
+	# store the new_weight
+	new_word_val = word_value 
+
+	# scale up if present in a zone
+	if keyword.lower() in title:
+		new_word_val *= weights['title']
+	
+	# we could also potentially not double dip.
+	# meaning, if the word has been scaled up, then not multiply also by the snippet weight
+	# lets experiment
+	if keyword.lower() in snippet:
+		new_word_val *= weights['snippet']
+	
+	return new_word_val
+
 # this method will score a document's relevance for a query
 def score(curr_query: list, col_vector: pd.Series) -> float:
 	score = 0
@@ -284,7 +314,9 @@ def score(curr_query: list, col_vector: pd.Series) -> float:
 		if keyword not in col_vector:
 			score += 0
 		else:
-			score += col_vector[keyword]
+			# check word zone.
+			# if the keyword has been seen in title or snippet scale up, else keep it the same
+			score += apply_word_zone_heuristic(col_vector.name, keyword, col_vector[keyword])
 	return score
 
 # this method will score all of the relevant documents and return
@@ -310,7 +342,7 @@ def apply_google_heuristic(documents: list[tuple]) -> list[tuple]:
 			  }
 	for document in documents:
 		new_weight = document[1] * weights[document[0]]
-		new_ranking.append( (document[0], new_weight))
+		new_ranking.append( (document[0], new_weight) )
 
 	# sort and return the weighted ranking
 	new_ranking.sort(key=lambda x: x[1], reverse=True)
@@ -360,18 +392,14 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 		print("in case 1")
 		
 		# here we will only use the tf dataframes
+		# also use the word zone heuristic
 		doc_scores = score_rel_docs(curr_query, rel_log_tf)
 		
 		# apply google heuristic
-		new_doc_scores = apply_google_heuristic(doc_scores)
-
-		# emphasize important words via document structure / "zones"
-
-		# TODO, this may be hard to implement
-		# check the document structure, if the word appears in the title or beginning of the document it is probably the 
-		# focus of the document
+		doc_scores = apply_google_heuristic(doc_scores)
 
 		# Here is where we choose words
+		
 		pass
 	
 	# since the query has multiple terms, idf actually differentiates term weights among
@@ -380,12 +408,14 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 		print("in case 2")
 
 		# here we will use the tf-idf dataframes
+		# also use the word zone heuristic
 		doc_scores = score_rel_docs(curr_query, rel_tf_idf)
 
 		# apply google heuristic
-		new_doc_scores = apply_google_heuristic(doc_scores)
+		doc_scores = apply_google_heuristic(doc_scores)
 
 		# Here is where we choose words
+		
 		pass
 	
 	#
@@ -574,6 +604,7 @@ Main Algorithm Idea:
 	NOTE 2: order of words expanded in query is important. Program should automatically consider alternate ways of ordering the words
 	in a modified query, and pick the order estimated to be the best. In each iter we can reorder all words, new and old, but cannot
 	delete any words.
+
 5) Modify current user query using notes in part 4, to put the keywords in the best possible order. and then go to step 2.
 
 key point: step 4 will need to be fleshed out as much as possible. we can use techniques borrowed from research literature, we 
