@@ -349,6 +349,63 @@ def apply_google_heuristic(documents: list[tuple]) -> list[tuple]:
 
 	return new_ranking
 
+# here will try and pick the best words so that we can begin to augment
+# the query. Return a list of words, to be added to the queries and then tested.
+def choose_words(scores: list[tuple], data: pd.DataFrame, query: list) -> list:	
+	words = set() # get 12 words max
+	max_words = 20
+
+	# scale max per doc
+	if len(scores) == 1:
+		max_per_doc = max_words
+	else:
+		max_per_doc = 10
+	
+	# go from highest ranked doc to lowest ranked doc
+	for document in scores:
+
+		# track number of added for a document
+		added = 0
+
+		# get col vector and sort in desc
+		vec = data[document[0]].sort_values(ascending=False)
+		
+		# go through all of the nonzero words in doc vector
+		for index, value in vec.items():
+			
+			# we have reached our limit of max_words
+			if len(words) == max_words:
+				break
+
+			# we have hit a weight of 0
+			# or we have the max number of words from document
+			# lets move on to next doc
+			if max_per_doc == added or value == 0:
+				break
+
+			# ensure that the word is not like any others in query
+			# hack for word stemming
+			in_query = False
+			for word in query:
+				if (index in word) or (word in index):
+					in_query = True
+					break
+			
+			# completely new unique word
+			if not in_query:
+				# add word and increment doc counter
+				words.add(index)
+				added += 1
+		
+		# we have reached our limit of max_words
+		if len(words) == max_words:
+			break
+	
+	# what happens if the words set contains 0? We should choose one randomly
+	# IDK if this is a case that needs to be tested.
+	return words
+
+
 
 # This method will return the new string, which hopefully produces better results for
 # the relevance feedback
@@ -399,8 +456,7 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 		doc_scores = apply_google_heuristic(doc_scores)
 
 		# Here is where we choose words
-		
-		pass
+		potential_words = choose_words(doc_scores, rel_log_tf, curr_query)
 	
 	# since the query has multiple terms, idf actually differentiates term weights among
 	# documents in the database
@@ -415,8 +471,7 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 		doc_scores = apply_google_heuristic(doc_scores)
 
 		# Here is where we choose words
-		
-		pass
+		potential_words = choose_words(doc_scores, rel_log_tf, curr_query)
 	
 	#
 	# Step 2: use the words to create a bunch of new queries
@@ -425,6 +480,7 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 		# try adding two words
 		# try all possible combinations!
 
+	print(potential_words)
 	#
 	# Step 3: test the new queries using rocchios algo, and use the highest one
 	#
