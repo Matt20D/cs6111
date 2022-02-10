@@ -405,7 +405,50 @@ def choose_words(scores: list[tuple], data: pd.DataFrame, query: list) -> list:
 	# IDK if this is a case that needs to be tested.
 	return words
 
+# using all of the keyword rankings lets build all of the combinations of the old
+# query terms + one new term, or old query terms + two new terms.
+# at a max this should return 210 potential queries. (based off the numbers in choose words)
+def generate_queries(curr_query: list, potential_words: set) -> list:
 
+	len_one = set() # should equal 20 max.
+	len_two = set() # 190 should be max. 20 choose 2 == 190
+	
+	# generate all possible combos
+	for word in potential_words:
+		
+		# add one word
+		len_one.add(word)
+	
+		# lets try to add combos of length 2
+		for word2 in potential_words:
+			
+			# dont pair word with itself
+			if word == word2:
+				continue
+			
+			# see if the reverse combo is in the set
+			if (word2, word) in len_two:
+				continue 
+
+			# new combo, add it
+			len_two.add((word, word2))
+	
+	# at max there should be 210 potential query lists
+	all_combos = []
+
+	# concatenate one word to previous query keyword list
+	for word in len_one:
+		temp_list = [word]
+		temp_list = curr_query + temp_list
+		all_combos.append(temp_list)
+
+	# concatenate two words to previous query keyword list
+	for word in len_two:
+		temp_list = [word[0], word[1]]
+		temp_list = curr_query + temp_list
+		all_combos.append(temp_list)
+
+	return all_combos
 
 # This method will return the new string, which hopefully produces better results for
 # the relevance feedback
@@ -476,14 +519,25 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	#
 	# Step 2: use the words to create a bunch of new queries
 	#
-		# try adding one word
-		# try adding two words
-		# try all possible combinations!
-
-	print(potential_words)
+	
+	# try adding one word, and adding two words
+	potential_queries = generate_queries(curr_query, potential_words)
+	
 	#
 	# Step 3: test the new queries using rocchios algo, and use the highest one
 	#
+	
+	# if len(curr_query) == 1 or len(rel_log_tf.columns) == 1:
+		# normalize rel_log_tf
+		# use rocchio's algo for normal vectors and all potential queries
+		# choose the best query that is clustered the best
+	# else:
+		# normalize rel_log_tf
+		# use rocchio's algo for normal vectors and all potential queries
+		# choose the best query that is clustered the best
+
+	# return new query as a list
+
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
@@ -492,6 +546,7 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 	# obviously this becomes the new query ...
 	return "UNDER CONSTRUCTION".split()
+
 #
 # Log file stuff, This is useful for final steps
 #
