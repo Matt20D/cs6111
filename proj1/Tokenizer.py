@@ -56,7 +56,11 @@ class Tokenizer(object):
     def execute_get_request(self) -> None:
 
         # send get request for the webpage
-        request = requests.get(self.webpage)
+        try:
+            request = requests.get(self.webpage)
+        except:
+            # raise exception, so that we just use the stored title and snippet
+            raise requests.exceptions.HTTPError
 
         # if the request status is not "200" ok then throw an exception
         # the code will then simply used the stored snippet and title
