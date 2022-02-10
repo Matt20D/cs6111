@@ -49,7 +49,7 @@ class Tokenizer(object):
         keywords = re.findall(regex, string)
         
         # we only compare lowercase versions of word
-        keywords = [word.lower() for word in keywords]
+        keywords = [word.lower() for word in keywords if not (self.is_stopword(word) or word.isnumeric())]
 
         return keywords
 
