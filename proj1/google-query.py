@@ -17,15 +17,17 @@ from googleapiclient.discovery import build # for querying google
 
 
 # use this method to print all relevant parameters to the console
-def print_params(api_key, eid, precision, query, iteration):
+def print_params(api_key, eid, precision, precision_calc, query, iteration):
 	
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
-	print(" Client Key  		= {}".format(api_key))
-	print(" Engine Key  		= {}".format(eid))
-	print(" Desired Precision	= {}".format(precision))
-	print(" Query       		= {}".format(to_string(query)))
-	print(" Iteration   		= {}".format(iteration))
+	print(" Client Key  			= {}".format(api_key))
+	print(" Engine Key  			= {}".format(eid))
+	print(" Desired Precision		= {}".format(precision))
+	print(" Calculated Precision		= {}".format(precision_calc))
+	print(" Query       			= {}".format(to_string(query)))
+	print(" Iteration   			= {}".format(iteration))
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
+	print()
 
 # convert the query list of keywords to a string
 def to_string(query_l: list) -> str:
@@ -64,11 +66,6 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 	#pprint.pprint(queries)
 	#print(len(queries))
 
-	#
-	# TODO
-	# Need to determine what we would like to do with non html files and Advertisements, look at spec
-	#
-
 	# lets parse the data thate we need URL, title, desc from the JSON object
 	clean_results = []
 	for doc in queries:
@@ -78,11 +75,25 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 		temp_list.append(doc['formattedUrl'])
 		temp_list.append(doc['title'])
 		temp_list.append(doc['snippet'])
+		
+		# mark whether the doc is html or not in precision counting.
+		if 'fileFormat' in doc.keys():
+			temp_list.append(doc['fileFormat'])
+		else:
+			temp_list.append("html-file")
 
 		clean_results.append(temp_list)
 	
 	#print(clean_results)
 	return clean_results
+
+def remove_bad_results(queries: list) -> list:
+	#print("removing non-html results if they exist...")
+	clean_queries = []
+	for query in queries:
+		if query[3] == 'html-file':
+			clean_queries.append(query)
+	return clean_queries
 
 # get user input and return True or False
 def get_feedback() -> bool:
@@ -291,6 +302,7 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	#non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
 	print(rel_tf_idf)
 	# TODO, note this is how we can pull the whole col vector out 'for (columnName, columnData) in df.iteritems():'
+	"""
 	ranking = []
 	
 	for columnName, columnData in rel_tf_idf.iteritems():
@@ -306,7 +318,7 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	print(words)
 	words = list(words).sort()
 	print(words)
-
+	"""
 	# ------------
 	# Next Steps
 	# ------------
@@ -390,7 +402,7 @@ def main():
 		if num_searches == 1:
 
 			# print the params to the console
-			print_params(api_key, engine_id, precision_at_k, initial_query, num_searches)
+			print_params(api_key, engine_id, precision_at_k, "N/A", initial_query, num_searches)
 
 			# execute query
 			query_results = query_google_search(initial_query, engine_id, api_key)
@@ -405,14 +417,19 @@ def main():
 		elif num_searches > 1:
 			
 			# print the params to the console, current_query has been modified from iteration num_searches - 1
-			#print_params(api_key, engine_id, precision_at_k, current_query, num_searches)
+			print_params(api_key, engine_id, precision_at_k, precision_k_actual, current_query, num_searches)
 
 			# execute query
-			#query_results = query_google_search(current_query, engine_id, api_key)
+			query_results = query_google_search(current_query, engine_id, api_key)
 
 			#TODO delete the break statement (for actual augmentation runs)
-			print("\n Iteration number " + str(num_searches))
+			#print("\n Iteration number " + str(num_searches))
 			break
+
+		#
+		# Remove Non-html files from the query results, if they exist
+		#
+		query_results = remove_bad_results(query_results)
 
 		# prompt user for relevance and calculate the initial precision@k value
 		precision_k_actual = present_results(query_results)
@@ -439,7 +456,7 @@ def main():
 		# The precision didn't pass our pre-defined target, so lets augment the query using
 		# heuristics. Then, set current_query up for the next loop iteration.
 		else:
-
+			print(" current precision {:.2f} < target precision {:.2f}. Let's augment...".format(precision_k_actual, precision_at_k))
 			#
 			# Modify current query, for next loop using algo
 			#
