@@ -71,8 +71,9 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 	for doc in queries:
 
 		temp_list = []
-		
-		temp_list.append(doc['formattedUrl'])
+		#pprint.pprint(doc)
+		# link has the http/https format which is needed for get request
+		temp_list.append(doc['link']) # changed from doc['formattedUrl']
 		temp_list.append(doc['title'])
 		temp_list.append(doc['snippet'])
 		
@@ -176,7 +177,7 @@ def get_term_frequency(documents: list) -> dict:
 		
 		# on failure just use the snippet and title
 		except requests.exceptions.HTTPError:
-
+			print("Http error for {}, we will now just use stored snippet and title".format(doc_url))
 			# use the snippet and title to get all keywords via the regex match
 			all_keywords = tk.regex_match(doc[1] + " " + doc[2])
 
@@ -229,8 +230,9 @@ def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # r
 	return df 
 
 def do_log_term_frequency(data:pd.DataFrame) -> pd.DataFrame:
-	
-	return data.applymap(lambda x: 0 if x == 0 else (1 + math.log(x, 10)))
+	# get a deep copy so we do not modify the tf dataframe
+	data_copy = data.copy(deep=True)
+	return data_copy.applymap(lambda x: 0 if x == 0 else (1 + math.log(x, 10)))
 
 def mult_tf_idf(row):
 	# each cell * last val in col (the idf weight)
@@ -251,6 +253,9 @@ def calc_idf(row: list) -> float:
 # tf-idf weights are used to help us pick the most relevant words
 def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 
+	# get a deep copy so we do not modify the tf dataframe
+	data_copy = data.copy(deep=True)
+
 	# calc idf_weights using formula from slides
 	# math.log(x,10) where x = N / document frequency
 	# so for each word, we will get the inverse document frequency meaning
@@ -258,18 +263,60 @@ def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 
 	# faster than iterrows()
 	# https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
-	idf_weights = [calc_idf(row) for row in data[data.columns].to_numpy()]
+	idf_weights = [calc_idf(row) for row in data_copy[data_copy.columns].to_numpy()]
 		
 	# initialize a column to store the idf weight
-	data["word_idf_weight"] = idf_weights
+	data_copy["word_idf_weight"] = idf_weights
 		
 	# now multiply tf * idf to get the final weight
-	new_data = data.apply(mult_tf_idf, axis=1)
+	new_data = data_copy.apply(mult_tf_idf, axis=1)
 	
 	# drop the column
 	new_data = new_data.drop(columns=["word_idf_weight"])
 	
 	return new_data
+
+# this method will score a document's relevance for a query
+def score(curr_query: list, col_vector: pd.Series) -> float:
+	score = 0
+	for keyword in curr_query:
+		# keyword doesnt show up, perhaps was removed as a stopword
+		if keyword not in col_vector:
+			score += 0
+		else:
+			score += col_vector[keyword]
+	return score
+
+# this method will score all of the relevant documents and return
+# them in sorted order
+def score_rel_docs(query: list, rel_docs: pd.DataFrame) -> list:
+	all_scores = []
+	for columnName, columnData in rel_docs.iteritems():
+		curr_score = score(query, columnData)
+		all_scores.append( (columnName, curr_score) )
+	all_scores.sort(key=lambda x: x[1], reverse=True)
+	return all_scores
+
+# google heuristic
+# figure out a way to work in google's ranking, to the weighting scheme, only a round by round basis
+# R_Doc_1 >>  R_Doc_2 >>  ... >> R_Doc_10. Only slightly tho, we will use googles' work that they have done
+# with implementing their search engine and ranking scheme.
+def apply_google_heuristic(documents: list[tuple]) -> list[tuple]:
+	new_ranking = []
+	weights = {'R_Doc_1':  1.00, 'R_Doc_2': 0.95, 'R_Doc_3': 0.90, 
+			   'R_Doc_4':  0.85, 'R_Doc_5': 0.80, 'R_Doc_6': 0.75,
+			   'R_Doc_7':  0.70, 'R_Doc_8': 0.65, 'R_Doc_9': 0.60, 
+			   'R_Doc_10': 0.55
+			  }
+	for document in documents:
+		new_weight = document[1] * weights[document[0]]
+		new_ranking.append( (document[0], new_weight))
+
+	# sort and return the weighted ranking
+	new_ranking.sort(key=lambda x: x[1], reverse=True)
+
+	return new_ranking
+
 
 # This method will return the new string, which hopefully produces better results for
 # the relevance feedback
@@ -277,71 +324,87 @@ def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 def run_augmentation(curr_query: list) -> list: # return a list of keywords, after potentially adding at max 2 new
 	global RELEVANT_DOCS, NON_RELEVANT_DOCS
 	
+	#
+	# Query Data Structures and weights
+	#
+
 	# keep the labeled documents separate, but calculate term frequency for both
 	inverted_list_relevant     = get_term_frequency(RELEVANT_DOCS)
 	#inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS) # not using irrelevant docs
 
 	# create a pandas dataframe for the document vectors
 	relevant_vectors = convert_to_dataframe(inverted_list_relevant, is_relevant=True)
-
 	#non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False) # not using irrelevant docs
 
 	# do log term frequency for each of the numbers in the dataframe, we want rarer terms to be more valuable
-
 	rel_log_tf = do_log_term_frequency(relevant_vectors)
-
 	#non_rel_log_tf = do_log_term_frequency(non_relevant_vectors) # not using irrelevant docs
 
-	#
-	# do the idf weighting, would need to combine the two dataframes?, TODO I need to think more
-	# but basically our collection will be all of the documents in this round, or in all of the rounds? IDK yet
-	#
-
-	# this step will calculate the tf-idf weights but separately, lets discuss. See note above
+	# this step will calculate the tf-idf weights
 	rel_tf_idf     = do_tf_idf(rel_log_tf)
 	#non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
-	print(rel_tf_idf)
-	# TODO, note this is how we can pull the whole col vector out 'for (columnName, columnData) in df.iteritems():'
-	"""
-	ranking = []
+	#print(rel_tf_idf)
+
+	#
+	# Query Augmentation
+	#
+
+	#
+	# Step 1: Score words and find ones that have the highest weights, in different contexts
+	#
+
+	# case 1: idf doesnt matter in query with one term, its a scalar applied to all documents
+	# just work with the most relevant document and pull the word
+	# case 2: if there is only one relevant document, then we cannot use tf-idf weights, becuase it would all be zero
+	if len(curr_query) == 1 or len(rel_log_tf.columns) == 1:
+		print("in case 1")
+		
+		# here we will only use the tf dataframes
+		doc_scores = score_rel_docs(curr_query, rel_log_tf)
+		
+		# apply google heuristic
+		new_doc_scores = apply_google_heuristic(doc_scores)
+
+		# emphasize important words via document structure / "zones"
+
+		# TODO, this may be hard to implement
+		# check the document structure, if the word appears in the title or beginning of the document it is probably the 
+		# focus of the document
+
+		# Here is where we choose words
+		pass
 	
-	for columnName, columnData in rel_tf_idf.iteritems():
-		print(columnName)
-		print(columnData)
-		print(sum(columnData))
-		ranking.append((columnName, sum(columnData)))
+	# since the query has multiple terms, idf actually differentiates term weights among
+	# documents in the database
+	else:
+		print("in case 2")
+
+		# here we will use the tf-idf dataframes
+		doc_scores = score_rel_docs(curr_query, rel_tf_idf)
+
+		# apply google heuristic
+		new_doc_scores = apply_google_heuristic(doc_scores)
+
+		# Here is where we choose words
+		pass
 	
-	ranking.sort(key=lambda x: x[1])
-	print(ranking)
-	
-	words = rel_tf_idf['R_Doc_3']
-	print(words)
-	words = list(words).sort()
-	print(words)
-	"""
-	# ------------
-	# Next Steps
-	# ------------
-	
-	# google heuristic
-	# figure out a way to work in google's ranking, to the weighting scheme, only a round by round basis
-	# R_Doc_1 >>  R_Doc_2 >>  R_Doc_3. Only slightly tho, but we should use googles' work that they have done.
+	#
+	# Step 2: use the words to create a bunch of new queries
+	#
+		# try adding one word
+		# try adding two words
+		# try all possible combinations!
 
-	# Here is where we choose words
-
-	# we add words and create a bunch of new queries
-
-	# see which one is estimated to have the highest weight
-
-	# if there is only one relevant document, then we cannot use tf-idf weights, becuase it would all be zero
-		# we could 
-
+	#
+	# Step 3: test the new queries using rocchios algo, and use the highest one
+	#
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
 	RELEVANT_DOCS     = None
 	NON_RELEVANT_DOCS = None
 
+	# obviously this becomes the new query ...
 	return "UNDER CONSTRUCTION".split()
 #
 # Log file stuff, This is useful for final steps
