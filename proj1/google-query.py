@@ -500,10 +500,7 @@ def normalize_vectors(data:pd.DataFrame) -> pd.DataFrame:
 # relevant queries, and then take the average
 def cosine_similarity(data: pd.DataFrame, ql: list) -> list:
 	
-	# TODO
-	# if no similarities, then print(Below desired precision, but can no longer augment the query)
-
-	print("calculating cosine similarity... ")
+	print(" calculating cosine similarity... ")
 	highest_avg_sim = 0
 	query_list      = None
 	columns         = data.columns
@@ -540,8 +537,6 @@ def cosine_similarity(data: pd.DataFrame, ql: list) -> list:
 		if  avg_cosine_sim > highest_avg_sim:
 			query_list = query
 
-	print(query_list)		
-	quit()
 	return query_list
 
 # This method will return the new string, which hopefully produces better results for
@@ -627,13 +622,13 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	# Step 3: test the new queries using cosine similarity, and use the highest one
 	#
 	if len(curr_query) == 1 or len(rel_log_tf.columns) == 1:
-		print("normalizing tf weights for relevant document vectors ...")
+		print(" normalizing tf weights for relevant document vectors ...")
 		
 		# normalize rel_log_tf
 		rel_docs = normalize_vectors(rel_log_tf)
 		
 	else:
-		print("normalizing tf-idf weights for relevant document vectors ...")
+		print(" normalizing tf-idf weights for relevant document vectors ...")
 		
 		# normalize rel_log_tf
 		rel_docs = normalize_vectors(rel_tf_idf)
@@ -652,11 +647,12 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
-	RELEVANT_DOCS     = None
-	NON_RELEVANT_DOCS = None
+	RELEVANT_DOCS     = []
+	NON_RELEVANT_DOCS = []
 
 	# obviously this becomes the new query ...
-	return "UNDER CONSTRUCTION".split()
+	#return "UNDER CONSTRUCTION".split()
+	return new_query
 
 #
 # Log file stuff, This is useful for final steps
@@ -679,7 +675,7 @@ def log_iteration() -> None:
 #
 # main method, do all of the dirty work
 #
-def main():
+def main() -> None:
 
 	# ensure that there are at least 4 command line arguments + the program run name
 	if len(sys.argv) > 5:
@@ -712,7 +708,7 @@ def main():
 
 	# run this loop until we hit the target precision
 	while True:
-		
+
 		# RUN INITIAL QUERY
 		if num_searches == 1:
 
@@ -739,7 +735,7 @@ def main():
 
 			#TODO delete the break statement (for actual augmentation runs)
 			#print("\n Iteration number " + str(num_searches))
-			break
+			#break
 
 		#
 		# Remove Non-html files from the query results, if they exist
@@ -760,18 +756,22 @@ def main():
 		# edge case 2: I believe this only matters for the first iteration
 		if precision_k_actual == 0:
 			print(" precision @ 10 for query {} is 0".format(num_searches))
-			break
+			print(" Below desired precision, but can no longer augment the query...")
+			#break # change to return
+			return
 
 		# edge case 3: if we have hit the target precision, then we can terminate.
 		elif precision_k_actual >= precision_at_k:
 			print(" current precision {:.2f} >= target precision {:.2f}. We are done...".format(precision_k_actual, precision_at_k))
-			break
+			#break # change to return
+			return 
 
 		# this is the actual point of the assignment, this is the algorithm we need to develop
 		# The precision didn't pass our pre-defined target, so lets augment the query using
 		# heuristics. Then, set current_query up for the next loop iteration.
 		else:
 			print(" current precision {:.2f} < target precision {:.2f}. Let's augment...".format(precision_k_actual, precision_at_k))
+			
 			#
 			# Modify current query, for next loop using algo
 			#
@@ -780,15 +780,12 @@ def main():
 			# next iteration. Pass the old query keywords, and receive a new one from heuristic analysis
 			augmented_query = run_augmentation(current_query)
 			current_query = augmented_query
- 
+	
 			# increment the iteration counter
 			num_searches += 1
 
-			# obvi delete later on
-			#break
-	
 	# return from main
-	return
+	#return
 
 # main driver
 if __name__ == "__main__":
