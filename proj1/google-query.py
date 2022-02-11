@@ -307,6 +307,7 @@ def apply_word_zone_heuristic(colname: str, keyword: str, word_value: float) -> 
 	return new_word_val
 
 # this method will score a document's relevance for a query
+# the issue comes when a query contains all stop words
 def score(curr_query: list, col_vector: pd.Series) -> float:
 	score = 0
 	for keyword in curr_query:
@@ -322,12 +323,32 @@ def score(curr_query: list, col_vector: pd.Series) -> float:
 # this method will score all of the relevant documents and return
 # them in sorted order
 def score_rel_docs(query: list, rel_docs: pd.DataFrame) -> list:
-	all_scores = []
+	all_scores     = []
 	for columnName, columnData in rel_docs.iteritems():
 		curr_score = score(query, columnData)
 		all_scores.append( (columnName, curr_score) )
-	all_scores.sort(key=lambda x: x[1], reverse=True)
-	return all_scores
+
+	# this is a case where the whole query list contains stopwords
+	# such as "to be or not to be" or "the who"
+	# thus, lets take a simple sum of the column vector.
+	# i.e. all docs have a score of 0
+	back_up_scores = []
+	using_back_up  = False
+	if sum([score[1] for score in all_scores]) == 0:
+		using_back_up = True
+		for columnName, columnData in rel_docs.iteritems():
+			col_score = columnData.sum()
+			back_up_scores.append( (columnName, col_score) )
+	
+	# This way, we can at least produce a document ranking for
+	# queries composed entirely of stopwords.
+	# normally we would be using the 'else' case
+	if using_back_up:
+		back_up_scores.sort(key=lambda x: x[1], reverse=True)
+		return back_up_scores
+	else:
+		all_scores.sort(key=lambda x: x[1], reverse=True)
+		return all_scores
 
 # google heuristic
 # figure out a way to work in google's ranking, to the weighting scheme, only a round by round basis
@@ -450,6 +471,79 @@ def generate_queries(curr_query: list, potential_words: set) -> list:
 
 	return all_combos
 
+# normalize each column vector, by diving each component by the length 
+# of the whole column vector
+def normalize_vectors(data:pd.DataFrame) -> pd.DataFrame:
+	
+	# get a deep copy so we do not modify the tf dataframe
+	data_copy = data.copy(deep=True)
+
+	# work on a column vector one at a time
+	for columnName, columnData in data_copy.iteritems():
+		
+		# square each component of the very long vector and add to the sum
+		components_sq = [ x ** 2 for x in columnData]
+
+		# sum all of the components
+		col_sum = sum(components_sq)
+		
+		# take the sqrt of sum of components squared
+		col_sum = math.sqrt(col_sum)
+
+		# divide each component by the vector length, therby normalizing
+		data_copy[columnName] = data_copy[columnName].map(lambda x: (x * 1.0) / col_sum)
+		
+	return data_copy
+
+# cosine similarity is simply the dot product of query list
+# and the column vectors. I will calculate dot product with all
+# relevant queries, and then take the average
+def cosine_similarity(data: pd.DataFrame, ql: list) -> list:
+	
+	# TODO
+	# if no similarities, then print(Below desired precision, but can no longer augment the query)
+
+	print("calculating cosine similarity... ")
+	highest_avg_sim = 0
+	query_list      = None
+	columns         = data.columns
+	num_rel_docs    = len(data.columns)
+
+	# for each of the queries
+	for query in ql:
+		temp_sum = [0] * num_rel_docs
+
+		# for each keword, go through each relevant document
+		# add the weight for the term to the sum in the correct
+		# index in temp sum
+		for keyword in query:
+
+			# compute dot product with the number of relevant docs
+			# where if keyword is present multiply weight by 1.0
+			i = 0
+
+			# use a single keyword, and go through all rel docs
+			for col in columns:
+				
+				try:
+					temp_sum[i] += data[col][keyword]
+				except:
+					temp_sum[i] += 1 # this is a stop word, and will be constant across all queries
+				i += 1
+		
+		# lets get the average similiarity, to push us towards the middle of the cluster
+		temp_sum = sum(temp_sum)
+		avg_cosine_sim = temp_sum / num_rel_docs
+		
+		# what happens on divide by zero
+		# if the avg similarity is better than what we have seen so far
+		if  avg_cosine_sim > highest_avg_sim:
+			query_list = query
+
+	print(query_list)		
+	quit()
+	return query_list
+
 # This method will return the new string, which hopefully produces better results for
 # the relevance feedback
 # This is the bulk of the assignemnt, we will run all augmentation out of here.
@@ -475,7 +569,6 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	# this step will calculate the tf-idf weights
 	rel_tf_idf     = do_tf_idf(rel_log_tf)
 	#non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
-	#print(rel_tf_idf)
 
 	#
 	# Query Augmentation
@@ -489,7 +582,6 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	# just work with the most relevant document and pull the word
 	# case 2: if there is only one relevant document, then we cannot use tf-idf weights, becuase it would all be zero
 	if len(curr_query) == 1 or len(rel_log_tf.columns) == 1:
-		print("in case 1")
 		
 		# here we will only use the tf dataframes
 		# also use the word zone heuristic
@@ -504,7 +596,6 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	# since the query has multiple terms, idf actually differentiates term weights among
 	# documents in the database
 	else:
-		print("in case 2")
 
 		# here we will use the tf-idf dataframes
 		# also use the word zone heuristic
@@ -523,21 +614,41 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	# try adding one word, and adding two words
 	potential_queries = generate_queries(curr_query, potential_words)
 	
-	#
-	# Step 3: test the new queries using rocchios algo, and use the highest one
-	#
-	
-	# if len(curr_query) == 1 or len(rel_log_tf.columns) == 1:
-		# normalize rel_log_tf
-		# use rocchio's algo for normal vectors and all potential queries
-		# choose the best query that is clustered the best
-	# else:
-		# normalize rel_log_tf
-		# use rocchio's algo for normal vectors and all potential queries
-		# choose the best query that is clustered the best
+	# -------------
+	# rocchios algo, actually uses the relevant docs and non-relevant docs to produce a potential
+	# new query. We could do this as well, where we get a resultant vector, and choose the words
+	# not in the original query that had the highest weight (can only add up to two more)
+	# source: https://www.youtube.com/watch?v=yPd3vHCG7N4
+	# to use this, we would need to enable the non-relevant doc calculations.
+	# TODO, may not need.
+	# -------------
 
+	#
+	# Step 3: test the new queries using cosine similarity, and use the highest one
+	#
+	if len(curr_query) == 1 or len(rel_log_tf.columns) == 1:
+		print("normalizing tf weights for relevant document vectors ...")
+		
+		# normalize rel_log_tf
+		rel_docs = normalize_vectors(rel_log_tf)
+		
+	else:
+		print("normalizing tf-idf weights for relevant document vectors ...")
+		
+		# normalize rel_log_tf
+		rel_docs = normalize_vectors(rel_tf_idf)
+		
+	# calculate cosine similarity with and all potential queries and the relevant docs
+	# choose the best query that is clustered the best
+	new_query = cosine_similarity(rel_docs, potential_queries)
+		
 	# return new query as a list
+	print(new_query)
 
+	#
+	# step 4: last step, work on query ordering. To do this I would need position of words in the relevant docs.
+	# This will need an expanded data structuer in Tokenizer, I think
+	# 
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
@@ -703,22 +814,11 @@ if __name__ == "__main__":
 """
 Main Algorithm Idea:
 
-4) calculate precision@10
-	if precision@10 greater than target value, then terminate. [DONE]
-	elif precision@10 == 0, then terminate. [DONE]
-	else: use pages marked as relevant to automatically derive new words that are likely to identify more relevant pages	
-	At this point no more user input...!!!
 
-	NOTE 1: Cannot delete any words from the original query, or from the query from the previous iteration. Only add words, at most
-	we can introduce at most 2 new words during each round.
-	
+	# TODO, IDK how to fucking do this
 	NOTE 2: order of words expanded in query is important. Program should automatically consider alternate ways of ordering the words
 	in a modified query, and pick the order estimated to be the best. In each iter we can reorder all words, new and old, but cannot
 	delete any words.
 
-5) Modify current user query using notes in part 4, to put the keywords in the best possible order. and then go to step 2.
-
-key point: step 4 will need to be fleshed out as much as possible. we can use techniques borrowed from research literature, we 
-just need to ensure that we cite any publication.
 
 """
