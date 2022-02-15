@@ -154,6 +154,7 @@ def get_term_frequency(documents: list) -> dict:
 	
 	# Hash Table with inverted list DS for easier indexing
 	inverted_list = {}
+	inverted_list_positions = {}
 
 	# of the relevant documents, lets parse the contents of it to build an inverted list data structure
 	for i in range(0, len(documents)): # start with indexing just one of them
@@ -179,21 +180,41 @@ def get_term_frequency(documents: list) -> dict:
 		except requests.exceptions.HTTPError:
 			print("Http error for {}, we will now just use stored snippet and title".format(doc_url))
 			# use the snippet and title to get all keywords via the regex match
-			all_keywords = tk.regex_match(doc[1] + " " + doc[2])
+			all_keywords = tk.regex_match(doc[1] + " " + doc[2], False)
 
 		# lets add to the inverted list, essentially creating our own linked list on hash table
 		# each word will contain a row, of length len(documents). if word exists, find doc location and increment
-		for word in all_keywords:
 
-			if word in inverted_list:
+					
+
+
+		# EG::: DO WE NEED TO KEEP TRACK OF WORD POSTION IN DOCUMENT HERE AS WELL?
+		for word in all_keywords:						
+			if word[0] in inverted_list_positions.keys():
+				
+				if i in inverted_list_positions[word[0]].keys():					
+					temp = inverted_list_positions[word[0]][i]
+					temp.append(word[1])
+					inverted_list_positions[word[0]][i] = temp
+				else:
+					inverted_list_positions[word[0]][i] = []
+					inverted_list_positions[word[0]][i].append(word[1])
+			else:
+				inverted_list_positions[word[0]] = {}
+				inverted_list_positions[word[0]][i] = []
+				inverted_list_positions[word[0]][i].append(word[1])
+
+			if word[0] in inverted_list:
 				# find the keyword, then find the document location, increment value
-				inverted_list[word][i] += 1
+				inverted_list[word[0]][i] += 1
 			else:
 				# create room for each of the documents in the relevant pool
 				# we found a completely new word
-				inverted_list[word]    = [0] * len(documents)
-				inverted_list[word][i] = 1 # ensure that the value for this word begins at 1
+				inverted_list[word[0]]    = [0] * len(documents)
+				inverted_list[word[0]][i] = 1 # ensure that the value for this word begins at 1
 
+	# print(inverted_list_positions)
+	
 	return inverted_list
 
 def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # return a PD DataFrame
@@ -354,7 +375,7 @@ def score_rel_docs(query: list, rel_docs: pd.DataFrame) -> list:
 # figure out a way to work in google's ranking, to the weighting scheme, only a round by round basis
 # R_Doc_1 >>  R_Doc_2 >>  ... >> R_Doc_10. Only slightly tho, we will use googles' work that they have done
 # with implementing their search engine and ranking scheme.
-def apply_google_heuristic(documents: list[tuple]) -> list[tuple]:
+def apply_google_heuristic(documents: list) -> list:
 	new_ranking = []
 	weights = {'R_Doc_1':  1.00, 'R_Doc_2': 0.95, 'R_Doc_3': 0.90, 
 			   'R_Doc_4':  0.85, 'R_Doc_5': 0.80, 'R_Doc_6': 0.75,
@@ -372,7 +393,7 @@ def apply_google_heuristic(documents: list[tuple]) -> list[tuple]:
 
 # here will try and pick the best words so that we can begin to augment
 # the query. Return a list of words, to be added to the queries and then tested.
-def choose_words(scores: list[tuple], data: pd.DataFrame, query: list) -> list:	
+def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:	
 	words = set() # get 12 words max
 	max_words = 20
 

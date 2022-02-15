@@ -40,7 +40,8 @@ class Tokenizer(object):
 
     # defined this separately, so that if the get request fails, we can just use
     # the data that we have previously stored
-    def regex_match(self, string) -> list:
+    # success determines whether the request was successful or not
+    def regex_match(self, string, success: bool) -> list:
         
         # match any alphanumeric char one or more times (i.e a word), remove all punctuation.
         regex = "\w+"
@@ -49,9 +50,17 @@ class Tokenizer(object):
         keywords = re.findall(regex, string)
         
         # we only compare lowercase versions of word
-        keywords = [word.lower() for word in keywords if not (self.is_stopword(word) or word.isnumeric())]
-
-        return keywords
+        if success:
+            keywords = [word.lower() for word in keywords if not (self.is_stopword(word) or word.isnumeric())]        
+            return keywords
+        else:
+            # we got here by an exception and are just storing snippet and title
+            res = []
+            for i in range(len(keywords)):
+                word = keywords[i]
+                if not (self.is_stopword(word) or word.isnumeric()):
+                    res.append([word.lower(), i+1])
+            return res
 
     def execute_get_request(self) -> None:
 
@@ -74,13 +83,16 @@ class Tokenizer(object):
         soup = bs(request.text,"html.parser")   
  
         docstrings = soup.stripped_strings
-
+        
+        # keep track of word position in document with i
+        i = 1 
         for string in docstrings:
-
+                        
             # we only compare lowercase versions of word
-            keywords = self.regex_match(string)
+            keywords = self.regex_match(string, True)
 
             # append to master list
+
             for word in keywords:
                 
                 # perform stopword elimination
@@ -90,8 +102,11 @@ class Tokenizer(object):
                     continue
 
                 # this word is not a stopword, save it
-                self.parsed_words.append(word)
-
+                self.parsed_words.append([word, i])
+                i += 1
+        
+        
+        
 
     # use this accessor method to get list of words from html file
     def get_words(self) -> list:
