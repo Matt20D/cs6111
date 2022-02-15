@@ -188,7 +188,7 @@ def get_term_frequency(documents: list) -> dict:
 					
 
 
-		# EG::: DO WE NEED TO KEEP TRACK OF WORD POSTION IN DOCUMENT HERE AS WELL?
+		# EG::: Added inverted_list_positions -- haven't done anything with it yet...
 		for word in all_keywords:						
 			if word[0] in inverted_list_positions.keys():
 				
