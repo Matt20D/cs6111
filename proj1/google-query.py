@@ -395,13 +395,13 @@ def apply_google_heuristic(documents: list) -> list:
 # the query. Return a list of words, to be added to the queries and then tested.
 def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:	
 	words = set() # get 12 words max
-	max_words = 20
+	max_words = 30
 
 	# scale max per doc
 	if len(scores) == 1:
 		max_per_doc = max_words
 	else:
-		max_per_doc = 10
+		max_per_doc = 15
 	
 	# go from highest ranked doc to lowest ranked doc
 	for document in scores:
@@ -423,6 +423,7 @@ def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:
 			# or we have the max number of words from document
 			# lets move on to next doc
 			if max_per_doc == added or value == 0:
+			# if value == 0:
 				break
 
 			# ensure that the word is not like any others in query
@@ -451,6 +452,10 @@ def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:
 # query terms + one new term, or old query terms + two new terms.
 # at a max this should return 210 potential queries. (based off the numbers in choose words)
 def generate_queries(curr_query: list, potential_words: set) -> list:
+	
+	
+	print(potential_words)
+
 
 	len_one = set() # should equal 20 max.
 	len_two = set() # 190 should be max. 20 choose 2 == 190
@@ -512,6 +517,8 @@ def normalize_vectors(data:pd.DataFrame) -> pd.DataFrame:
 		col_sum = math.sqrt(col_sum)
 
 		# divide each component by the vector length, therby normalizing
+
+		# NOTE: can't divide by zero -- likely error only one irrelevant column
 		data_copy[columnName] = data_copy[columnName].map(lambda x: (x * 1.0) / col_sum)
 		
 	return data_copy
@@ -519,44 +526,71 @@ def normalize_vectors(data:pd.DataFrame) -> pd.DataFrame:
 # cosine similarity is simply the dot product of query list
 # and the column vectors. I will calculate dot product with all
 # relevant queries, and then take the average
-def cosine_similarity(data: pd.DataFrame, ql: list) -> list:
+def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: list) -> list:
 	
 	print(" calculating cosine similarity... ")
 	highest_avg_sim = 0
 	query_list      = None
-	columns         = data.columns
-	num_rel_docs    = len(data.columns)
+	rel_columns     = rel_data.columns
+	num_rel_docs    = len(rel_data.columns)
+
+	non_rel_columns     = non_rel_data.columns
+	num_non_rel_docs    = len(non_rel_data.columns)
 
 	# for each of the queries
+	# print(ql)
 	for query in ql:
-		temp_sum = [0] * num_rel_docs
+		temp_sum_rel = [0] * num_rel_docs
+		temp_sum_non_rel = [0] * num_non_rel_docs
+
 
 		# for each keword, go through each relevant document
 		# add the weight for the term to the sum in the correct
 		# index in temp sum
 		for keyword in query:
 
+			# determine how close to relevant documents
+
 			# compute dot product with the number of relevant docs
 			# where if keyword is present multiply weight by 1.0
 			i = 0
-
 			# use a single keyword, and go through all rel docs
-			for col in columns:
+			for col in rel_columns:
 				
 				try:
-					temp_sum[i] += data[col][keyword]
+					temp_sum_rel[i] += rel_data[col][keyword]
 				except:
-					temp_sum[i] += 1 # this is a stop word, and will be constant across all queries
+					temp_sum_rel[i] += 1 # this is a stop word, and will be constant across all queries
+				i += 1
+
+			# determine how close to non_relevant documents
+			i = 0	
+			for col in non_rel_columns:				
+				try:
+					temp_sum_non_rel[i] += non_rel_data[col][keyword]
+				except:
+					temp_sum_non_rel[i] += 1 # this is a stop word, and will be constant across all queries
 				i += 1
 		
-		# lets get the average similiarity, to push us towards the middle of the cluster
-		temp_sum = sum(temp_sum)
-		avg_cosine_sim = temp_sum / num_rel_docs
+		# lets get the average similiarity to relevant, to push us towards the middle of the cluster
+		temp_sum_rel = sum(temp_sum_rel)
+		avg_cosine_sim_rel = temp_sum_rel / num_rel_docs
+
+		# lets get the average similiarity to non relevant docs, to push us towards the middle of the cluster
+		temp_sum_non_rel = sum(temp_sum_non_rel)
+		avg_cosine_sim_non_rel = temp_sum_non_rel / num_non_rel_docs
 		
+
+		# roccio metric
+		# roccio = avg_cosine_sim_rel - avg_cosine_sim_non_rel
+		roccio = temp_sum_rel - temp_sum_non_rel
+
+
 		# what happens on divide by zero
 		# if the avg similarity is better than what we have seen so far
-		if  avg_cosine_sim > highest_avg_sim:
+		if  roccio > highest_avg_sim:
 			query_list = query
+			highest_avg_sim = roccio
 
 	return query_list
 
@@ -572,19 +606,19 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 	# keep the labeled documents separate, but calculate term frequency for both
 	inverted_list_relevant     = get_term_frequency(RELEVANT_DOCS)
-	#inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS) # not using irrelevant docs
+	inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS) # not using irrelevant docs
 
 	# create a pandas dataframe for the document vectors
 	relevant_vectors = convert_to_dataframe(inverted_list_relevant, is_relevant=True)
-	#non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False) # not using irrelevant docs
+	non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False) # not using irrelevant docs
 
 	# do log term frequency for each of the numbers in the dataframe, we want rarer terms to be more valuable
 	rel_log_tf = do_log_term_frequency(relevant_vectors)
-	#non_rel_log_tf = do_log_term_frequency(non_relevant_vectors) # not using irrelevant docs
+	non_rel_log_tf = do_log_term_frequency(non_relevant_vectors) # not using irrelevant docs
 
 	# this step will calculate the tf-idf weights
 	rel_tf_idf     = do_tf_idf(rel_log_tf)
-	#non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
+	non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
 
 	#
 	# Query Augmentation
@@ -647,16 +681,23 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 		
 		# normalize rel_log_tf
 		rel_docs = normalize_vectors(rel_log_tf)
+		non_rel_docs = normalize_vectors(non_rel_log_tf)
 		
 	else:
 		print(" normalizing tf-idf weights for relevant document vectors ...")
 		
 		# normalize rel_log_tf
 		rel_docs = normalize_vectors(rel_tf_idf)
+
+		# NOTE: error when only one irrelevant doc -- need to add more cases?
+		# idf is irrelevant for one document -- everything goes to zero
+		# need another check 
+		non_rel_docs = normalize_vectors(non_rel_tf_idf)
 		
 	# calculate cosine similarity with and all potential queries and the relevant docs
 	# choose the best query that is clustered the best
-	new_query = cosine_similarity(rel_docs, potential_queries)
+	# want to find most dissimilar to irrelevant
+	new_query = cosine_similarity(rel_docs, non_rel_docs, potential_queries)
 		
 	# return new query as a list
 	print(new_query)
