@@ -109,7 +109,7 @@ def get_feedback() -> bool:
 		else:
 			print(" Bad input, please redo...")
 
-# global storage of documents according to label by relevance feedback
+# global storage of documents according to label by relevance feedback, for a given iteration
 RELEVANT_DOCS = []
 NON_RELEVANT_DOCS = []
 
@@ -184,9 +184,6 @@ def get_term_frequency(documents: list) -> dict:
 
 		# lets add to the inverted list, essentially creating our own linked list on hash table
 		# each word will contain a row, of length len(documents). if word exists, find doc location and increment
-
-					
-
 
 		# EG::: Added inverted_list_positions -- haven't done anything with it yet...
 		for word in all_keywords:						
@@ -300,8 +297,9 @@ def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 # emphasize the location of certain words by title (most weight), and snippet
 # which is the early part of the document (2nd most weight)
 def apply_word_zone_heuristic(colname: str, keyword: str, word_value: float) -> float:
-	weights = {'title':  1.20, 'snippet': 1.10}
-
+	#weights = {'title':  1.20, 'snippet': 1.10}
+	weights = {'title':  1.50, 'snippet': 1.10} # title should matter much more
+	
 	# adjust the index to base 0 for array
 	doc_index = int(colname[-1]) - 1
 	
@@ -453,13 +451,9 @@ def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:
 # at a max this should return 210 potential queries. (based off the numbers in choose words)
 def generate_queries(curr_query: list, potential_words: set) -> list:
 	
-	
+	len_one = set() # should equal 30 max.
+	len_two = set() # 435 should be max. 30 choose 2 == 435
 	print(potential_words)
-
-
-	len_one = set() # should equal 20 max.
-	len_two = set() # 190 should be max. 20 choose 2 == 190
-	
 	# generate all possible combos
 	for word in potential_words:
 		
@@ -517,9 +511,12 @@ def normalize_vectors(data:pd.DataFrame) -> pd.DataFrame:
 		col_sum = math.sqrt(col_sum)
 
 		# divide each component by the vector length, therby normalizing
-
-		# NOTE: can't divide by zero -- likely error only one irrelevant column
-		data_copy[columnName] = data_copy[columnName].map(lambda x: (x * 1.0) / col_sum)
+		if col_sum == 0:
+			continue
+		else:
+			# NOTE: can't divide by zero -- likely error only one irrelevant column
+			# or could be a bad document
+			data_copy[columnName] = data_copy[columnName].map(lambda x: (x * 1.0) / col_sum)
 		
 	return data_copy
 
@@ -527,9 +524,9 @@ def normalize_vectors(data:pd.DataFrame) -> pd.DataFrame:
 # and the column vectors. I will calculate dot product with all
 # relevant queries, and then take the average
 def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: list) -> list:
-	#TODO add in the original query?
-
+	
 	print(" calculating cosine similarity... ")
+
 	highest_avg_sim = float('-inf') # we want the highest similarity, using all the data
 	query_list      = None
 
@@ -551,10 +548,10 @@ def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: l
 		# index in temp sum
 		for keyword in query:
 
-			# determine how close to relevant documents
+			# determine how close to relevant documents in current iteration
 
 			# compute dot product with the number of relevant docs
-			# where if keyword is present multiply weight by 1.0
+			# where if keyword is present essentially multiply weight by 1.0
 			i = 0
 			# use a single keyword, and go through all rel docs
 			for col in rel_columns:
@@ -565,7 +562,7 @@ def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: l
 					temp_sum_rel[i] += 0 # this is a stop word, and will be constant across all queries
 				i += 1
 
-			# determine how close to non_relevant documents
+			# determine how close to non_relevant documents in current iteration
 			i = 0	
 			for col in non_rel_columns:				
 				try:
@@ -607,19 +604,19 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 	# keep the labeled documents separate, but calculate term frequency for both
 	inverted_list_relevant     = get_term_frequency(RELEVANT_DOCS)
-	inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS) # not using irrelevant docs
+	inverted_list_non_relevant = get_term_frequency(NON_RELEVANT_DOCS)
 
 	# create a pandas dataframe for the document vectors
 	relevant_vectors = convert_to_dataframe(inverted_list_relevant, is_relevant=True)
-	non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False) # not using irrelevant docs
+	non_relevant_vectors = convert_to_dataframe(inverted_list_non_relevant, is_relevant=False)
 
 	# do log term frequency for each of the numbers in the dataframe, we want rarer terms to be more valuable
 	rel_log_tf = do_log_term_frequency(relevant_vectors)
-	non_rel_log_tf = do_log_term_frequency(non_relevant_vectors) # not using irrelevant docs
+	non_rel_log_tf = do_log_term_frequency(non_relevant_vectors)
 
 	# this step will calculate the tf-idf weights
 	rel_tf_idf     = do_tf_idf(rel_log_tf)
-	non_rel_tf_idf = do_tf_idf(non_rel_log_tf) # not using irrelevant docs
+	non_rel_tf_idf = do_tf_idf(non_rel_log_tf)
 
 	#
 	# Query Augmentation
@@ -670,7 +667,7 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	#
 
 	# need this check because tf-idf would be 0 for the whole column, if there was only one document
-	# so lets just use term frequency
+	# Also for one term, there will be no effect, so lets just use term frequency.
 	if len(curr_query) == 1 or len(rel_log_tf.columns) == 1 or len(non_rel_log_tf.columns) == 1:
 		print(" normalizing tf weights for relevant document vectors ...")
 		
@@ -691,12 +688,8 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	# and want to find most dissimilar to irrelevant
 	new_query = cosine_similarity(rel_docs, non_rel_docs, potential_queries)
 		
-	# return new query as a list
-	print(new_query)
-
 	#
-	# step 4: last step, work on query ordering. To do this I would need position of words in the relevant docs.
-	# This will need an expanded data structuer in Tokenizer, I think
+	# step 4: last step, work on query ordering. This seems very NLP-y
 	# 
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
@@ -704,8 +697,6 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	RELEVANT_DOCS     = []
 	NON_RELEVANT_DOCS = []
 
-	# obviously this becomes the new query ...
-	#return "UNDER CONSTRUCTION".split()
 	return new_query
 
 #
@@ -861,15 +852,3 @@ if __name__ == "__main__":
 		print("+ Program will terminate now...                 +")
 		print("+++++++++++++++++++++++++++++++++++++++++++++++++")
 		print("\n")
-
-"""
-Main Algorithm Idea:
-
-
-	# TODO, IDK how to fucking do this
-	NOTE 2: order of words expanded in query is important. Program should automatically consider alternate ways of ordering the words
-	in a modified query, and pick the order estimated to be the best. In each iter we can reorder all words, new and old, but cannot
-	delete any words.
-
-
-"""
