@@ -12,6 +12,7 @@ import pprint # printing out Datastructures in a readable format
 import math # for logs
 import Tokenizer # class written to execute get request and get the keywords back
 import requests
+import heapq # for choosing words
 
 from googleapiclient.discovery import build # for querying google 
 
@@ -178,7 +179,7 @@ def get_term_frequency(documents: list) -> dict:
 		
 		# on failure just use the snippet and title
 		except requests.exceptions.HTTPError:
-			print("Http error for {}, we will now just use stored snippet and title".format(doc_url))
+			#print("Http error for {}, we will now just use stored snippet and title".format(doc_url))
 			# use the snippet and title to get all keywords via the regex match
 			all_keywords = tk.regex_match(doc[1] + " " + doc[2], False)
 
@@ -375,10 +376,10 @@ def score_rel_docs(query: list, rel_docs: pd.DataFrame) -> list:
 # with implementing their search engine and ranking scheme.
 def apply_google_heuristic(documents: list) -> list:
 	new_ranking = []
-	weights = {'R_Doc_1':  1.00, 'R_Doc_2': 0.95, 'R_Doc_3': 0.90, 
-			   'R_Doc_4':  0.85, 'R_Doc_5': 0.80, 'R_Doc_6': 0.75,
-			   'R_Doc_7':  0.70, 'R_Doc_8': 0.65, 'R_Doc_9': 0.60, 
-			   'R_Doc_10': 0.55
+	weights = {'R_Doc_1':  1.00, 'R_Doc_2': 0.99, 'R_Doc_3': 0.98, 
+			   'R_Doc_4':  0.97, 'R_Doc_5': 0.96, 'R_Doc_6': 0.95,
+			   'R_Doc_7':  0.94, 'R_Doc_8': 0.93, 'R_Doc_9': 0.92, 
+			   'R_Doc_10': 0.91
 			  }
 	for document in documents:
 		new_weight = document[1] * weights[document[0]]
@@ -392,20 +393,20 @@ def apply_google_heuristic(documents: list) -> list:
 # here will try and pick the best words so that we can begin to augment
 # the query. Return a list of words, to be added to the queries and then tested.
 def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:	
-	words = set() # get 12 words max
-	max_words = 30
-
-	# scale max per doc
-	if len(scores) == 1:
-		max_per_doc = max_words
-	else:
-		max_per_doc = 15
 	
+	# these are the max number of words to return
+	words = set() 
+	max_words = 250
+	
+	# create a max heap so we can compare across all rel docs
+	my_heap = []
+
+	# want to use this object to check for stop words, url is not used
+	# just want to use the is_stopword check
+	tk = Tokenizer.Tokenizer("https://www.google.com/")
+
 	# go from highest ranked doc to lowest ranked doc
 	for document in scores:
-
-		# track number of added for a document
-		added = 0
 
 		# get col vector and sort in desc
 		vec = data[document[0]].sort_values(ascending=False)
@@ -413,15 +414,10 @@ def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:
 		# go through all of the nonzero words in doc vector
 		for index, value in vec.items():
 			
-			# we have reached our limit of max_words
-			if len(words) == max_words:
-				break
 
-			# we have hit a weight of 0
-			# or we have the max number of words from document
-			# lets move on to next doc
-			if max_per_doc == added or value == 0:
-			# if value == 0:
+			# we have hit a weight of 0, and since they are sorted 
+			# there are no more good words
+			if value == 0:
 				break
 
 			# ensure that the word is not like any others in query
@@ -432,28 +428,48 @@ def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:
 					in_query = True
 					break
 			
+			# check if the word is a stopword
+			if tk.is_stopword(index):
+				#print("skipped stop word")
+				continue
+
 			# completely new unique word
 			if not in_query:
-				# add word and increment doc counter
-				words.add(index)
-				added += 1
+
+				# multiply value by one to ensure max heap
+				my_heap.append( (-1 * value,index) )
 		
 		# we have reached our limit of max_words
 		if len(words) == max_words:
 			break
 	
+	# O(N) heapify for my max heap
+	heapq.heapify(my_heap)
+	
+	# stop either at 250 words or when my heap is empty
+	while max_words > 0 and len(my_heap): 
+		new_word = heapq.heappop(my_heap)[1]
+		if new_word not in words:
+			words.add(new_word)
+			max_words -= 1
+	
 	# what happens if the words set contains 0? We should choose one randomly
-	# IDK if this is a case that needs to be tested.
-	return words
+	# NOTE: IDK if this is a case that needs to be tested, i dont think so
+	if len(words) == 0:
+		return {"error"}
+	
+	# trying to guard against termination on an untested corner case
+	else:
+		return words
 
 # using all of the keyword rankings lets build all of the combinations of the old
 # query terms + one new term, or old query terms + two new terms.
 # at a max this should return 210 potential queries. (based off the numbers in choose words)
 def generate_queries(curr_query: list, potential_words: set) -> list:
 	
-	len_one = set() # should equal 30 max.
-	len_two = set() # 435 should be max. 30 choose 2 == 435
-	print(potential_words)
+	len_one = set()
+	len_two = set()
+
 	# generate all possible combos
 	for word in potential_words:
 		
@@ -579,7 +595,6 @@ def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: l
 		temp_sum_non_rel = sum(temp_sum_non_rel)
 		avg_cosine_sim_non_rel = temp_sum_non_rel / num_non_rel_docs
 		
-
 		# rocchio metric
 		# use all of the information to score this query
 		rocchio = (1.0 * avg_cosine_sim_rel) - (1.25 * avg_cosine_sim_non_rel)
@@ -589,6 +604,9 @@ def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: l
 		if  rocchio > highest_avg_sim:
 			query_list = query
 			highest_avg_sim = rocchio
+			# NOTE: uncomment to see how the winner changes over time
+			#print(query_list)
+			#print(highest_avg_sim)
 
 	return query_list
 
