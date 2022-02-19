@@ -3,6 +3,7 @@
 #
 
 # Library Modules Needed
+from ctypes.wintypes import WORD
 from operator import inv
 import sys # command line arg parsing
 import numpy as np # havent decided which one yet
@@ -13,6 +14,11 @@ import math # for logs
 import Tokenizer # class written to execute get request and get the keywords back
 import requests
 import heapq # for choosing words
+
+
+import itertools
+import os
+from collections import defaultdict
 
 from googleapiclient.discovery import build # for querying google 
 
@@ -113,6 +119,9 @@ def get_feedback() -> bool:
 # global storage of documents according to label by relevance feedback, for a given iteration
 RELEVANT_DOCS = []
 NON_RELEVANT_DOCS = []
+N_GRAM_MASTER_LIST = []
+WORD_COUNT = defaultdict(int)
+
 
 # print the query results for the users,
 # ask for relevence feedback, and return the precision metric
@@ -152,10 +161,12 @@ def present_results(queries: list) -> float:
 # return an inverted list, that contains the term_frequency of each term
 # in a given document snippet + title of document
 def get_term_frequency(documents: list) -> dict:
-	
+	global N_GRAM_MASTER_LIST, WORD_COUNT
 	# Hash Table with inverted list DS for easier indexing
 	inverted_list = {}
-	inverted_list_positions = {}
+
+	# track all word orderings seen
+	# inverted_list_positions = {}
 
 	# of the relevant documents, lets parse the contents of it to build an inverted list data structure
 	for i in range(0, len(documents)): # start with indexing just one of them
@@ -181,38 +192,26 @@ def get_term_frequency(documents: list) -> dict:
 		except requests.exceptions.HTTPError:
 			#print("Http error for {}, we will now just use stored snippet and title".format(doc_url))
 			# use the snippet and title to get all keywords via the regex match
-			all_keywords = tk.regex_match(doc[1] + " " + doc[2], False)
+			all_keywords = tk.regex_match(doc[1] + " " + doc[2])
 
 		# lets add to the inverted list, essentially creating our own linked list on hash table
 		# each word will contain a row, of length len(documents). if word exists, find doc location and increment
 
-		# EG::: Added inverted_list_positions -- haven't done anything with it yet...
+		# for calculating N-gram probability we need the count of every word and the sequence in which we traverse for each document
+		for word in tk.all_words:						
+			WORD_COUNT[word] += 1
+			N_GRAM_MASTER_LIST.append(word)		
+	
 		for word in all_keywords:						
-			if word[0] in inverted_list_positions.keys():
-				
-				if i in inverted_list_positions[word[0]].keys():					
-					temp = inverted_list_positions[word[0]][i]
-					temp.append(word[1])
-					inverted_list_positions[word[0]][i] = temp
-				else:
-					inverted_list_positions[word[0]][i] = []
-					inverted_list_positions[word[0]][i].append(word[1])
-			else:
-				inverted_list_positions[word[0]] = {}
-				inverted_list_positions[word[0]][i] = []
-				inverted_list_positions[word[0]][i].append(word[1])
-
-			if word[0] in inverted_list:
+			if word in inverted_list:
 				# find the keyword, then find the document location, increment value
-				inverted_list[word[0]][i] += 1
+				inverted_list[word][i] += 1
 			else:
 				# create room for each of the documents in the relevant pool
 				# we found a completely new word
-				inverted_list[word[0]]    = [0] * len(documents)
-				inverted_list[word[0]][i] = 1 # ensure that the value for this word begins at 1
+				inverted_list[word]    = [0] * len(documents)
+				inverted_list[word][i] = 1 # ensure that the value for this word begins at 1
 
-	# print(inverted_list_positions)
-	
 	return inverted_list
 
 def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # return a PD DataFrame
@@ -610,15 +609,67 @@ def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: l
 
 	return query_list
 
+
+def calc_n_gram(query):
+	'''
+	calculates n_gram probability using section 3.1 from the following paper:
+	https://web.stanford.edu/~jurafsky/slp3/3.pdf
+	
+	'''
+	global N_GRAM_MASTER_LIST, WORD_COUNT
+	
+	print(" calculating n_gram probabilities for", query, "...")
+	list_of_query_perms = list(itertools.permutations(query))
+	bi_gram_occurances = {}
+
+	most_likely_sequence = list(list_of_query_perms[0])
+	most_likely_sequence_score = 0	
+
+	if len(query)>1:
+		for test_query in list_of_query_perms:
+			# print('---------------')
+			# print('testing query: ', test_query)
+			n_gram_probability = 1
+			for i in range(len(test_query)-1):
+				word1 = test_query[i].lower()
+				word2 = test_query[i+1].lower()
+				combo = word1 + word2
+
+				# calculate number of occurances word 1 occurs after word 2 in all docs			
+				
+				if combo not in bi_gram_occurances.keys():
+					bi_gram_occurances[combo] = 0
+					for i in range(len(N_GRAM_MASTER_LIST)-1):						
+						if N_GRAM_MASTER_LIST[i] == word1 and N_GRAM_MASTER_LIST[i+1] == word2:
+							bi_gram_occurances[combo] += 1			
+
+				
+				# print('WORD', word1)
+				if bi_gram_occurances[combo] == 0:
+					bi_gram_occurances[combo] = .001
+				bi_gram_prob = bi_gram_occurances[combo]/WORD_COUNT[word1]
+				# print('bi-gram probability for: ', word1, word2, ' = ', bi_gram_prob)
+				n_gram_probability *= bi_gram_prob
+
+			if n_gram_probability > most_likely_sequence_score:
+				most_likely_sequence_score = n_gram_probability
+				most_likely_sequence = list(test_query)
+
+			# print("n-gram-probability = ", n_gram_probability)
+			# print('----------------------')
+	# print(most_likely_sequence)	
+	return most_likely_sequence
+
 # This method will return the new string, which hopefully produces better results for
 # the relevance feedback
 # This is the bulk of the assignemnt, we will run all augmentation out of here.
 def run_augmentation(curr_query: list) -> list: # return a list of keywords, after potentially adding at max 2 new
-	global RELEVANT_DOCS, NON_RELEVANT_DOCS
+	global RELEVANT_DOCS, NON_RELEVANT_DOCS, N_GRAM_MASTER_LIST, WORD_COUNT
 	
 	#
 	# Query Data Structures and weights
 	#
+	
 
 	# keep the labeled documents separate, but calculate term frequency for both
 	inverted_list_relevant     = get_term_frequency(RELEVANT_DOCS)
@@ -708,14 +759,16 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 		
 	#
 	# step 4: last step, work on query ordering. This seems very NLP-y
-	# 
+	reordered_query = calc_n_gram(new_query)
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
-	RELEVANT_DOCS     = []
-	NON_RELEVANT_DOCS = []
+	RELEVANT_DOCS     	= []
+	NON_RELEVANT_DOCS 	= []
+	N_GRAM_MASTER_LIST 	= []
+	WORD_COUNT 			= defaultdict(int)
 
-	return new_query
+	return reordered_query
 
 #
 # Log file stuff, This is useful for final steps
