@@ -52,8 +52,8 @@ class Tokenizer(object):
         
         # we only compare lowercase versions of word
 
-        keywords = [word.lower() for word in keywords if not (self.is_stopword(word) or word.isnumeric())]        
-
+        keywords = [word.lower() for word in keywords if not (self.is_stopword(word) or word.isnumeric())]                
+        
         return keywords
 
     def execute_get_request(self) -> None:

@@ -4,6 +4,7 @@
 
 # Library Modules Needed
 from ctypes.wintypes import WORD
+from logging import exception, raiseExceptions
 from operator import inv
 import sys # command line arg parsing
 import numpy as np # havent decided which one yet
@@ -126,7 +127,7 @@ WORD_COUNT = defaultdict(int)
 # print the query results for the users,
 # ask for relevence feedback, and return the precision metric
 def present_results(queries: list) -> float:
-	global RELEVANT_DOCS, NON_RELEVANT_DOCS
+	global RELEVANT_DOCS, NON_RELEVANT_DOCS, N_GRAM_MASTER_LIST, WORD_COUNT
 	# track query rank
 	rank = 1
 
@@ -144,6 +145,20 @@ def present_results(queries: list) -> float:
 		# present query result to user
 		print(" URL: {}\n Title: {}\n Description: {}\n".format(query[0], query[1], query[2]))
 
+		# add description and title to N_GRAM_MASTER list
+		# putting breaks in between		
+		list_of_title = query[1].split()
+		for word in list_of_title:
+			WORD_COUNT[word.lower()] += 1
+			N_GRAM_MASTER_LIST.append(word.lower())
+		N_GRAM_MASTER_LIST.append(" ")
+
+		list_of_descr = query[2].split()
+		for word in list_of_descr:
+			WORD_COUNT[word.lower()] += 1
+			N_GRAM_MASTER_LIST.append(word.lower())
+		N_GRAM_MASTER_LIST.append(" ")
+		
 		# ask user if this query is relevant
 		if get_feedback() == True:
 			num_yes += 1
@@ -191,17 +206,22 @@ def get_term_frequency(documents: list) -> dict:
 		# on failure just use the snippet and title
 		except requests.exceptions.HTTPError:
 			#print("Http error for {}, we will now just use stored snippet and title".format(doc_url))
-			# use the snippet and title to get all keywords via the regex match
+			# use the snippet and title to get all keywords via the regex match			
 			all_keywords = tk.regex_match(doc[1] + " " + doc[2])
 
 		# lets add to the inverted list, essentially creating our own linked list on hash table
 		# each word will contain a row, of length len(documents). if word exists, find doc location and increment
-
+	
 		# for calculating N-gram probability we need the count of every word and the sequence in which we traverse for each document
 		for word in tk.all_words:						
 			WORD_COUNT[word] += 1
 			N_GRAM_MASTER_LIST.append(word)		
 	
+		# put a break between documents
+		N_GRAM_MASTER_LIST.append(" ")
+		# print("Length of master list")
+		# print(len(N_GRAM_MASTER_LIST))
+
 		for word in all_keywords:						
 			if word in inverted_list:
 				# find the keyword, then find the document location, increment value
@@ -617,7 +637,14 @@ def calc_n_gram(query):
 	
 	'''
 	global N_GRAM_MASTER_LIST, WORD_COUNT
-	
+	# print(WORD_COUNT)
+
+	# first check to make sure each word is in word count - if not, raise exception
+	for word in query:
+		if word not in WORD_COUNT.keys():
+			raise Exception(word + ": not found in WORD_COUNT.")
+
+
 	print(" calculating n_gram probabilities for", query, "...")
 	list_of_query_perms = list(itertools.permutations(query))
 	bi_gram_occurances = {}
@@ -647,6 +674,7 @@ def calc_n_gram(query):
 				# print('WORD', word1)
 				if bi_gram_occurances[combo] == 0:
 					bi_gram_occurances[combo] = .001
+					
 				bi_gram_prob = bi_gram_occurances[combo]/WORD_COUNT[word1]
 				# print('bi-gram probability for: ', word1, word2, ' = ', bi_gram_prob)
 				n_gram_probability *= bi_gram_prob
@@ -759,7 +787,11 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 		
 	#
 	# step 4: last step, work on query ordering. This seems very NLP-y
-	reordered_query = calc_n_gram(new_query)
+	try:
+		reordered_query = calc_n_gram(new_query)
+	except exception:
+		print(exception)
+		reordered_query = new_query
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
 	# relevent v non-relevent docs
