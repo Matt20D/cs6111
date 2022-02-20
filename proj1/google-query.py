@@ -2,39 +2,39 @@
 # Main Driver for Google Query Relevance Feedback
 #
 
+#
 # Library Modules Needed
+#
+
 # from ctypes.wintypes import WORD
+# import re # regex
+# import pprint # printing out Datastructures in a readable format
+# import os
 from logging import exception, raiseExceptions
 from operator import inv
 import sys # command line arg parsing
 import numpy as np # havent decided which one yet
 import pandas as pd # havent decided which one yet
-# import re # regex
-# import pprint # printing out Datastructures in a readable format
 import math # for logs
 import Tokenizer # class written to execute get request and get the keywords back
 import requests
 import heapq # for choosing words
-
-
 import itertools
-# import os
 from collections import defaultdict
-
-from googleapiclient.discovery import build # for querying google 
+from googleapiclient.discovery import build # for querying google using their API
 
 
 # use this method to print all relevant parameters to the console
 def print_params(api_key, eid, precision, precision_calc, query, iteration):
 	
-	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
-	print(" Client Key  			= {}".format(api_key))
+	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	print(" Client Key  			= {}".format(api_key))									
 	print(" Engine Key  			= {}".format(eid))
 	print(" Desired Precision		= {}".format(precision))
 	print(" Calculated Precision		= {}".format(precision_calc))
 	print(" Query       			= {}".format(to_string(query)))
 	print(" Iteration   			= {}".format(iteration))
-	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
+	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 	print()
 
 # convert the query list of keywords to a string
@@ -825,8 +825,9 @@ def log_iteration() -> None:
 #
 def main() -> None:
 
-	# ensure that there are at least 4 command line arguments + the program run name
-	if len(sys.argv) > 5:
+	# ensure that there are at exactly 4 command line arguments + the program run name
+	# Query is a string with as many words as desired
+	if len(sys.argv) != 5: # changed from ... > 5
 		raise Exception(" usage: google-query.py <google api key> <google engine id> <precision> <query>")  
 	
 	# idk if we can even error check this... 
@@ -935,23 +936,37 @@ def main() -> None:
 	# return from main
 	#return
 
-# main driver
+# main driver for the program
 if __name__ == "__main__":
-
-	# print greeting
-	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
-	print("+ Welcome to Relevence Feedback Query Optimizer +")
-	print("+ Written by Matt Duran and Ethan Garry         +")
-	print("+++++++++++++++++++++++++++++++++++++++++++++++++")
-
-	# run the program
+	
 	try:
+
+		# print greeting
+		print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+		print("+                Welcome to Relevence Feedback Query Optimizer                   +")
+		print("+                     Written by Matt Duran and Ethan Garry                      +")
+		print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+		
+		# run the program
 		main()
+
+	# control-c graceful exit
 	except KeyboardInterrupt:
+		
 		print("\n")
+	
+	# usage error
+	except Exception as e:
+		
+		print()
+		print(e)
+		print()
+	
 	finally:
+		
 		# print goodbye
-		print("+++++++++++++++++++++++++++++++++++++++++++++++++")
-		print("+ Program will terminate now...                 +")
-		print("+++++++++++++++++++++++++++++++++++++++++++++++++")
+		print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+		print("+                       Program will terminate now...                            +")
+		print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 		print("\n")
+		
