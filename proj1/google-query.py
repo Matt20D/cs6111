@@ -9,8 +9,8 @@ from operator import inv
 import sys # command line arg parsing
 import numpy as np # havent decided which one yet
 import pandas as pd # havent decided which one yet
-import re # regex
-import pprint # printing out Datastructures in a readable format
+# import re # regex
+# import pprint # printing out Datastructures in a readable format
 import math # for logs
 import Tokenizer # class written to execute get request and get the keywords back
 import requests
@@ -18,7 +18,7 @@ import heapq # for choosing words
 
 
 import itertools
-import os
+# import os
 from collections import defaultdict
 
 from googleapiclient.discovery import build # for querying google 
