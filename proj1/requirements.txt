@@ -17,7 +17,7 @@ rsa==4.8
 six==1.16.0
 uritemplate==4.1.1
 urllib3==1.26.8
-numpy==1.22.2
-pandas==1.4
+numpy==1.19.5
+pandas==1.1.5
 beautifulsoup4==4.9.3
 lxml==4.6.1
