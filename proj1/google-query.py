@@ -1,6 +1,8 @@
-#
-# Main Driver for Google Query Relevance Feedback
-#
+"""
+file: google-query.py
+description: Main Driver for Google Query Relevance Feedback
+authors: Matthew Duran and Ethan Garry
+"""
 
 #
 # Library Modules Needed
@@ -24,7 +26,10 @@ from collections import defaultdict
 from googleapiclient.discovery import build # for querying google using their API
 
 
-# use this method to print all relevant parameters to the console
+"""
+desc: 
+use this method to print all query and API parameters to the console
+"""
 def print_params(api_key, eid, precision, precision_calc, query, iteration, k) -> None:
 	
 	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -37,7 +42,10 @@ def print_params(api_key, eid, precision, precision_calc, query, iteration, k) -
 	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 	print()
 
-# convert the query list of keywords to a string
+"""
+desc: 
+convert the query list of keywords to a string, used for debugging purposes
+"""
 def to_string(query_l: list) -> str:
 	query_s = ""
 	for i in range (0, len(query_l)):
@@ -46,15 +54,22 @@ def to_string(query_l: list) -> str:
 			query_s += " "
 	return query_s
 
-# for a particular iteration, lets pass in the correct parameters to execute a google query
 """
-params
+desc: 
+For a particular iteration, lets pass in the 
+correct parameters to execute a google query API
+
+params:
 q/query: query input list
 cx/eid:  search engine id
 key: 	 google API key
+
+citation:
+https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
 """
 def query_google_search(query: list, eid: str, key: str) -> list():
-	# source: https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
+	
+	# use google api for querying
 	service = build("customsearch", "v1",
 		developerKey=key)
 
@@ -64,22 +79,15 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 			q  = to_string(query)
 			).execute()
 
-	# print out the whole JSON response document from google engine
-	#print(res)	
-	#pprint.pprint(res)
-
 	# get the actual queries from response document, max of 10 returned always
 	queries = res['items']
-
-	#pprint.pprint(queries)
-	#print(len(queries))
 
 	# lets parse the data thate we need URL, title, desc from the JSON object
 	clean_results = []
 	for doc in queries:
 
 		temp_list = []
-		#pprint.pprint(doc)
+
 		# link has the http/https format which is needed for get request
 		temp_list.append(doc['link']) # changed from doc['formattedUrl']
 		temp_list.append(doc['title'])
@@ -93,9 +101,14 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 
 		clean_results.append(temp_list)
 	
-	#print(clean_results)
 	return clean_results
 
+"""
+desc: 
+if a file has been marked as non-html in query_google_search then 
+we will simply remove that document result from the list and return
+the new clean list
+"""
 def remove_bad_results(queries: list) -> list:
 	#print("removing non-html results if they exist...")
 	clean_queries = []
@@ -104,7 +117,13 @@ def remove_bad_results(queries: list) -> list:
 			clean_queries.append(query)
 	return clean_queries
 
-# get user input and return True or False
+"""
+desc: 
+method that will prompt user with a question in order
+to get their relevance feeback. There is some param checking
+to ensure that a 'y' or 'n' is entered. Returns True for 'y' 
+and False for 'n'
+"""
 def get_feedback() -> bool:
 	# normal case this loop runs once, but you need
 	# to get good input, i.e. a 'y' or 'n'
@@ -117,15 +136,26 @@ def get_feedback() -> bool:
 		else:
 			print(" Bad input, please redo...")
 
-# global storage of documents according to label by relevance feedback, for a given iteration
+"""
+desc:
+Global storage of documents. These lists will be appended to when they are
+labeled by relevance feedback, for a given iteration. We are also storing 
+words for NLP N-Gram analysis for word ordering.
+"""
 RELEVANT_DOCS = []
 NON_RELEVANT_DOCS = []
 N_GRAM_MASTER_LIST = []
 WORD_COUNT = defaultdict(int)
 
+"""
+desc: present the query results for the users and then 
+ask them for their relevance feeback for the particular query.
+Also, will store the word count for the title/snippet in the b
+N Gram Master List
 
-# print the query results for the users,
-# ask for relevence feedback, and return the precision metric
+This method returns the precision@k metric, and the k value for number
+of documents considered.
+"""
 def present_results(queries: list) -> tuple:
 	global RELEVANT_DOCS, NON_RELEVANT_DOCS, N_GRAM_MASTER_LIST, WORD_COUNT
 	# track query rank
@@ -174,10 +204,14 @@ def present_results(queries: list) -> tuple:
 	
 	return (precision, (num_yes + num_no))
 
-# return an inverted list, that contains the term_frequency of each term
-# in a given document snippet + title of document
+"""
+desc:
+return an inverted list, containing the term_frequency of each term
+in a given document snippet/title of document
+"""
 def get_term_frequency(documents: list) -> dict:
 	global N_GRAM_MASTER_LIST, WORD_COUNT
+	
 	# Hash Table with inverted list DS for easier indexing
 	inverted_list = {}
 
@@ -235,6 +269,11 @@ def get_term_frequency(documents: list) -> dict:
 
 	return inverted_list
 
+"""
+desc:
+convert an inverted list into a dataframe so we can manipulate document vectors
+in a much easier fashion
+"""
 def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # return a PD DataFrame
 
 	df = pd.DataFrame()
@@ -268,17 +307,31 @@ def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # r
 
 	return df 
 
+"""
+desc: 
+helper function that applies the log_tf formula 
+we learned in class to each cell in the dataframe
+"""
 def do_log_term_frequency(data:pd.DataFrame) -> pd.DataFrame:
 	# get a deep copy so we do not modify the tf dataframe
 	data_copy = data.copy(deep=True)
 	return data_copy.applymap(lambda x: 0 if x == 0 else (1 + math.log(x, 10)))
 
+"""
+desc:
+helper function to multiply idf by each tf in the dataframe row
+"""
 def mult_tf_idf(row):
 	# each cell * last val in col (the idf weight)
 	for i in range(0, len(row)-1):
 		row[i] = row[i] * row[len(row)-1]
 	return row
 
+"""
+desc:
+calculates the idf for a word in a row vector. i.e. the idf of a word
+across all of the documents that it shows up in
+"""
 def calc_idf(row: list) -> float:
 	document_frequency = 0
 	for cell in row:
@@ -287,9 +340,15 @@ def calc_idf(row: list) -> float:
 	x = len(row) / document_frequency
 	return math.log(x, 10)
 
-# remember idf weights how rare a term is across documents
-# multiply that weight by how frequent the term is within a document
-# tf-idf weights are used to help us pick the most relevant words
+"""
+desc:
+since, idf weights how rare a term is across documents
+lets multiply that weight by how frequent the term is within a document
+TL;DR: tf-idf weights are used to help us pick the most relevant words
+
+citation: [for using list comprehensions instead of iterrows()]
+https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+"""
 def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 
 	# get a deep copy so we do not modify the tf dataframe
@@ -301,7 +360,6 @@ def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 	# lets see out of how many documents, this word shows up in.
 
 	# faster than iterrows()
-	# https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
 	idf_weights = [calc_idf(row) for row in data_copy[data_copy.columns].to_numpy()]
 		
 	# initialize a column to store the idf weight
@@ -315,10 +373,13 @@ def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
 	
 	return new_data
 
-# emphasize the location of certain words by title (most weight), and snippet
-# which is the early part of the document (2nd most weight)
+"""
+desc:
+heuristic that emphasizes the location of certain words by title (most weight), 
+and snippet which is the early part of the document (2nd most weight)
+"""
 def apply_word_zone_heuristic(colname: str, keyword: str, word_value: float) -> float:
-	#weights = {'title':  1.20, 'snippet': 1.10}
+
 	weights = {'title':  1.50, 'snippet': 1.10} # title should matter much more
 	
 	# adjust the index to base 0 for array
@@ -346,8 +407,13 @@ def apply_word_zone_heuristic(colname: str, keyword: str, word_value: float) -> 
 	
 	return new_word_val
 
-# this method will score a document's relevance for a query
-# the issue comes when a query contains all stop words
+"""
+desc:
+this helper method will score a document's relevance for a given query.
+There is an issue when a query is all stop words, that we never really got 
+around to. However, we will end up choosing the best possible words later
+on anyways.
+"""
 def score(curr_query: list, col_vector: pd.Series) -> float:
 	score = 0
 	for keyword in curr_query:
@@ -360,8 +426,11 @@ def score(curr_query: list, col_vector: pd.Series) -> float:
 			score += apply_word_zone_heuristic(col_vector.name, keyword, col_vector[keyword])
 	return score
 
-# this method will score all of the relevant documents and return
-# them in sorted order
+"""
+desc:
+this method will score all of the relevant documents and return
+them in sorted order. Calls the above score() helper for assistance
+"""
 def score_rel_docs(query: list, rel_docs: pd.DataFrame) -> list:
 	all_scores     = []
 	for columnName, columnData in rel_docs.iteritems():
@@ -390,10 +459,13 @@ def score_rel_docs(query: list, rel_docs: pd.DataFrame) -> list:
 		all_scores.sort(key=lambda x: x[1], reverse=True)
 		return all_scores
 
-# google heuristic
-# figure out a way to work in google's ranking, to the weighting scheme, only a round by round basis
-# R_Doc_1 >>  R_Doc_2 >>  ... >> R_Doc_10. Only slightly tho, we will use googles' work that they have done
-# with implementing their search engine and ranking scheme.
+"""
+desc:
+google heuristic
+we wanted to figure out a way to work in google's ranking, to the weighting scheme, only a round by round basis
+R_Doc_1 >>  R_Doc_2 >>  ... >> R_Doc_10. Only slightly tho, we will use googles' extensive work that they have done
+with implementing their search engine and ranking scheme as a minor heuristics
+"""
 def apply_google_heuristic(documents: list) -> list:
 	new_ranking = []
 	weights = {'R_Doc_1':  1.00, 'R_Doc_2': 0.99, 'R_Doc_3': 0.98, 
@@ -410,8 +482,11 @@ def apply_google_heuristic(documents: list) -> list:
 
 	return new_ranking
 
-# here will try and pick the best words so that we can begin to augment
-# the query. Return a list of words, to be added to the queries and then tested.
+"""
+desc:
+here will try and pick the best words so that we can begin to augment
+the query. Return a list of words, to be added to the queries and then tested.
+"""
 def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:	
 	
 	# these are the max number of words to return
@@ -434,7 +509,6 @@ def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:
 		# go through all of the nonzero words in doc vector
 		for index, value in vec.items():
 			
-
 			# we have hit a weight of 0, and since they are sorted 
 			# there are no more good words
 			if value == 0:
@@ -482,9 +556,12 @@ def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:
 	else:
 		return words
 
-# using all of the keyword rankings lets build all of the combinations of the old
-# query terms + one new term, or old query terms + two new terms.
-# at a max this should return 210 potential queries. (based off the numbers in choose words)
+"""
+desc:
+using all of the keywords that are returned lets build all of the combinations of the old
+query terms + one new term, or old query terms + two new terms. This is a combinatorial explosion
+but it only hangs the computer for a little while. The final results have been pretty good too.
+"""
 def generate_queries(curr_query: list, potential_words: set) -> list:
 	
 	len_one = set()
@@ -527,8 +604,11 @@ def generate_queries(curr_query: list, potential_words: set) -> list:
 
 	return all_combos
 
-# normalize each column vector, by diving each component by the length 
-# of the whole column vector
+"""
+desc:
+normalize each column vector, by diving each component by the length 
+of the whole column vector
+"""
 def normalize_vectors(data:pd.DataFrame) -> pd.DataFrame:
 	
 	# get a deep copy so we do not modify the tf dataframe
@@ -556,9 +636,13 @@ def normalize_vectors(data:pd.DataFrame) -> pd.DataFrame:
 		
 	return data_copy
 
-# cosine similarity is simply the dot product of query list
-# and the column vectors. I will calculate dot product with all
-# relevant queries, and then take the average
+"""
+desc: 
+cosine similarity is simply the dot product of query list
+and the column vectors. I will calculate dot product with all
+relevant queries, and then take the average.
+This is the most important algorithm here, this is how we get our final query recommendation
+"""
 def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: list) -> list:
 	
 	print(" calculating cosine similarity... ")
@@ -630,13 +714,15 @@ def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: l
 
 	return query_list
 
-
+"""
+desc:
+calculates n_gram probability using section 3.1 from the following paper:
+		
+citation:
+https://web.stanford.edu/~jurafsky/slp3/3.pdf
+"""
 def calc_n_gram(query):
-	'''
-	calculates n_gram probability using section 3.1 from the following paper:
-	https://web.stanford.edu/~jurafsky/slp3/3.pdf
-	
-	'''
+
 	global N_GRAM_MASTER_LIST, WORD_COUNT
 	# print(WORD_COUNT)
 
@@ -686,12 +772,16 @@ def calc_n_gram(query):
 
 			# print("n-gram-probability = ", n_gram_probability)
 			# print('----------------------')
+	
 	# print(most_likely_sequence)	
 	return most_likely_sequence
 
-# This method will return the new string, which hopefully produces better results for
-# the relevance feedback
-# This is the bulk of the assignemnt, we will run all augmentation out of here.
+"""
+desc:
+This method will return the new string, which hopefully produces better results for
+the relevance feedback. This is the bulk of the assignemnt, we will run all query
+augmentation out of here.
+"""
 def run_augmentation(curr_query: list) -> list: # return a list of keywords, after potentially adding at max 2 new
 	global RELEVANT_DOCS, NON_RELEVANT_DOCS, N_GRAM_MASTER_LIST, WORD_COUNT
 	
@@ -803,11 +893,11 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 	return reordered_query
 
-#
-# Log file stuff, This is useful for final steps
-#
-
-# use this for serializing our data
+"""
+desc:
+Log file stuff, This is useful for final steps (unused).
+use this for serializing our data and writing to log file
+"""
 def make_json(iter_num: int, curr: str, prec: float, res: list) -> dict:
 
 	json = {"iter": iter_num, \
@@ -817,22 +907,20 @@ def make_json(iter_num: int, curr: str, prec: float, res: list) -> dict:
 
 	return json
 
-# use this for logging to file later
 def log_iteration() -> None:
 	pass
 
-#
-# main method, do all of the dirty work
-#
+"""
+desc:
+main method where program control is run out of.
+
+"""
 def main() -> None:
 
 	# ensure that there are at exactly 4 command line arguments + the program run name
 	# Query is a string with as many words as desired
 	if len(sys.argv) != 5: # changed from ... > 5
-		#raise Exception(" usage: google-query.py <google api key> <google engine id> <precision> <query>")  
-		print()
-		print(" usage: google-query.py <google api key> <google engine id> <precision> <query>")
-		sys.exit()
+		sys.exit(" usage: google-query.py <google api key> <google engine id> <precision> <query>")
 
 	# idk if we can even error check this... 
 	api_key     = str(sys.argv[1])
@@ -841,10 +929,7 @@ def main() -> None:
 	# ensure that precision is correct input
 	precision_at_k   = float(sys.argv[3])
 	if precision_at_k < 0.0 or precision_at_k > 1.0:
-		#raise Exception(" Query precision needs to be real valued between 0 and 1")
-		print()
-		print(" usage: Query precision needs to be real valued between 0 and 1")
-		sys.exit()
+		sys.exit(" usage: Query precision needs to be real valued between 0 and 1")
 
 	# create a query list of keywords
 	initial_query 		= sys.argv[4]
@@ -938,7 +1023,7 @@ def main() -> None:
 
 			# this function will be the entry point into getting a new query string for 
 			# next iteration. Pass the old query keywords, and receive a new one from heuristic analysis
-			print("running augmentation algorithm, wait times may vary... ")
+			print(" running augmentation algorithm, wait times may vary... ")
 			augmented_query = run_augmentation(current_query)
 			current_query = augmented_query
 			print()
@@ -974,7 +1059,16 @@ if __name__ == "__main__":
 	except SystemExit as e:
 		
 		print()
+		print(e)
+		print()
 	
+	# other ???
+	except Exception as other_exception:
+		
+		print()
+		print(other_exception)
+		print()
+
 	finally:
 		
 		# print goodbye
