@@ -1,0 +1,193 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                Welcome to Relevence Feedback Query Optimizer                   +
++                     Written by Matt Duran and Ethan Garry                      +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key                     = 7c642eecbff553d82
+ Desired Precision              = 0.9
+ Calculated Precision@10        = N/A
+ Query                          = cases
+ Iteration                      = 1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ Rank 1
+ URL: https://www.cases.org/
+ Title: CASES: Home
+ Description: From court and program offices in the Bronx, Brooklyn, and Manhattan, CASES provides community-based alternatives to jail and prison. These programs address ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 2
+ URL: https://covid.cdc.gov/covid-data-tracker/
+ Title: CDC COVID Data Tracker
+ Description: Your Community · County View · County View Map Thumbnail. Forecasting ; Case, Death, & Laboratory Testing Trends by Location and Demographics · Trends in Cases and ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 3
+ URL: https://www.worldometers.info/coronavirus/
+ Title: COVID Live - Coronavirus Statistics - Worldometer
+ Description: Live statistics and coronavirus news tracking the number of confirmed cases, recovered patients, tests, and death toll due to the COVID-19 coronavirus from ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 4
+ URL: https://www.dhs.wisconsin.gov/covid-19/cases.htm
+ Title: COVID-19: Wisconsin Cases | Wisconsin Department of Health ...
+ Description: Back to a list of charts on this page. Percent of COVID-19 cases living in group housing ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 5
+ URL: https://www.nytimes.com/interactive/2021/us/covid-cases.html
+ Title: Covid in the U.S.: Latest Maps, Case and Death Counts - The New ...
+ Description: Track Covid-19 in your area, and get the latest state and county data on cases, deaths, hospitalizations, tests and vaccinations.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 6
+ URL: https://www.verizon.com/products/phone-cases/
+ Title: Phone Cases for your iPhone, Samsung, and more | Verizon
+ Description: Shop Verizon for an extensive selection of phone cases. Protect your phone from accidents. Featuring products from OtterBox, Case-Mate, Kate Spade & more.
+
+ Is query relevant [y/n]? n
+
+
+ Rank 7
+ URL: https://www.icj-cij.org/en/cases
+ Title: Cases | International Court of Justice
+ Description: Cases. The Court has a twofold role: to settle, in accordance with international law, legal disputes submitted to it by States (contentious cases) and to ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 8
+ URL: https://www.vdh.virginia.gov/coronavirus/see-the-numbers/covid-19-in-virginia/covid-19-in-virginia-cases/
+ Title: Cases - Coronavirus
+ Description: Starting on February 1, 2022, VDH is using 2020 National Center for Health Statistics (NCHS) population estimates for COVID-19 events (cases, ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 9
+ URL: https://ourworldindata.org/covid-cases
+ Title: Coronavirus (COVID-19) Cases - Our World in Data
+ Description: Country-by-country data on confirmed cases. This page has a large number of charts on the pandemic. In the box below you can select any country you are ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 10
+ URL: https://www.oyez.org/cases
+ Title: 2021-2022 Term | Oyez
+ Description: US Supreme Court cases from the 2021-2022 term. ... A case in which the Court will decide whether federal courts have subject-matter jurisdiction to confirm ...
+
+ Is query relevant [y/n]? n
+
+
+ current precision@10 0.60 < target precision@10 0.90. Let's augment...
+ running augmentation algorithm, wait times may vary... 
+ normalizing tf weights for relevant document vectors ...
+ calculating cosine similarity... 
+ calculating n_gram probabilities for ['cases', 'data', 'covid'] ...
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key                     = 7c642eecbff553d82
+ Desired Precision              = 0.9
+ Calculated Precision@10        = 0.6
+ Query                          = cases covid data
+ Iteration                      = 2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ Rank 1
+ URL: https://covid19.who.int/
+ Title: WHO Coronavirus (COVID-19) Dashboard
+ Description: ... daily counts of COVID-19 cases and deaths worldwide, along with vaccination rates and other vaccination data, while providing a hub to other resources.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 2
+ URL: https://covid.cdc.gov/covid-data-tracker/
+ Title: CDC COVID Data Tracker
+ Description: COVID Data Tracker. Find maps and charts tracking cases, deaths, and trends of COVID-19 in the United States, updated daily by 8 pm ET ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 3
+ URL: https://www.mass.gov/info-details/covid-19-response-reporting
+ Title: COVID-19 Response Reporting | Mass.gov
+ Description: Additional reports include nursing facility data, cases by city/town, residents subject to COVID-19 quarantine, ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 4
+ URL: https://coronavirus.maryland.gov/
+ Title: Coronavirus - Maryland Department of Health
+ Description: Data for ZIP codes with 7 or fewer cases are suppressed. Hospitalization data reflect COVID-19 bed occupancy in Maryland hospitals. Testing volume data ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 5
+ URL: https://www.health.state.mn.us/diseases/coronavirus/situation.html
+ Title: Situation Update for COVID-19 - Minnesota Dept. of Health
+ Description: Many data points are collected through an online survey or during case interviews; however, not all cases are interviewed. Case ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 6
+ URL: https://ourworldindata.org/coronavirus
+ Title: Coronavirus Pandemic (COVID-19) - Our World in Data
+ Description: Coronavirus Pandemic (COVID-19) ... The data on the coronavirus pandemic is updated daily. Last update: 2 days ago. ... Explore all metrics – including cases, ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 7
+ URL: https://www.doh.wa.gov/emergencies/covid19/datadashboard
+ Title: COVID-19 Data Dashboard :: Washington State Department of Health
+ Description: Data shown below are the most recent complete data available. Rates per 100,000 Population of Cases, Hospitalizations and Deaths by County. County, 7-Day Case ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 8
+ URL: https://doh.wa.gov/emergencies/covid-19/data-dashboard
+ Title: COVID-19 Data Dashboard | DOH
+ Description: Data shown below are the most recent complete data available. Rates per 100,000 Population of Cases, Hospitalizations and Deaths by County. County, 7-Day Case ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 9
+ URL: https://coronavirus.jhu.edu/map.html
+ Title: COVID-19 Map - Johns Hopkins Coronavirus Resource Center
+ Description: Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)
+
+ Is query relevant [y/n]? y
+
+
+ Rank 10
+ URL: https://www.cdc.gov/coronavirus/2019-ncov/covid-data/covidview/index.html
+ Title: COVID Data Tracker Weekly Review | CDC
+ Description: See the COVID Data Tracker Weekly Review, including information on U.S. cases, variants, testing, vaccinations, hospitalizations, and deaths.
+
+ Is query relevant [y/n]? y
+
+
+ current precision@10 1.00 >= target precision@10 0.90. We are done...
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                       Program will terminate now...                            +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

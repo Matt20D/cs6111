@@ -1,0 +1,288 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                Welcome to Relevence Feedback Query Optimizer                   +
++                     Written by Matt Duran and Ethan Garry                      +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key                     = 7c642eecbff553d82
+ Desired Precision              = 0.9
+ Calculated Precision@10        = N/A
+ Query                          = per se
+ Iteration                      = 1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ Rank 1
+ URL: https://www.thomaskeller.com/perseny
+ Title: Per Se | Thomas Keller Restaurant Group
+ Description: Per Se. Per Se Front Door. center. About. About; Restaurant · Team · Info & Directions · Gift Experiences · Reservations; Menus & Stories. Menus & Stories
+
+ Is query relevant [y/n]? y
+
+
+ Rank 2
+ URL: https://www.merriam-webster.com/dictionary/perse
+ Title: Perse Definition & Meaning - Merriam-Webster
+ Description: We generally use per se to distinguish between something in its narrow sense and some larger thing that it represents. Thus, you may have no objection to ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 3
+ URL: https://en.wiktionary.org/wiki/per_se
+ Title: per se - Wiktionary
+ Description: In and of itself; by itself; without determination by or involvement of extraneous factors; as such quotations ▽ · (chiefly in negative polarity environments) ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 4
+ URL: https://en.wikipedia.org/wiki/Per_se
+ Title: Per se - Wikipedia
+ Description: per se, a Latin phrase meaning "by itself" or "in itself". Illegal per se, the legal usage in criminal and antitrust law; Negligence per se, legal use in tort ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 5
+ URL: https://www.exploretock.com/perse
+ Title: Per Se - New York, NY | Tock
+ Description: Opened in 2004, Per Se is Thomas Keller's acclaimed interpretation of The French Laundry in the Deutsche Bank Center at Columbus Circle.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 6
+ URL: https://www.instagram.com/perseny/?hl=en
+ Title: Per Se (@perseny) • Instagram photos and videos
+ Description: Per Se. Chef Thomas Keller's 3-Star Michelin restaurant overlooking Columbus Circle & Central Park located in New York City. exploretock.com/perse.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 7
+ URL: https://www.yelp.com/biz/per-se-new-york
+ Title: PER SE - 6798 Photos & 1719 Reviews - French - 10 Columbus Cir ...
+ Description: 1719 reviews of Per Se "This is Thomas Keller's new resturant in New York. A must if you can get a reservation."
+
+ Is query relevant [y/n]? y
+
+
+ Rank 8
+ URL: https://www.law.cornell.edu/wex/per_se
+ Title: per se | Wex | US Law | LII / Legal Information Institute
+ Description: For example, in tort law, a statutory violation is negligence per se. One of the elements a person has to prove in a negligence claim is that the defendant ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 9
+ URL: https://www.vocabulary.com/dictionary/per%20se
+ Title: Per se - Definition, Meaning & Synonyms | Vocabulary.com
+ Description: Per se is the phrase to use when you want to refer to a particular thing on its own. It is not this Latin phrase, per se, that is important, but rather the ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 10
+ URL: https://dictionary.cambridge.org/dictionary/english/per-se
+ Title: PER SE | meaning in the Cambridge English Dictionary
+ Description: 4 days ago ... per se | American Dictionary ... by or of itself: It is not a pretty town per se, but it is where my family comes from, so I like it.
+
+ Is query relevant [y/n]? n
+
+
+ current precision@10 0.40 < target precision@10 0.90. Let's augment...
+ running augmentation algorithm, wait times may vary... 
+ normalizing tf-idf weights for relevant document vectors ...
+ calculating cosine similarity... 
+ calculating n_gram probabilities for ['per', 'se', 'cocktails', 'bakery'] ...
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key                     = 7c642eecbff553d82
+ Desired Precision              = 0.9
+ Calculated Precision@10        = 0.4
+ Query                          = cocktails bakery per se
+ Iteration                      = 2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ Rank 1
+ URL: https://www.thomaskeller.com/new-york-new-york/per-se/about-wine-cocktails
+ Title: About the Wine & Cocktails | Thomas Keller Restaurant Group
+ Description: Other libations include classic cocktails, of which the Per Se Tonic & Gin is a house favorite. View Wine & Cocktail Selections. Cocktail and Wine.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 2
+ URL: https://www.theshopsatcolumbuscircle.com/dining/
+ Title: Restaurants in Manhattan NYC | The Shops at Columbus Circle
+ Description: The Restaurant and Bar Collection · Tartinery · Ascent Lounge New York · Bluebird London · Bar Masa · Masa · Momofuku Noodle Bar · Per Se · Porter House Bar & Grill.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 3
+ URL: https://www.thomaskeller.com/perseny
+ Title: Per Se | Thomas Keller Restaurant Group
+ Description: Wine & Cocktails. Wine & Cocktails; About the Wine & Cocktails · Wine & Cocktail Selections · Private Dining & Events · Per Se. Per Se Front Door.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 4
+ URL: https://www.nytimes.com/2012/05/16/dining/demi-monde-and-maslow-6-wine-bar-open.html
+ Title: Demi Monde and Maslow 6 Wine Bar Open - The New York Times
+ Description: May 15, 2012 ... These drinks are also served with Mr. Kirschen-Clark's $130 ... who has been the head baker at Per Se and Bouchon Bakery for two years, ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 5
+ URL: https://www.thomaskeller.com/las-vegas-nevada/bouchon-bistro/wine-cocktails
+ Title: Wine & Cocktails | Thomas Keller Restaurant Group
+ Description: Wine & Cocktails Our wine selection features varietals from France and the U.S., primarily California, and takes its cues from the cuisine.
+
+ Is query relevant [y/n]? n
+
+
+ Rank 6
+ URL: https://forums.egullet.org/topic/42570-per-se-the-cocktail/
+ Title: Per Se -- The Cocktail - Spirits & Cocktails - eGullet Forums
+ Description: May 9, 2004 ... Per Se is careful to present cocktails that are not palate-killers. The house drink is vodka with Pineau des Charentes, a hybrid of Cognac ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 7
+ URL: https://www.thomaskeller.com/new-york-new-york/per-se/todays-menus
+ Title: Today's Menus | Thomas Keller Restaurant Group
+ Description: Restaurants & Bakeries. Yountville; The French Laundry · Bouchon Bistro · Bouchon Bakery · Ad Hoc + Addendum · La Calenda; New York; Per Se; Las Vegas
+
+ Is query relevant [y/n]? y
+
+
+ Rank 8
+ URL: http://ruthreichl.com/wp-content/uploads/2015/06/todays-menus1
+ Title: Today's Menus | Thomas Keller Restaurant Group
+ Description: Wine & Cocktails. Wine & Cocktails; About the Wine & Cocktails · Wine & Cocktail Selections ... Per Se · Bouchon Bakery & Café · Bouchon Bakery; Las Vegas ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 9
+ URL: https://www.thomaskeller.com/new-york-new-york/per-se/gift-experiences
+ Title: Gift Experiences | Thomas Keller Restaurant Group
+ Description: Please be aware that holding a gift experience card will not guarantee specific reservation dates or times. Per Se gift card.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 10
+ URL: https://ny.eater.com/2021/7/21/22583671/per-se-masa-raise-tasting-menu-prices-800
+ Title: Per Se and Masa Both Raise Prices of Tasting Menu to $800 - Eater ...
+ Description: Jul 21, 2021 ... Adding on cocktails, sake, or white truffle ice cream can easily push up the price of a dinner date by another few hundred dollars. Masa's ...
+
+ Is query relevant [y/n]? y
+
+
+ current precision@10 0.80 < target precision@10 0.90. Let's augment...
+ running augmentation algorithm, wait times may vary... 
+ normalizing tf-idf weights for relevant document vectors ...
+ calculating cosine similarity... 
+ calculating n_gram probabilities for ['cocktails', 'bakery', 'per', 'se', 'bouchon', 'daily'] ...
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key                     = 7c642eecbff553d82
+ Desired Precision              = 0.9
+ Calculated Precision@10        = 0.8
+ Query                          = daily cocktails per se bouchon bakery
+ Iteration                      = 3
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ Rank 1
+ URL: https://www.thomaskeller.com/perseny
+ Title: Per Se | Thomas Keller Restaurant Group
+ Description: Per Se Front Door. center. About. About; Restaurant · Team · Info & Directions · Gift Experiences · Reservations; Menus & Stories. Menus & Stories; Daily ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 2
+ URL: http://ruthreichl.com/wp-content/uploads/2015/06/todays-menus1
+ Title: Today's Menus | Thomas Keller Restaurant Group
+ Description: Daily Menus Two tasting menus are offered daily: a nine-course chef's tasting menu as well as a nine-course vegetable tasting menu.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 3
+ URL: https://www.thomaskeller.com/new-york-new-york/per-se/todays-menus
+ Title: Today's Menus | Thomas Keller Restaurant Group
+ Description: Daily Menus Two tasting menus are offered daily: a nine-course chef's tasting menu, as well as a nine-course vegetable tasting menu.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 4
+ URL: https://ny.eater.com/2021/7/21/22583671/per-se-masa-raise-tasting-menu-prices-800
+ Title: Per Se and Masa Both Raise Prices of Tasting Menu to $800 - Eater ...
+ Description: Jul 21, 2021 ... New tasting menu options at NYC restaurants Masa and Per Se could easily ... Thomas Keller's Per Se, a French-American tasting menu palace ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 5
+ URL: https://www.thomaskeller.com/new-york-new-york/per-se/about-wine-cocktails
+ Title: About the Wine & Cocktails | Thomas Keller Restaurant Group
+ Description: Because the food menus change daily, our sommeliers have the opportunity to explore ... Other libations include classic cocktails, of which the Per Se Tonic ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 6
+ URL: https://hamptonsmonthly.com/article/cocktails-at-columbus-circle/
+ Title: Cocktails at Columbus Circle – Hamptons Monthly
+ Description: Aug 29, 2019 ... One floor below his highly acclaimed Michelin three-star restaurant Per Se, chef Thomas Keller – also behind California's three-star The ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 7
+ URL: https://www.thomaskeller.com/new-york-new-york/per-se/restaurant
+ Title: Restaurant | Thomas Keller Restaurant Group
+ Description: Restaurant Opened in 2004, Per Se is Thomas Keller's acclaimed New York ... three-Michelin-starred property featuring his daily nine-course tasting menu and ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 8
+ URL: https://www.bakemag.com/articles/391-checking-in-with-bouchon-bakery
+ Title: Checking in with Bouchon Bakery
+ Description: Jan 5, 2016 ... Altieri Lopez first joined the Thomas Keller Restaurant Group in 2009 as pastry sous chef at Per Se. During her time, she adapted quickly to ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 9
+ URL: https://www.thomaskeller.com/new-york-new-york/per-se/gift-experiences
+ Title: Gift Experiences | Thomas Keller Restaurant Group
+ Description: Please be aware that holding a gift experience card will not guarantee specific reservation dates or times. Per Se gift card.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 10
+ URL: https://www.venetianlasvegas.com/restaurants/bouchon.html
+ Title: Bouchon by Thomas Keller | French Restaurant Las Vegas
+ Description: Celebrity chef Thomas Keller brings his famous French bistro to The Venetian. ... Each day, additions to the menu are hand-written on blackboards throughout ...
+
+ Is query relevant [y/n]? y
+
+
+ current precision@10 1.00 >= target precision@10 0.90. We are done...
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                       Program will terminate now...                            +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

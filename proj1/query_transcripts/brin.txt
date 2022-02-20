@@ -1,0 +1,193 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                Welcome to Relevence Feedback Query Optimizer                   +
++                     Written by Matt Duran and Ethan Garry                      +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key                     = 7c642eecbff553d82
+ Desired Precision              = 0.9
+ Calculated Precision@10        = N/A
+ Query                          = brin
+ Iteration                      = 1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ Rank 1
+ URL: https://www.davidbrin.com/
+ Title: worlds of David Brin
+ Description: David Brin is best-known for shining light — plausibly and entertainingly — on technology, society, and countless challenges confronting our rambunctious ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 2
+ URL: https://en.wikipedia.org/wiki/Sergey_Brin
+ Title: Sergey Brin - Wikipedia
+ Description: Sergey Mikhailovich Brin is an American business magnate, computer scientist, and Internet entrepreneur. Together with Larry Page, he co-founded Google.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 3
+ URL: https://brinandbrin.com/
+ Title: Brin & Brin LLC – Law Firm
+ Description: The litigation, transactional and compliance lawyers at Brin & Brin have proven success in some of the toughest Texas venues. ... We have represented clients in a ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 4
+ URL: https://www.forbes.com/profile/sergey-brin/
+ Title: Sergey Brin
+ Description: 6 Sergey Brin on the 2021 Forbes 400 - Sergey Brin stepped down as president of Alphabet, parent company of Google, in December 2019 but remains a ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 5
+ URL: https://www.postgresql.org/docs/13/brin-intro.html
+ Title: Documentation: 13: 67.1. Introduction - PostgreSQL
+ Description: BRIN stands for Block Range Index. BRIN is designed for handling very large tables in which certain columns have some natural correlation with their ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 6
+ URL: https://www.bringlass.com/
+ Title: Brin Glass: Commercial Glass Company
+ Description: Brin Glass provides commercial glass services including wholesale distribution and fabrication of glass and architectural aluminum products, glass service ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 7
+ URL: https://en.wiktionary.org/wiki/brin
+ Title: brin - Wiktionary
+ Description: NounEdit · One of the radiating sticks of a fan. The outermost are larger and longer, and are called panaches. · A single silkworm thread extruded from the gland, ...
+
+ Is query relevant [y/n]? n
+
+
+ Rank 8
+ URL: https://www.biography.com/business-figure/sergey-brin
+ Title: Sergey Brin - Education, Google & Wife - Biography
+ Description: Aug 11, 2015 ... Sergey Brin is a computer scientist who created Google with Larry Page, the two becoming billionaires as Google developed into the world's ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 9
+ URL: https://www.brinlevinson.com/
+ Title: Brin Levinson
+ Description: The Art of Brin Levinson.
+
+ Is query relevant [y/n]? n
+
+
+ Rank 10
+ URL: https://tulsahurricane.com/sports/football/roster/davis-brin/10547
+ Title: Davis Brin - Football - University of Tulsa Athletics
+ Description: Davis Brin (7) Quarterback - TULSA – A returning letterwinner … has played in four career games … was an early enrollee in January 2018 following his ...
+
+ Is query relevant [y/n]? n
+
+
+ current precision@10 0.30 < target precision@10 0.90. Let's augment...
+ running augmentation algorithm, wait times may vary... 
+ normalizing tf weights for relevant document vectors ...
+ calculating cosine similarity... 
+ calculating n_gram probabilities for ['brin', 'sergey', 'google'] ...
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key                     = 7c642eecbff553d82
+ Desired Precision              = 0.9
+ Calculated Precision@10        = 0.3
+ Query                          = google sergey brin
+ Iteration                      = 2
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ Rank 1
+ URL: https://en.wikipedia.org/wiki/Sergey_Brin
+ Title: Sergey Brin - Wikipedia
+ Description: Sergey Mikhailovich Brin is an American business magnate, computer scientist, and Internet entrepreneur. Together with Larry Page, he co-founded Google.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 2
+ URL: https://www.britannica.com/biography/Sergey-Brin
+ Title: Sergey Brin | Biography, Google, & Facts | Britannica
+ Description: Sergey Brin, American computer scientist and entrepreneur who created, along with Larry Page, the online search engine Google, one of the most successful ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 3
+ URL: https://www.forbes.com/profile/sergey-brin/
+ Title: Sergey Brin
+ Description: REAL TIME NET WORTH · Sergey Brin stepped down as president of Alphabet, parent company of Google, in December 2019 but remains a controller shareholder and a ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 4
+ URL: https://www.biography.com/business-figure/sergey-brin
+ Title: Sergey Brin - Education, Google & Wife - Biography
+ Description: Aug 11, 2015 ... Sergey Brin is a computer scientist who created Google with Larry Page, the two becoming billionaires as Google developed into the world's ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 5
+ URL: https://www.nbcnews.com/technolog/googles-sergey-brin-explains-why-he-paid-330-000-lab-6c10853442
+ Title: Google's Sergey Brin explains why he paid $330,000 for lab burger
+ Description: Aug 5, 2013 ... Google's Sergey Brin explains why he paid $330,000 for lab burger. When scientists brought out a hamburger created in a laboratory for its ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 6
+ URL: https://www.theverge.com/2019/12/4/20994361/google-alphabet-larry-page-sergey-brin-sundar-pichai-co-founders-ceo-timeline
+ Title: Google co-founders Larry Page and Sergey Brin: a timeline of their ...
+ Description: Dec 4, 2019 ... Larry Page and Sergey Brin founded Google in 1996 on the back of an algorithm, turned it into one of the most valuable companies in the ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 7
+ URL: https://www.theguardian.com/science/2013/aug/05/google-sergey-brin-synthetic-beef-hamburger
+ Title: Google's Sergey Brin bankrolled world's first synthetic beef ...
+ Description: Aug 5, 2013 ... The billionaire co-founder of Google, Sergey Brin, said he invested €250000 in the technology for animal welfare reasons.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 8
+ URL: https://blog.google/alphabet/letter-from-larry-and-sergey/
+ Title: A letter from Larry and Sergey
+ Description: Dec 3, 2019 ... Information about your use of our site is shared with Google for that ... A letter from Larry and Sergey ... Larry Page and Sergey Brin.
+
+ Is query relevant [y/n]? y
+
+
+ Rank 9
+ URL: https://www.theguardian.com/technology/2021/apr/12/google-founders-larry-page-and-sergey-brin-join-100bn-club
+ Title: Google founders Larry Page and Sergey Brin join $100bn club ...
+ Description: Apr 12, 2021 ... The Google founders, Larry Page and Sergey Brin, have joined the $100bn club of super-rich people with 12-digit fortunes after a surge in ...
+
+ Is query relevant [y/n]? y
+
+
+ Rank 10
+ URL: https://www.investopedia.com/articles/markets/011516/top-5-google-shareholders-goog.asp
+ Title: Top Google (Alphabet) Shareholders
+ Description: Oct 13, 2021 ... The top individual insider shareholders of Google are Larry Page, Sergey Brin, and Sundar Pichai, and the top institutional shareholders are ...
+
+ Is query relevant [y/n]? y
+
+
+ current precision@10 1.00 >= target precision@10 0.90. We are done...
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                       Program will terminate now...                            +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
