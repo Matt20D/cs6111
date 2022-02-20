@@ -1,18 +1,40 @@
-using google api, and pprint module
-1) https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
-  Gravano's provided example for querying the google search engine.
+--------------------------------------------------
+Proj 1: References for Matt Duran and Ethan Garry
+--------------------------------------------------
 
-reg-exs for tokenization
+using google api, and pprint module:
+1) https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
+
+Gravano's provided example for querying the google search engine. This was the main example used
+in order to learn how to use google query api.
+
+reg-exs for tokenization:
 2) https://docs.python.org/3/library/re.html
 3) https://www.programiz.com/python-programming/regex
 
-pandas 
+Needed to learn more about how regular expressions were used in Python, and used these tutorials. 
+This helped with tokenizing the input from the html docs into words, according to well defined rules.
+
+Pandas:
 4) https://www.kite.com/python/answers/how-to-append-a-list-as-a-row-to-a-pandas-dataframe-in-python
 5) https://pandas.pydata.org/docs/reference/frame.html
 6) https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
-used above to scrap iterrows() cuz it was taking way too long for me to manipulate the data frame.
-Thus, i used the above example to change to using list comprehensions for faster mult
 
-web-scraping/beautiful soup
+All of the above references were important to learn how to use Pandas DataFrames for making the 
+inverted list. This was my first real experience with Pandas so I relied heavily on these tutorials.
+Once the code got working, used the stackoverflow link to get rid of iterrows() since that operation
+takes way too long for data frame manipulation. Thus, i settled on using a lot of list comprehensions 
+to execute computations faster.
+
+web-scraping/beautiful soup:
 6) https://stackoverflow.com/questions/45954949/parse-text-response-from-http-request-in-python
 7) https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
+These references were useful for figuring out how to parse a full html document. Once returned from 
+a get request, I turn the html response into a BeautifulSoup object and used the lxml parser
+to parse only the human readable text and sift through all of the metadata.
+
+N-Grams for query reordering using NLP:
+8) https://web.stanford.edu/~jurafsky/slp3/3.pdf
+
++++++++++++++++++ETHAN PLEASE UPDATE HERE+++++++++++++++++
