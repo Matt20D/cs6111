@@ -944,7 +944,6 @@ def main() -> None:
 			# edge case 1: ensure that there are 10 results on first search
 			if len(query_results) < 10:
 				print(" Query was not ambiguous, there were less than 10 results in iteration 1")
-				#quit()
 				break # break out of loop, and terminate program gracefully
 
 		# do all other queries post modification
@@ -955,10 +954,6 @@ def main() -> None:
 
 			# execute query
 			query_results = query_google_search(current_query, engine_id, api_key)
-
-			#TODO delete the break statement (for actual augmentation runs)
-			#print("\n Iteration number " + str(num_searches))
-			#break
 
 		#
 		# Remove Non-html files from the query results, if they exist
@@ -972,15 +967,13 @@ def main() -> None:
 		# edge case 2: I believe this only matters for the first iteration
 		if precision_k_actual == 0:
 			print(" precision@{} for query {} is 0".format(k, num_searches))
-			print(" Below desired precision, but can no longer augment the query...")
-			#break # change to return
-			return
+			print(" Below desired precision, but can no longer augment the query...\n")
+			break # break out of loop, and terminate program gracefully
 
 		# edge case 3: if we have hit the target precision, then we can terminate.
 		elif precision_k_actual >= precision_at_k:
-			print(" current precision@{} {:.2f} >= target precision@{} {:.2f}. We are done...".format(k, precision_k_actual, k, precision_at_k))
-			#break # change to return
-			return 
+			print(" current precision@{} {:.2f} >= target precision@{} {:.2f}. We are done...\n".format(k, precision_k_actual, k, precision_at_k))
+			break  # break out of loop, and terminate program gracefully
 
 		# this is the actual point of the assignment, this is the algorithm we need to develop
 		# The precision didn't pass our pre-defined target, so lets augment the query using
