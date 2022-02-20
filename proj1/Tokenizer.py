@@ -1,3 +1,16 @@
+"""
+file: Tokenizer.py
+description: Tokenizer class used for parsing html documents into tokens
+which is a big part of the document analysis. We need to be able to 
+get a list of all the words in a document so that we can create inverted
+lists.
+authors: Matthew Duran and Ethan Garry
+"""
+
+#
+# Library Modules Needed
+#
+
 import requests # use to execute a get request
 from bs4 import BeautifulSoup as bs # scraper
 import re # regex
@@ -14,7 +27,10 @@ class Tokenizer(object):
     # Use these methods to do stop word elimination
     #
 
-    # get list of stopwords from gravano's file saved locally
+    """
+    desc:
+    get list of stopwords from gravano's file saved locally
+    """
     def get_stopwords(self) -> set():
 
         # open the file to parse the stopwords and build a set
@@ -31,17 +47,22 @@ class Tokenizer(object):
         except:
             return set()
 
-    # use for stopword elimination
+    """
+    desc:
+    use for stopword elimination
+    """
     def is_stopword(self, word: str) -> bool:
         return word in self.STOPWORDS_SET
 
     #
     # Use these methods for parsing file for keywords and cleaning them up
     #
-
-    # defined this separately, so that if the get request fails, we can just use
-    # the data that we have previously stored
-    # success determines whether the request was successful or not
+    
+    """
+    desc:
+    defined this separately, so that if the get request fails, we can just use
+    the data (title/snippet) that we have previously stored for tokenizing
+    """
     def regex_match(self, string) -> list:
         
         # match any alphanumeric char one or more times (i.e a word), remove all punctuation.
@@ -56,6 +77,11 @@ class Tokenizer(object):
         
         return keywords
 
+    """
+    desc:
+    execute a get request and try to parse the returned html document.
+    Then tokenize all of the words in the document, after eliminating stopwords
+    """
     def execute_get_request(self) -> None:
 
         # send get request for the webpage
@@ -100,11 +126,11 @@ class Tokenizer(object):
                 else:
                     self.all_words.append(word.lower())        
                          
-            
-        
-        
-
-    # use this accessor method to get list of words from html file
+    """
+    desc:
+    use this accessor method call the private execute_get_request() and
+    return the tokenized words back to the caller
+    """  
     def get_words(self) -> list:
 
         self.execute_get_request()
