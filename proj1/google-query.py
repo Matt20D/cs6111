@@ -25,13 +25,13 @@ from googleapiclient.discovery import build # for querying google using their AP
 
 
 # use this method to print all relevant parameters to the console
-def print_params(api_key, eid, precision, precision_calc, query, iteration):
+def print_params(api_key, eid, precision, precision_calc, query, iteration, k) -> None:
 	
 	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 	print(" Client Key  			= {}".format(api_key))									
 	print(" Engine Key  			= {}".format(eid))
 	print(" Desired Precision		= {}".format(precision))
-	print(" Calculated Precision		= {}".format(precision_calc))
+	print(" Calculated Precision@{}	= {}".format(k, precision_calc))
 	print(" Query       			= {}".format(to_string(query)))
 	print(" Iteration   			= {}".format(iteration))
 	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -126,7 +126,7 @@ WORD_COUNT = defaultdict(int)
 
 # print the query results for the users,
 # ask for relevence feedback, and return the precision metric
-def present_results(queries: list) -> float:
+def present_results(queries: list) -> tuple:
 	global RELEVANT_DOCS, NON_RELEVANT_DOCS, N_GRAM_MASTER_LIST, WORD_COUNT
 	# track query rank
 	rank = 1
@@ -171,7 +171,8 @@ def present_results(queries: list) -> float:
 
 	# calc and return the precision
 	precision = (num_yes) / (num_yes + num_no)
-	return precision
+	
+	return (precision, (num_yes + num_no))
 
 # return an inverted list, that contains the term_frequency of each term
 # in a given document snippet + title of document
@@ -828,8 +829,11 @@ def main() -> None:
 	# ensure that there are at exactly 4 command line arguments + the program run name
 	# Query is a string with as many words as desired
 	if len(sys.argv) != 5: # changed from ... > 5
-		raise Exception(" usage: google-query.py <google api key> <google engine id> <precision> <query>")  
-	
+		#raise Exception(" usage: google-query.py <google api key> <google engine id> <precision> <query>")  
+		print()
+		print(" usage: google-query.py <google api key> <google engine id> <precision> <query>")
+		sys.exit()
+
 	# idk if we can even error check this... 
 	api_key     = str(sys.argv[1])
 	engine_id   = str(sys.argv[2])
@@ -837,14 +841,17 @@ def main() -> None:
 	# ensure that precision is correct input
 	precision_at_k   = float(sys.argv[3])
 	if precision_at_k < 0.0 or precision_at_k > 1.0:
-		raise Exception(" Query precision needs to be real valued between 0 and 1")
-	
+		#raise Exception(" Query precision needs to be real valued between 0 and 1")
+		print()
+		print(" usage: Query precision needs to be real valued between 0 and 1")
+		sys.exit()
+
 	# create a query list of keywords
 	initial_query 		= sys.argv[4]
 	initial_query       = initial_query.split() 
 	
 	# track all of our queries by iteration
-	ALL_QUERIES = {}
+	#ALL_QUERIES = {}
 
 	# set up counter for iterations
 	num_searches = 1
@@ -855,6 +862,9 @@ def main() -> None:
 	# current query
 	current_query = initial_query
 
+	# store the precision@<how_many_docs>
+	k = 10
+
 	# run this loop until we hit the target precision
 	while True:
 
@@ -862,7 +872,7 @@ def main() -> None:
 		if num_searches == 1:
 
 			# print the params to the console
-			print_params(api_key, engine_id, precision_at_k, "N/A", initial_query, num_searches)
+			print_params(api_key, engine_id, precision_at_k, "N/A", initial_query, num_searches, k)
 
 			# execute query
 			query_results = query_google_search(initial_query, engine_id, api_key)
@@ -877,7 +887,7 @@ def main() -> None:
 		elif num_searches > 1:
 			
 			# print the params to the console, current_query has been modified from iteration num_searches - 1
-			print_params(api_key, engine_id, precision_at_k, precision_k_actual, current_query, num_searches)
+			print_params(api_key, engine_id, precision_at_k, precision_k_actual, current_query, num_searches, k)
 
 			# execute query
 			query_results = query_google_search(current_query, engine_id, api_key)
@@ -892,26 +902,27 @@ def main() -> None:
 		query_results = remove_bad_results(query_results)
 
 		# prompt user for relevance and calculate the initial precision@k value
-		precision_k_actual = present_results(query_results)
+		# also store the k value (i.e. precision@<how_many>)
+		precision_k_actual, k = present_results(query_results)
 	
 		# Logging Purposes
 		# add to the ALL_QUERIES data structure, we can use this for logging to a log file later
-		ALL_QUERIES[num_searches] = make_json(num_searches, current_query, \
-									 		  precision_k_actual, query_results)
+		#ALL_QUERIES[num_searches] = make_json(num_searches, current_query, \
+		#							 		  precision_k_actual, query_results)
 		
 		# pprint package does a good job of formatting print, check it out
 		#pprint.pprint(ALL_QUERIES)
 
 		# edge case 2: I believe this only matters for the first iteration
 		if precision_k_actual == 0:
-			print(" precision @ 10 for query {} is 0".format(num_searches))
+			print(" precision@{} for query {} is 0".format(k, num_searches))
 			print(" Below desired precision, but can no longer augment the query...")
 			#break # change to return
 			return
 
 		# edge case 3: if we have hit the target precision, then we can terminate.
 		elif precision_k_actual >= precision_at_k:
-			print(" current precision {:.2f} >= target precision {:.2f}. We are done...".format(precision_k_actual, precision_at_k))
+			print(" current precision@{} {:.2f} >= target precision@{} {:.2f}. We are done...".format(k, precision_k_actual, k, precision_at_k))
 			#break # change to return
 			return 
 
@@ -919,7 +930,7 @@ def main() -> None:
 		# The precision didn't pass our pre-defined target, so lets augment the query using
 		# heuristics. Then, set current_query up for the next loop iteration.
 		else:
-			print(" current precision {:.2f} < target precision {:.2f}. Let's augment...".format(precision_k_actual, precision_at_k))
+			print(" current precision@{} {:.2f} < target precision@{} {:.2f}. Let's augment...".format(k, precision_k_actual, k, precision_at_k))
 			
 			#
 			# Modify current query, for next loop using algo
@@ -927,16 +938,20 @@ def main() -> None:
 
 			# this function will be the entry point into getting a new query string for 
 			# next iteration. Pass the old query keywords, and receive a new one from heuristic analysis
+			print("running augmentation algorithm, wait times may vary... ")
 			augmented_query = run_augmentation(current_query)
 			current_query = augmented_query
-	
+			print()
+
 			# increment the iteration counter
 			num_searches += 1
 
 	# return from main
 	#return
 
-# main driver for the program
+"""
+main driver for the program
+"""
 if __name__ == "__main__":
 	
 	try:
@@ -955,11 +970,9 @@ if __name__ == "__main__":
 		
 		print("\n")
 	
-	# usage error
-	except Exception as e:
+	# a usage error (bad params, or precision)
+	except SystemExit as e:
 		
-		print()
-		print(e)
 		print()
 	
 	finally:
