@@ -212,7 +212,7 @@ in a given document snippet/title of document
 def get_term_frequency(documents: list) -> dict:
 	global N_GRAM_MASTER_LIST, WORD_COUNT
 	
-	print("getting term frequency...")
+	#print("getting term frequency...")
 
 	# Hash Table with inverted list DS for easier indexing
 	inverted_list = {}
@@ -277,7 +277,7 @@ convert an inverted list into a dataframe so we can manipulate document vectors
 in a much easier fashion
 """
 def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # return a PD DataFrame
-	print("converting to data frame")
+	#print("converting to data frame")
 	df = pd.DataFrame()
 	#df["keyword"] = pd.Series([], dtype="string") # initialize a column
 
@@ -352,7 +352,7 @@ citation: [for using list comprehensions instead of iterrows()]
 https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
 """
 def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
-	print("calculating tf-idf weights")
+	#print("calculating tf-idf weights")
 	# get a deep copy so we do not modify the tf dataframe
 	data_copy = data.copy(deep=True)
 
@@ -490,7 +490,7 @@ here will try and pick the best words so that we can begin to augment
 the query. Return a list of words, to be added to the queries and then tested.
 """
 def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:	
-	print("choosing words")
+	#print("choosing words")
 	# these are the max number of words to return
 	words = set() 
 	max_words = 250
@@ -565,7 +565,7 @@ query terms + one new term, or old query terms + two new terms. This is a combin
 but it only hangs the computer for a little while. The final results have been pretty good too.
 """
 def generate_queries(curr_query: list, potential_words: set) -> set:
-	print("generating queries")
+	#print("generating queries")
 	len_one = set()
 	len_two = set()
 
