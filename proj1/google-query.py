@@ -880,8 +880,8 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	# step 4: last step, work on query ordering. This seems very NLP-y
 	try:
 		reordered_query = calc_n_gram(new_query)
-	except exception:
-		print(exception)
+	except Exception as e:
+		print(e)
 		reordered_query = new_query
 
 	# reset the relevent docs, lets only consider this iteration's pool of 
