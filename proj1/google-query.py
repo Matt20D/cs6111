@@ -3,7 +3,7 @@
 #
 
 # Library Modules Needed
-from ctypes.wintypes import WORD
+# from ctypes.wintypes import WORD
 from logging import exception, raiseExceptions
 from operator import inv
 import sys # command line arg parsing
