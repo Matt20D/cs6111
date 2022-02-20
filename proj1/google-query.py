@@ -895,25 +895,7 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 
 """
 desc:
-Log file stuff, This is useful for final steps (unused).
-use this for serializing our data and writing to log file
-"""
-def make_json(iter_num: int, curr: str, prec: float, res: list) -> dict:
-
-	json = {"iter": iter_num, \
-			"query string": curr, \
-			"precision": prec, \
-			"google results": res}
-
-	return json
-
-def log_iteration() -> None:
-	pass
-
-"""
-desc:
 main method where program control is run out of.
-
 """
 def main() -> None:
 
@@ -934,9 +916,6 @@ def main() -> None:
 	# create a query list of keywords
 	initial_query 		= sys.argv[4]
 	initial_query       = initial_query.split() 
-	
-	# track all of our queries by iteration
-	#ALL_QUERIES = {}
 
 	# set up counter for iterations
 	num_searches = 1
@@ -990,14 +969,6 @@ def main() -> None:
 		# also store the k value (i.e. precision@<how_many>)
 		precision_k_actual, k = present_results(query_results)
 	
-		# Logging Purposes
-		# add to the ALL_QUERIES data structure, we can use this for logging to a log file later
-		#ALL_QUERIES[num_searches] = make_json(num_searches, current_query, \
-		#							 		  precision_k_actual, query_results)
-		
-		# pprint package does a good job of formatting print, check it out
-		#pprint.pprint(ALL_QUERIES)
-
 		# edge case 2: I believe this only matters for the first iteration
 		if precision_k_actual == 0:
 			print(" precision@{} for query {} is 0".format(k, num_searches))
