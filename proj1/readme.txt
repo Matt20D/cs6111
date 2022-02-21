@@ -129,7 +129,7 @@ constant and would not give us any actionable information to use.
 
 Whethere we are in the first or second case we will need to execute the following 3 functions.
 
-in score_rel_docs() we will take in the previous query list along with the dataframe of 
+In score_rel_docs() we will take in the previous query list along with the dataframe of 
 all relevant documents. They are still in preserved order from google's return, which is 
 important to the next heuristic. we will essentially take the union of the words in the query
 along with the word weight in document column vectors, and take a sum of all the weights. 
@@ -139,13 +139,13 @@ give the word weight an extra boost if it hits in the title or the snippet. We c
 snippet to be important, because it is the beginning of the html document, so probably the  
 most relevant. Lastly, we will return the list of the documents and their score to the caller.
 
-in apply_google_heuristic() we use the document scores from above and will weight them by 
+In apply_google_heuristic() we use the document scores from above and will weight them by 
 their column label. Recall that we stored the documents in ranked order from google's search 
 return, so we wanted to be able to apply a heuristic that uses their results as a proxy for
 search importantce. Thus we use a sliding scale, to weight the document sums accordingly. We
 have seen some of the final document orderings change as a result of this heuristic.
 
-in choose_words() we now use all of the relevant documents (after their scoring using our
+In choose_words() we now use all of the relevant documents (after their scoring using our
 varied heuristics) to pick the best words. We didnt want to limit the way we chose words, 
 since the user could have labeled a variety of documents as relevant. Thus we will iterate
 throguh all of the relevant documents and choose all of the nonzero words, that have their 
@@ -166,11 +166,45 @@ to pass them to normalize_vectors() which just applies the function from class.
 
 Now that we have all of these potential queries, a very large list, we need to score them to 
 choose the best one. In cosine_similarity(), we implement a pseudo Rochhio algorithm 
-which incorporates data from both relevant and non relevant documents to score the 
-potential queries. We mean pseudo because the algorithm will not return a new query like Rocchio would, but would rather score the query list using cosine similarity between the query and the relevant documents and the non relevant documents. The goal being that the query be the most similar to the relevant docs and the most dissimilar to the non-rel docs. For a while we never considered all of the information, and we received poor query results. So by using all of the labeled data we were able to get much better results for our final 
-query.
+which incorporates data from both relevant and non relevant documents to score the potential queries. 
+We mean pseudo because the algorithm will not return a new query like Rocchio would, but would rather 
+score the query list using cosine similarity between the query and the relevant documents 
+and the non relevant documents. The goal being that the query be the most similar to the 
+relevant docs and the most dissimilar to the non-rel docs. For a while we never considered all of the 
+information, and we received poor query results. So by using all of the labeled data we were able to get 
+much better results for our final query.
 
 =======================================================================================
 Now that we have generated the best possible query we move on to n-grams for ordering.
-+++++++++ Ethan, you need to talk about n-grams ++++++++
 =======================================================================================
+
+At this stage we have chosen our word(s) for the new query and need to determine the proper ordering.
+Although neither of us have a background in NLP, professor Gravano was kind enough to link a research
+paper (https://web.stanford.edu/~jurafsky/slp3/3.pdf) on using n_grams to determine the "proper" order
+of a query. I put proper in quotations because we ultimately end up using an approximation of the probabilities 
+we really want. 
+
+Let's say we have a query "word1 word2 word3 word4". We want to calculate the probability this query occurs in any of
+our documents (relevant and non-relevant). In an ideal world, we can calculate the following:
+
+p("word2" given "word1") * p("word3" given "word1 word2") * ...
+
+We would then calculate this probability for every permutation of our query phrase to determine the best order (one with 
+the highest probability). These calculations become costly, fast. So, instead, we use an approximation of these probabilities, 
+only considering pairs of words at a time. So our new calculation looks something like this:
+
+p("word2" given "word1") * p("word3" given "word2") * ...
+
+This way, we can also store probabilities in a dictionary object and re-use work. This approximation
+significantly speeds up our calculations and allows us to make a very well educated guess at the "proper"
+order.
+
+We had to develop 2 additional global data structures to implement this algorithm: WORD_COUNT and N_GRAM_MASTER_LIST.
+WORD_COUNT is simply a frequency for ALL terms throughout given documents (including stop words). N_GRAM_MASTER_LIST 
+contains all the terms from our returned documents IN ORDER. We use this list to determine p("word2" given "word1") etc.
+
+We ran into some issues with larger undirected queries. If the user deviated from the original purpose and allowed the
+query to expand over 10 terms, calc_n_grams starts to hang. The permuations become too great to be calculated in a 
+reasonable amount of time. Based on the advice from Ed we've determined this scenario is out of scope as the user will 
+not be deviating from their original goal. If we did have to consider this scenario, we would implement a random sampling
+of all the queries or impose a time limit on the function.
