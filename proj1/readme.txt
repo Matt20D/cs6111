@@ -35,7 +35,7 @@ project=cs6111
 1) type `source setup.sh` into the command line to run the shell
 script which will install all of our dependent packages into a python
 venv so that you have all of the packages necessesary for our software 
-to run
+to run. Please ensure that you have pip3 package manager installed.
 
 2) either uncomment a test case in test.sh, and type `./test.sh` or use the command line
 `python3 google-query.py <google api key> <google engine id> <precision> <query>`
