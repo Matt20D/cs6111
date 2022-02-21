@@ -212,6 +212,8 @@ in a given document snippet/title of document
 def get_term_frequency(documents: list) -> dict:
 	global N_GRAM_MASTER_LIST, WORD_COUNT
 	
+	#print("getting term frequency...")
+
 	# Hash Table with inverted list DS for easier indexing
 	inverted_list = {}
 
@@ -275,7 +277,7 @@ convert an inverted list into a dataframe so we can manipulate document vectors
 in a much easier fashion
 """
 def convert_to_dataframe(inv_list: dict, is_relevant: bool) -> pd.DataFrame: # return a PD DataFrame
-
+	#print("converting to data frame")
 	df = pd.DataFrame()
 	#df["keyword"] = pd.Series([], dtype="string") # initialize a column
 
@@ -350,7 +352,7 @@ citation: [for using list comprehensions instead of iterrows()]
 https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
 """
 def do_tf_idf(data:pd.DataFrame) -> pd.DataFrame:
-
+	#print("calculating tf-idf weights")
 	# get a deep copy so we do not modify the tf dataframe
 	data_copy = data.copy(deep=True)
 
@@ -488,7 +490,7 @@ here will try and pick the best words so that we can begin to augment
 the query. Return a list of words, to be added to the queries and then tested.
 """
 def choose_words(scores: list, data: pd.DataFrame, query: list) -> list:	
-	
+	#print("choosing words")
 	# these are the max number of words to return
 	words = set() 
 	max_words = 250
@@ -562,8 +564,8 @@ using all of the keywords that are returned lets build all of the combinations o
 query terms + one new term, or old query terms + two new terms. This is a combinatorial explosion
 but it only hangs the computer for a little while. The final results have been pretty good too.
 """
-def generate_queries(curr_query: list, potential_words: set) -> list:
-	
+def generate_queries(curr_query: list, potential_words: set) -> set:
+	#print("generating queries")
 	len_one = set()
 	len_two = set()
 
@@ -587,21 +589,10 @@ def generate_queries(curr_query: list, potential_words: set) -> list:
 			# new combo, add it
 			len_two.add((word, word2))
 	
-	# at max there should be 210 potential query lists
-	all_combos = []
-
-	# concatenate one word to previous query keyword list
-	for word in len_one:
-		temp_list = [word]
-		temp_list = curr_query + temp_list
-		all_combos.append(temp_list)
-
-	# concatenate two words to previous query keyword list
-	for word in len_two:
-		temp_list = [word[0], word[1]]
-		temp_list = curr_query + temp_list
-		all_combos.append(temp_list)
-
+	# get all of the new query add ons to score
+	# the original words don't matter and they will be constant
+	# in the math
+	all_combos = len_one.union(len_two)
 	return all_combos
 
 """
@@ -641,7 +632,8 @@ desc:
 cosine similarity is simply the dot product of query list
 and the column vectors. I will calculate dot product with all
 relevant queries, and then take the average.
-This is the most important algorithm here, this is how we get our final query recommendation
+This is the most important algorithm here, this is how we get our final query recommendation.
+This function will return the new keywords to append to the query stem
 """
 def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: list) -> list:
 	
@@ -656,8 +648,9 @@ def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: l
 	num_non_rel_docs    = len(non_rel_data.columns)
 
 	# for each of the queries
-	# print(ql)
+	#print(len(ql))
 	for query in ql:
+		
 
 		# want to see similar the query is to the current rel and non-rel docs
 		temp_sum_rel = [0] * num_rel_docs
@@ -706,13 +699,13 @@ def cosine_similarity(rel_data: pd.DataFrame, non_rel_data: pd.DataFrame,  ql: l
 		# what happens on divide by zero
 		# if the avg similarity is better than what we have seen so far
 		if  rocchio > highest_avg_sim:
-			query_list = query
+			query_list = query # set
 			highest_avg_sim = rocchio
 			# NOTE: uncomment to see how the winner changes over time
 			#print(query_list)
 			#print(highest_avg_sim)
 
-	return query_list
+	return list(query_list)
 
 """
 desc:
@@ -874,7 +867,8 @@ def run_augmentation(curr_query: list) -> list: # return a list of keywords, aft
 	# calculate cosine similarity with and all potential queries and the relevant docs
 	# choose the best query that is clustered to the best
 	# and want to find most dissimilar to irrelevant
-	new_query = cosine_similarity(rel_docs, non_rel_docs, potential_queries)
+	# cosine_similarity just returns the stem, so concatenate it with the current query
+	new_query = curr_query + cosine_similarity(rel_docs, non_rel_docs, potential_queries)
 		
 	#
 	# step 4: last step, work on query ordering. This seems very NLP-y
