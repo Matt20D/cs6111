@@ -19,7 +19,7 @@ project=cs6111
     ├── references.txt
     ├── stopwords.txt
     ├── setup.sh [Note: ensure that the shell file has executable permissions]   
-    ├── references.txt
+    ├── requirements.txt
     ├── test.sh  [Note: ensure that the shell file has executable permissions] 
     ├── google-query.py
     ├── Tokenizer.py
