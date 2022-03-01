@@ -1,1 +1,5 @@
 venv/
+
+SpanBert/
+
+__pycache__/
