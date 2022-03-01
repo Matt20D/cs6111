@@ -16,16 +16,13 @@ from logging import exception, raiseExceptions
 from operator import inv
 import sys
 from tokenize import String # command line arg parsing
-import numpy as np # havent decided which one yet
-import pandas as pd # havent decided which one yet
-import math # for logs
+
 import Tokenizer # class written to execute get request and get the keywords back
 import requests
-import heapq # for choosing words
-import itertools
+
 from collections import defaultdict
 from googleapiclient.discovery import build # for querying google using their API
-
+from SpanBERT.spacy_help_functions import * #import spacy help
 
 """
 desc: 
@@ -69,8 +66,7 @@ key: 	 google API key
 citation:
 https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
 """
-def query_google_search(query: list, eid: str, key: str) -> list():
-	
+def query_google_search(query: list, eid: str, key: str) -> list():	
 	# use google api for querying
 	service = build("customsearch", "v1",
 		developerKey=key)
@@ -161,7 +157,7 @@ def main() -> None:
 
 	# run this loop until we hit k tuples
 	while len(X) < k:		
-		
+		print('here in while loop')
 		# print the params to the console
 		print_params(api_key, engine_id, r, t, current_query, num_searches, k)
 			
