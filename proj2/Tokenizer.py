@@ -45,18 +45,29 @@ class Tokenizer(object):
         soup = bs(request.text,"html.parser")           
         
         # print(type(soup.get_text()))
-        soup_text = soup.get_text()
+        soup_text = soup.get_text().replace("\n", "")        
      
         # get first 20k characters as specified in assignment prompt
         soup_text = soup_text if len(soup_text)<=20000 else soup_text[:20000]
 
         nlp = spacy.load("en_core_web_lg")
         doc = nlp(soup_text)
-        print('Start of ent')
-        for ent in doc.ents:
+        
 
-            print(ent.text, ent.start_char, ent.end_char, ent.label_)
-        print('end of ent')
+        # loop through extracted sentences
+        # for sent in doc.sents:
+            
+            
+        print('end of sents')
+
+        # Named entity recognition
+        spaCy_extracted_entities = set()
+        for ent in doc.ents:
+            
+            spaCy_extracted_entities.add((ent.text,ent.label_))
+        
+        spaCy_extracted_entities = list(spaCy_extracted_entities)
+        print(spaCy_extracted_entities)
         quit()
         return None
     
