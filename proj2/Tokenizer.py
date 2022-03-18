@@ -47,6 +47,10 @@ class Tokenizer(object):
         soup = bs(request.text,"html.parser")           
         
         # print(type(soup.get_text()))
+        # NOTE: we may need to do additional clean up here --> 
+        #The Beautiful Soup toolkit to extract the actual plain text from a 
+        # given webpage, and ignore HTML tags, links, images, and all other 
+        # content that would interfere with the information extraction process.
         soup_text = soup.get_text().replace("\n", "")        
      
         # get first 20k characters as specified in assignment prompt
