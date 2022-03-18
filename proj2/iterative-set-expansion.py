@@ -165,13 +165,15 @@ def main() -> None:
 		url_list = query_google_search(current_query, engine_id, api_key)
 		
 		# extract sentences and use spaCy to split text into sentences
+		print('Extracting Sentences and Entities...')
 		for url in url_list:
-			extracted_sentences = extract_sentences(url)		
+			extracted_relations = extract_sentences(url)		
 		
+		print(extracted_relations)
 		# feed sentences and named entity pairs as input to SpanBERT 
 		# to predict the corresponding relations and extract all instances 
 		# of the relation specified by input param r
-
+		quit()
 		print()
 
 		# increment the iteration counter

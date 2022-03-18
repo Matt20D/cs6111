@@ -16,7 +16,9 @@ from bs4 import BeautifulSoup as bs # scraper
 import re # regex
 import spacy
 from SpanBERT.spacy_help_functions import * #import spacy help
+from SpanBERT.spanbert import SpanBERT 
 
+spanbert = SpanBERT("./pretrained_spanbert")  
 
 class Tokenizer(object):
 
@@ -52,24 +54,13 @@ class Tokenizer(object):
 
         nlp = spacy.load("en_core_web_lg")
         doc = nlp(soup_text)
-        
+        entities_of_interest = ["ORGANIZATION", "PERSON", "LOCATION", "CITY", "STATE_OR_PROVINCE", "COUNTRY"]
+        print('working on new doc')
+        relations = extract_relations(doc, spanbert, entities_of_interest)
+        print("Relations: {}".format(dict(relations)))
 
-        # loop through extracted sentences
-        # for sent in doc.sents:
-            
-            
-        print('end of sents')
 
-        # Named entity recognition
-        spaCy_extracted_entities = set()
-        for ent in doc.ents:
-            
-            spaCy_extracted_entities.add((ent.text,ent.label_))
-        
-        spaCy_extracted_entities = list(spaCy_extracted_entities)
-        print(spaCy_extracted_entities)
-        quit()
-        return None
+        return relations
     
 
           
