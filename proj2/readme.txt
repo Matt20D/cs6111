@@ -8,7 +8,9 @@ Current Status:
 
 Run ./getSpanBert.sh 
 	This should create a folder called SpanBert (not uploaded to GH — too big)
-
+	MD: we should probably do the sourcing within the file, and have like a pre-program and post-program shell script
+		* this is a lateeeer issue
+		
 Check in SpanBert/pretrained_spanbert and SpanBert/pytorch_pretrained_bert. If there is nothing in these folders run the following commands:
 cd SpanBert
 ./download_finetuned.sh
