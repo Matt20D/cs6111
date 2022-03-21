@@ -35,4 +35,5 @@ Add:
 
 To the special_tokens dictionary.
 
-Right now the application makes request to google —> parses (tokenizer.py) it —> limits text to 20k chars (tokenizer.py) —> attempts to extract relations using “extract_relations” in the spacy_help_functions.py but keeps running into bugs…
+Right now the application makes request to google —> parses (tokenizer.py) it —> limits text to 20k chars (tokenizer.py) —> 
+attempts to extract relations using “extract_relations” in the spacy_help_functions.py but keeps running into bugs…
