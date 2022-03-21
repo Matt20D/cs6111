@@ -173,6 +173,7 @@ def main() -> None:
 		# feed sentences and named entity pairs as input to SpanBERT 
 		# to predict the corresponding relations and extract all instances 
 		# of the relation specified by input param r
+		print('made it to end of ')
 		quit()
 		print()
 

@@ -18,7 +18,7 @@ import spacy
 from SpanBERT.spacy_help_functions import * #import spacy help
 from SpanBERT.spanbert import SpanBERT 
 
-spanbert = SpanBERT("./pretrained_spanbert")  
+spanbert = SpanBERT("./SpanBERT/pretrained_spanbert")  
 
 class Tokenizer(object):
 
@@ -40,18 +40,17 @@ class Tokenizer(object):
         if request.status_code != 200:
             raise requests.exceptions.HTTPError
 
-        # making the soup object
-        # request.text is the markup; this ensures we only receive back the human
-        # readable part of the web page, no meta data
-        # using the html parser
-        soup = bs(request.text,"html.parser")           
+
         
-        # print(type(soup.get_text()))
-        # NOTE: we may need to do additional clean up here --> 
-        #The Beautiful Soup toolkit to extract the actual plain text from a 
-        # given webpage, and ignore HTML tags, links, images, and all other 
-        # content that would interfere with the information extraction process.
-        soup_text = soup.get_text().replace("\n", "")        
+        # Extract text
+        # source: https://www.geeksforgeeks.org/remove-all-style-scripts-and-html-tags-using-beautifulsoup/
+        soup = bs(request.text, "html.parser")
+ 
+        for data in soup(['style', 'script']):
+        # Remove tags
+            data.decompose()
+
+        soup_text = ' '.join(soup.stripped_strings)        
      
         # get first 20k characters as specified in assignment prompt
         soup_text = soup_text if len(soup_text)<=20000 else soup_text[:20000]
@@ -61,7 +60,8 @@ class Tokenizer(object):
         entities_of_interest = ["ORGANIZATION", "PERSON", "LOCATION", "CITY", "STATE_OR_PROVINCE", "COUNTRY"]
         print('working on new doc')
         relations = extract_relations(doc, spanbert, entities_of_interest)
-        print("Relations: {}".format(dict(relations)))
+        if len(relations.keys())>0:
+            print("Relations: {}".format(dict(relations)))
 
 
         return relations
