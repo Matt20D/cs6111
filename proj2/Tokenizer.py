@@ -57,14 +57,20 @@ class Tokenizer(object):
 
         nlp = spacy.load("en_core_web_lg")
         doc = nlp(soup_text)
+        for ent in doc.ents:
+             print([(e.text, e.start_char, e.end_char, e.label_) for e in doc.ents])
         entities_of_interest = ["ORGANIZATION", "PERSON", "LOCATION", "CITY", "STATE_OR_PROVINCE", "COUNTRY"]
         print('working on new doc')
-        relations = extract_relations(doc, spanbert, entities_of_interest)
-        if len(relations.keys())>0:
-            print("Relations: {}".format(dict(relations)))
+        try:
+            relations = extract_relations(doc, spanbert, entities_of_interest)
+            if len(relations.keys())>0:
+                print("Relations: {}".format(dict(relations)))
+                return relations
+            return None
+        except:
+            return None
 
-
-        return relations
+        
     
 
           

@@ -1,5 +1,6 @@
 venv/
 
-SpanBert/
+SpanBert/pretrained_spanbert
+SpanBert/pytorch_pretrained_bert
 
 __pycache__/
