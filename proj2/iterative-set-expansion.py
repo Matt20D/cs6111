@@ -96,10 +96,10 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 	return clean_results
 
 # return a list of keywords, after potentially adding at max 2 new
-def extract_sentences(url: str, tuples: set, relation: str) -> list: 	
+def extract_sentences(url: str, tuples: set, relation: str, conf: float) -> list: 	
 
 	#instantiate tokenizer object
-	tk 		= Tokenizer.Tokenizer(url, tuples, relation)
+	tk 		= Tokenizer.Tokenizer(url, tuples, relation, conf)
 	sentences = []
 	try:
 		# use method to execute get request and return clean document words in list
@@ -198,7 +198,7 @@ def main() -> None:
 
 			# pass the set so we dont place duplicates, I wont add to set until
 			# after this completes
-			extracted_relations = extract_sentences(url, X, relation_to_extract)		
+			extracted_relations = extract_sentences(url, X, relation_to_extract, t)		
 			#print(extracted_relations)
 
 			# or maybe we do, I havent thought that far yet ... 
