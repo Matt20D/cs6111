@@ -24,18 +24,25 @@ from collections import defaultdict
 from googleapiclient.discovery import build # for querying google using their API
 from SpanBERT.spacy_help_functions import * #import spacy help
 
+RELATIONS = {
+				1: "per:schools_attended",
+                2: "per:employee_of",
+				3: "per:cities_of_residence",
+				4: "org:top_members/employees"
+			}
 """
 desc: 
 use this method to print all query and API parameters to the console
 """
-def print_params(api_key, eid, field_to_extract, confidence_threshold, query, iteration, k) -> None:
+def print_params(api_key, eid, field_to_extract, confidence_threshold, query, iteration, k, n) -> None:
 	
 	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 	print(" Client Key  				= {}".format(api_key))									
 	print(" Engine Key  				= {}".format(eid))
-	print(" Field to Extract			= {}".format(field_to_extract))
+	print(" Field to Extract			= {}".format(RELATIONS[field_to_extract]))
 	print(" Confidence Threshold			= {}".format(confidence_threshold))
 	print(" Desired Number of Tuples		= {}".format(k))
+	print(" Number of Extracted Tuples		= {}".format(n))
 	print(" Query       				= {}".format(to_string(query)))
 	print(" Iteration   				= {}".format(iteration))
 	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -88,19 +95,21 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 
 	return clean_results
 
+# return a list of keywords, after potentially adding at max 2 new
+def extract_sentences(url: str, tuples: set, relation: str) -> list: 	
 
-def extract_sentences(url: String) -> list: # return a list of keywords, after potentially adding at max 2 new
-	
 	#instantiate tokenizer object
-	tk 		= Tokenizer.Tokenizer(url)
+	tk 		= Tokenizer.Tokenizer(url, tuples, relation)
 	sentences = []
 	try:
 		# use method to execute get request and return clean document words in list
+		print("\tFetching text from url ...")
 		sentences = tk.execute_get_request()
 			
 	except requests.exceptions.HTTPError:
 		# on failure we skip
-		pass
+		print("\tHTTPError, skipping this document")
+		#pass
 	return sentences
 
 """
@@ -121,14 +130,18 @@ def main() -> None:
 	# indicates relation to extract
 	# 1 for Schools_Attended, 2 for Work_For, 3 for Live_In, 4 Top_Member_Employees
 	r   = int(sys.argv[3])
-	
+
 	if r == 1:
+		# internal name: per:schools_attended
 		relation_to_extract = 'Schools_Attended'
 	elif r == 2:
+		# internal name: per:employee_of
 		relation_to_extract = 'Work_For'
 	elif r==3:
+    	# internal name: per:cities_of_residence
 		relation_to_extract = 'Live_In'
 	elif r==4:
+		# internal name: org:top_members/employees
 		relation_to_extract = 'Top_Member_Employees'
 	else:
 		sys.exit(" usage: r needs to be 1, 2, 3 or 4")
@@ -145,7 +158,6 @@ def main() -> None:
 	# k ==> number of tuples we request in the output
 	k   = int(sys.argv[6])
 	
-
 	# set up counter for iterations
 	num_searches = 1
 
@@ -154,22 +166,45 @@ def main() -> None:
 
 	# set of extracted tuples
 	X = set()
+	URLS = set()
 
 	# run this loop until we hit k tuples
 	while len(X) < k:		
-		print('here in while loop')
+
+
 		# print the params to the console
-		print_params(api_key, engine_id, r, t, current_query, num_searches, k)
+		print_params(api_key, engine_id, r, t, current_query, num_searches, k, len(X))
 			
 		# execute query ---> returns list of urls
 		url_list = query_google_search(current_query, engine_id, api_key)
 		
+		print("\n=========== Iteration: {} - Query: {} ===========\n".format(num_searches,\
+																	to_string(current_query)))
+
 		# extract sentences and use spaCy to split text into sentences
-		print('Extracting Sentences and Entities...')
+		page_num = 1
 		for url in url_list:
-			extracted_relations = extract_sentences(url)		
-		
-		print(extracted_relations)
+
+			# book keep which URL we are on
+			print("URL ( {} / {}): {}".format(page_num, len(url_list), url))
+			page_num += 1
+
+			# if we have already processed a URL just skip it, NBD
+			if url in URLS:
+				print("\tAlready processed URL will skip now")
+				continue
+			else:
+				URLS.add(url)
+
+			# pass the set so we dont place duplicates, I wont add to set until
+			# after this completes
+			extracted_relations = extract_sentences(url, X, relation_to_extract)		
+			#print(extracted_relations)
+
+			# or maybe we do, I havent thought that far yet ... 
+
+		break
+
 		# feed sentences and named entity pairs as input to SpanBERT 
 		# to predict the corresponding relations and extract all instances 
 		# of the relation specified by input param r
@@ -181,7 +216,7 @@ def main() -> None:
 		num_searches += 1
 
 	# return from main
-	#return
+	return
 
 """
 main driver for the program
@@ -192,10 +227,11 @@ if __name__ == "__main__":
 
 		# print greeting
 		print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-		print("+                      Welcome to Iterative Set Expansion			            +")
+		print("+                      Welcome to Iterative Set Expansion                        +")
 		print("+                     Written by Matt Duran and Ethan Garry                      +")
 		print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-		
+		print()	
+
 		# run the program
 		main()
 
@@ -208,14 +244,15 @@ if __name__ == "__main__":
 	except SystemExit as e:
 		
 		print()
-		print(e)
+		print("SystemExit")
+		#print(e)
 		print()
 	
 	# other ???
 	except Exception as other_exception:
 		
 		print()
-		print(other_exception)
+		print("Exception Error: {}".format(other_exception))
 		print()
 
 	finally:
