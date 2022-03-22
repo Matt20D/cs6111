@@ -95,22 +95,30 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 
 	return clean_results
 
-# return a list of keywords, after potentially adding at max 2 new
-def extract_sentences(url: str, tuples: set, relation: str, conf: float) -> list: 	
+# here we will execute get request and return the updated set of 
+# extracted relations.
+def do_pipeline(url: str, tuples: dict, relation: str, conf: float) -> dict: 	
 
 	#instantiate tokenizer object
 	tk 		= Tokenizer.Tokenizer(url, tuples, relation, conf)
-	sentences = []
+	new_tuples = None
 	try:
 		# use method to execute get request and return clean document words in list
 		print("\tFetching text from url ...")
-		sentences = tk.execute_get_request()
-			
+
+		# NOTE: tk will modify the dictionary address, if this becomes an issue
+		# we can just do a deep copy of it. RN i think this is a feature
+		tk.execute_get_request()
+		new_tuples = tk.curr_tuples	
+		return new_tuples
+
 	except requests.exceptions.HTTPError:
+
 		# on failure we skip
 		print("\tHTTPError, skipping this document")
-		#pass
-	return sentences
+
+		# couldnt process file, return the same set of tuples passed in
+		return tuples
 
 """
 desc:
@@ -165,7 +173,8 @@ def main() -> None:
 	current_query = seed_query
 
 	# set of extracted tuples
-	X = set()
+	# NOTE: X is mutable, I pass the memory location to tk and it updates.
+	X = dict() # need a value to overwrite, i.e. confidence
 	URLS = set()
 
 	# run this loop until we hit k tuples
@@ -198,7 +207,13 @@ def main() -> None:
 
 			# pass the set so we dont place duplicates, I wont add to set until
 			# after this completes
-			extracted_relations = extract_sentences(url, X, relation_to_extract, t)		
+			# NOTE: it seems that while passing the dictionary it is a memory address
+			# and is mutable. May need to pass a copy later on, but I think we are good rn
+			extracted_relations = do_pipeline(url, X, relation_to_extract, t)		
+			#X = extracted_relations
+			print("after")
+			print(X)
+			quit()
 			#print(extracted_relations)
 
 			# or maybe we do, I havent thought that far yet ... 
