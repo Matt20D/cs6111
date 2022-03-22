@@ -20,6 +20,7 @@ from SpanBERT.spanbert import SpanBERT
 
 spanbert = SpanBERT("./SpanBERT/pretrained_spanbert")  
 
+ENTITIES_OF_INTEREST = ["ORGANIZATION", "PERSON", "LOCATION", "CITY", "STATE_OR_PROVINCE", "COUNTRY"]
 RELATIONS = {
 	"Schools_Attended": 
 		{"Subject": "PERSON", "Object": "ORGANIZATION"},
@@ -30,6 +31,41 @@ RELATIONS = {
 	"Top_Member_Employees": 
 		{"Subject": "ORGANIZATION", "Object": "PERSON"}
 }
+
+def check_sentence_entities(rel_type: str, ents: list) -> bool:
+	#print(rel_type)
+	#print(ents)
+	seen_sub = False
+	seen_obj = False
+	
+	# test all entities to ensure that I cover both categories at a MINIMUM
+	for ent in ents:
+		extracted_ent = ent[1]
+
+		if seen_sub == False:
+			# test if this ent is a subject
+			if RELATIONS[rel_type]['Subject'] == extracted_ent:
+				seen_sub = True
+
+		if seen_obj == False:
+			# test if this ent it an object
+			if rel_type == "Live_In": 
+				# this rel type has a list of objects
+				if extracted_ent in RELATIONS[rel_type]['Object']:
+					seen_obj = True
+			else: 
+				# all other rel types have single objects
+				if extracted_ent == RELATIONS[rel_type]['Object']:
+					seen_obj = True
+
+	#print("seen_sub: {}".format(seen_sub))
+	#print("seen_obj: {}".format(seen_obj))
+	# determine if we are missing one or two of the entities required by the 
+	# relation
+	if seen_sub == True and seen_obj == True:
+		return True
+	else:
+		return False
 
 def is_valid_relation(rel_type: str, pair: dict) -> bool:
 
@@ -111,28 +147,43 @@ class Tokenizer(object):
 		print("\tAnnotating the webpage using spacy...")
 		nlp = spacy.load("en_core_web_lg")
 		doc = nlp(soup_text)
-		print("\tExtracted {} sentences.".format(len(doc.sents)))
+		#print("\tExtracted {} sentences.".format(len(doc.sents)))
+		sentence_num = 1
 
-		entities_of_interest = ["ORGANIZATION", "PERSON", "LOCATION", "CITY", "STATE_OR_PROVINCE", "COUNTRY"]
 
-
-		# 3) run the expensive SpanBERT model, separately only over each 
-		#    entity pair that contains both required named entities for the relation of interest
-		# 4) IMPORTANT: skip SpanBERT for any entity pairs that are missing one or two entities 
-		# of the type required by the relation.
 		for sentence in doc.sents:
+			
+			# book keep sentence 
+			print("\t\tProcessing sentence {}".format(sentence_num))
 
 			# 1) use spaCY to ID sentences in web text along with the 
 			#    named entities (if any), that appear
-			print("\n\n\tProcessing sentence: {}".format(sentence))
-			print("\tTokenized sentence: {}".format([token.text for token in sentence]))
-			ents = get_entities(sentence, entities_of_interest)
-			print("\tspaCy extracted entities: {}".format(ents))
+			#print("\n\n\tProcessing sentence: {}".format(sentence))
+			#print("\tTokenized sentence: {}".format([token.text for token in sentence]))
+			ents = get_entities(sentence, ENTITIES_OF_INTEREST)
+			#print("\tspaCy extracted entities: {}".format(ents))
 
-			# 2) Then, you should construct entity pairs
+			# 2) IMPORTANT: skip SpanBERT for any entity pairs that are missing one or
+			#    two entities of the type required by the relation. Dont waste time
+			if check_sentence_entities(self.relation_type, ents) == False:
+				print("\t\t\tSkipping sentence {}. Missing one or more "\
+							"extracted entities for relation".format(sentence_num))
+				sentence_num += 1
+				quit()
+				continue
+			#else: #TODO YOU CAN DELETE THIS ELSE BLOCK
+			#	print("NOT ...... missing the entities")
+			#	print(self.relation_type)
+			#	print(ents)
+			#	quit()
+
+			sentence_num += 1
+
+			# 3) Then, you should construct entity pairs
 			candidate_pairs = []
-			sentence_entity_pairs = create_entity_pairs(sentence, entities_of_interest)
+			sentence_entity_pairs = create_entity_pairs(sentence, ENTITIES_OF_INTEREST)
 			
+			# 4) Filter out invalid pairs
 			for ep in sentence_entity_pairs:
 				
 				# generate the pairs
@@ -153,9 +204,12 @@ class Tokenizer(object):
 					candidate_pairs.append(pair2)  # e1=Object, e2=Subject
 					continue
 
-			print("\tGenerated Sentence entity pairs: {}, remaining valid pairs: {}".format(\
-									len(sentence_entity_pairs), len(candidate_pairs)))
-			quit()
+			print("\t\t\tGenerated Sentence entity pairs: {}, remaining"\
+				"valid pairs: {}".format(len(sentence_entity_pairs), len(candidate_pairs)))
+
+			# 5) run the expensive SpanBERT model, separately only over each 
+			#    entity pair that contains both required named entities for the relation of interest
+			
         #print('working on new doc')
         #try:
         #    relations = extract_relations(doc, spanbert, entities_of_interest)
