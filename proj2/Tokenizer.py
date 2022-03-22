@@ -106,20 +106,21 @@ def is_valid_relation(rel_type: str, pair: dict) -> bool:
 		return False
 class Tokenizer(object):
 	
-	def __init__(self, url, current_tuples, relation):
+	def __init__(self, url, current_tuples, relation, conf):
 		self.webpage       = url
 		self.curr_tuples   = current_tuples # Do not add anything, just use
 											# for checking and size
-		self.relation_type = relation 
+		self.relation_type = relation
+		self.threshold     = conf
 
 	def execute_get_request(self) -> None:
 
 		# send get request for the webpage
 		try:
 			print("\tGetting the webpage using GET request") 
-			request = requests.get(self.webpage)
+			request = requests.get(self.webpage, timeout=5) # need to timeout and not hang
 		except:
-			# raise exception, so that we just use the stored title and snippet
+			# raise exception, which is a catch all for timeouts or other http errors
 			raise requests.exceptions.HTTPError
 
 		# if the request status is not "200" ok then throw an exception
@@ -153,8 +154,6 @@ class Tokenizer(object):
 
 		for sentence in doc.sents:
 			
-			# book keep sentence 
-			print("\t\tProcessing sentence {}".format(sentence_num))
 
 			# 1) use spaCY to ID sentences in web text along with the 
 			#    named entities (if any), that appear
@@ -166,18 +165,14 @@ class Tokenizer(object):
 			# 2) IMPORTANT: skip SpanBERT for any entity pairs that are missing one or
 			#    two entities of the type required by the relation. Dont waste time
 			if check_sentence_entities(self.relation_type, ents) == False:
-				print("\t\t\tSkipping sentence {}. Missing one or more "\
-							"extracted entities for relation".format(sentence_num))
-				sentence_num += 1
-				quit()
+				#print("\t\t\tSkipping sentence {}. Missing one or more "\
+				#			"extracted entities for relation".format(sentence_num))
+				sentence_num += 1 # even tho we skip, still book mark
 				continue
-			#else: #TODO YOU CAN DELETE THIS ELSE BLOCK
-			#	print("NOT ...... missing the entities")
-			#	print(self.relation_type)
-			#	print(ents)
-			#	quit()
-
-			sentence_num += 1
+			else:
+				# book keep sentence 
+				print("\t\tProcessing sentence {}".format(sentence_num))
+				sentence_num += 1
 
 			# 3) Then, you should construct entity pairs
 			candidate_pairs = []
@@ -204,25 +199,38 @@ class Tokenizer(object):
 					candidate_pairs.append(pair2)  # e1=Object, e2=Subject
 					continue
 
-			print("\t\t\tGenerated Sentence entity pairs: {}, remaining"\
+			print("\t\t\tGenerated Sentence entity pairs: {}, remaining "\
 				"valid pairs: {}".format(len(sentence_entity_pairs), len(candidate_pairs)))
+			
+			if len(candidate_pairs) == 0:
+				print("\t\t\tNo valid candidate pairs, no need for Bert")
+				continue
+			#else:
+			#	print("Candidate entity pairs:")
+			#	for p in candidate_pairs:
+			#		print("Subject: {}\tObject: {}".format(p["subj"][0:2], p["obj"][0:2]))
 
 			# 5) run the expensive SpanBERT model, separately only over each 
 			#    entity pair that contains both required named entities for the relation of interest
-			
-        #print('working on new doc')
-        #try:
-        #    relations = extract_relations(doc, spanbert, entities_of_interest)
-        #    if len(relations.keys())>0:
-        #        print("Relations: {}".format(dict(relations)))
-        #        return relations
-        #    return None
-        #except:
-        #    return None
+			print("\t\t\tApplying SpanBERT for each of the {} candidate pairs. "\
+							"This should take some time...\n".format(len(candidate_pairs)))
 
-        
-    
-
+			# get predictions: list of (relation, confidence) pairs 
+			relation_preds = spanbert.predict(candidate_pairs)     
+			# Print Extracted Relations
+			for ex, pred in list(zip(candidate_pairs, relation_preds)):
+				print("\t\t\t=== Extracted Relation ===")
+				#print("[{},{}]".format(ex["subj"], ex["obj"]))
+				print("\t\t\tInput Tokens: {}".format(ex['tokens']))
+				print("\t\t\tSubject: {}".format(ex["subj"][0]))
+				print("\t\t\tObject: {}".format(ex["obj"][0]))
+				print("\t\t\tRelation: {}".format(pred[0]))
+				print("\t\t\tConfidence: {}".format(pred[1]))
+				if pred[1] >= self.threshold:
+					print("\t\t\tAdding to set of extracted relations")
+				else:
+					print("\t\t\tConfidence is lower than threshold confidence. Ignoring this.")
+				print("\t\t\t==========================\n")
           
                          
- 
+			quit() 
