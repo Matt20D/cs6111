@@ -108,8 +108,7 @@ class Tokenizer(object):
 	
 	def __init__(self, url, current_tuples, relation, conf):
 		self.webpage       = url
-		self.curr_tuples   = current_tuples # Do not add anything, just use
-											# for checking and size
+		self.curr_tuples   = current_tuples # Hash Table, value is the confidence
 		self.relation_type = relation
 		self.threshold     = conf
 
@@ -226,11 +225,33 @@ class Tokenizer(object):
 				print("\t\t\tObject: {}".format(ex["obj"][0]))
 				print("\t\t\tRelation: {}".format(pred[0]))
 				print("\t\t\tConfidence: {}".format(pred[1]))
+
+				# lets keep the extracted tuple!
 				if pred[1] >= self.threshold:
+
 					print("\t\t\tAdding to set of extracted relations")
+					
+					new_tuple = (ex["subj"][0], ex["obj"][0])
+					new_conf  = pred[1]
+
+					# if not in set, just add it	
+					if new_tuple not in self.curr_tuples.keys():
+					
+						self.curr_tuples[new_tuple] = new_conf
+
+					# if in set, keep the higher confidence version
+					else:
+						#print("already in set")
+						#print("old conf: {}".format(self.curr_tuples[new_tuple]))
+						#print("new conf: {}".format(new_conf))
+						if self.curr_tuples[new_tuple] < new_conf:
+							self.curr_tuples[new_tuple] = new_conf
+						#print("after check conf: {}".format(self.curr_tuples[new_tuple]))
+
+				# ignore, move on
 				else:
 					print("\t\t\tConfidence is lower than threshold confidence. Ignoring this.")
+
 				print("\t\t\t==========================\n")
-          
+         	
                          
-			quit() 
