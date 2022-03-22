@@ -1,5 +1,5 @@
 #  python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 1 .8 "bill gates microsoft" 5
- python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 1 .8 "steve jobs apple" 10
+ python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 1 .8 "mark zuckerberg harvard" 10
 
 #  python3 google-query.py <google API Key> <google engine id> <r> <t> <"seed query"> <k>
 
