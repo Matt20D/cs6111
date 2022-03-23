@@ -148,8 +148,10 @@ class Tokenizer(object):
 		nlp = spacy.load("en_core_web_lg")
 		doc = nlp(soup_text)
 		#print("\tExtracted {} sentences.".format(len(doc.sents)))
-		sentence_num = 1
 
+		# book keeping
+		sentence_num       = 1
+		num_tuples_added   = 0
 
 		for sentence in doc.sents:
 			
@@ -202,7 +204,7 @@ class Tokenizer(object):
 				"valid pairs: {}".format(len(sentence_entity_pairs), len(candidate_pairs)))
 			
 			if len(candidate_pairs) == 0:
-				print("\t\t\tNo valid candidate pairs, no need for Bert")
+				print("\t\t\tNo valid candidate pairs, no need for Bert\n")
 				continue
 			#else:
 			#	print("Candidate entity pairs:")
@@ -226,18 +228,20 @@ class Tokenizer(object):
 				print("\t\t\tRelation: {}".format(pred[0]))
 				print("\t\t\tConfidence: {}".format(pred[1]))
 
-				# lets keep the extracted tuple!
+				# lets keep the extracted tuple, hopefully!
 				if pred[1] >= self.threshold:
 
-					print("\t\t\tAdding to set of extracted relations")
 					
 					new_tuple = (ex["subj"][0], ex["obj"][0])
 					new_conf  = pred[1]
 
 					# if not in set, just add it	
 					if new_tuple not in self.curr_tuples.keys():
+
+						print("\t\t\tAdding to set of extracted relations")
 					
 						self.curr_tuples[new_tuple] = new_conf
+						num_tuples_added += 1
 
 					# if in set, keep the higher confidence version
 					else:
@@ -245,7 +249,10 @@ class Tokenizer(object):
 						#print("old conf: {}".format(self.curr_tuples[new_tuple]))
 						#print("new conf: {}".format(new_conf))
 						if self.curr_tuples[new_tuple] < new_conf:
+							print("\t\t\tAlready present but higher confidence. Update it.")
 							self.curr_tuples[new_tuple] = new_conf
+						else:
+							print("\t\t\tAlready present but lower confidence. Discard it.")
 						#print("after check conf: {}".format(self.curr_tuples[new_tuple]))
 
 				# ignore, move on
@@ -254,4 +261,5 @@ class Tokenizer(object):
 
 				print("\t\t\t==========================\n")
          	
-                         
+		print("\tRelations extracted from this website: {} (Overall: {})\n".format(\
+										num_tuples_added, len(self.curr_tuples)))
