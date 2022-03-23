@@ -1,0 +1,6 @@
+http://www.cs.columbia.edu/~gravano/cs6111/Proj2/example_relations.py
+used this source in order to get an example of how to work with spacy and
+with spanBert
+
+http://www.cs.columbia.edu/~gravano/cs6111/Proj2/spacy_help_functions.py
+used this source in order to get an example of how to work with spacy
