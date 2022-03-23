@@ -43,7 +43,8 @@ def print_params(api_key, eid, field_to_extract, confidence_threshold, query, it
 	print(" Confidence Threshold			= {}".format(confidence_threshold))
 	print(" Desired Number of Tuples		= {}".format(k))
 	print(" Number of Extracted Tuples		= {}".format(n))
-	print(" Query       				= {}".format(to_string(query)))
+	#print(" Query       				= {}".format(to_string(query)))
+	print(" Query       				= {}".format(query))
 	print(" Iteration   				= {}".format(iteration))
 	print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 	print()
@@ -73,7 +74,8 @@ key: 	 google API key
 citation:
 https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
 """
-def query_google_search(query: list, eid: str, key: str) -> list():	
+#def query_google_search(query: list, eid: str, key: str) -> list():	
+def query_google_search(query: str, eid: str, key: str) -> list():	
 	# use google api for querying
 	service = build("customsearch", "v1",
 		developerKey=key)
@@ -81,7 +83,8 @@ def query_google_search(query: list, eid: str, key: str) -> list():
 	res  = service.cse().list(
 			key = key,
 			cx = eid,
-			q  = to_string(query)
+			#q  = to_string(query)
+			q  = query
 			).execute()
 
 	# get the actual queries from response document, max of 10 returned always
@@ -161,7 +164,8 @@ def main() -> None:
 		sys.exit(" usage: t needs to be 0 and 1")
 
 	# create a query list of keywords
-	seed_query 		= sys.argv[5].split()
+	#seed_query 		= sys.argv[5].split()
+	seed_query = sys.argv[5]
 
 	# k ==> number of tuples we request in the output
 	k   = int(sys.argv[6])
@@ -171,6 +175,7 @@ def main() -> None:
 
 	# current query
 	current_query = seed_query
+	all_queries = set()
 
 	# set of extracted tuples
 	# NOTE: X is mutable, I pass the memory location to tk and it updates.
@@ -180,7 +185,6 @@ def main() -> None:
 	# run this loop until we hit k tuples
 	while len(X) < k:		
 
-
 		# print the params to the console
 		print_params(api_key, engine_id, r, t, current_query, num_searches, k, len(X))
 			
@@ -188,7 +192,7 @@ def main() -> None:
 		url_list = query_google_search(current_query, engine_id, api_key)
 		
 		print("\n=========== Iteration: {} - Query: {} ===========\n".format(num_searches,\
-																	to_string(current_query)))
+																	current_query))
 
 		# extract sentences and use spaCy to split text into sentences
 		page_num = 1
@@ -211,24 +215,89 @@ def main() -> None:
 			# and is mutable. May need to pass a copy later on, but I think we are good rn
 			extracted_relations = do_pipeline(url, X, relation_to_extract, t)		
 			#X = extracted_relations
-			print("after")
-			print(X)
-			quit()
 			#print(extracted_relations)
 
-			# or maybe we do, I havent thought that far yet ... 
+			#break # for testing
 
-		break
+		# we are done
+		if len(X) >= k:
+			break
+		
+		# we are not done, we need to requery and hopefully not stall
+		else:
+			#print("need more tuples")
+			#print(len(X))
+			#print(k)
 
-		# feed sentences and named entity pairs as input to SpanBERT 
-		# to predict the corresponding relations and extract all instances 
-		# of the relation specified by input param r
-		print('made it to end of ')
-		quit()
-		print()
+			#
+			# Sort in desc order for confidence, and print to screen
+			#
+
+			# sort the hash table and print to the screen
+			final_list = list()
+			for key in X.keys():
+				final_list.append((key[0], key[1], X[key]))
+
+			# sort the list in desc order according to the confidence val
+			final_list.sort(key = lambda x: x[2], reverse = True)
+
+			i = 0
+			has_stalled = False
+			while True:
+
+				# This loop will break either when we find a new tuple
+				# or when we stall and have gone through all of our tuples
+				
+				# there are no more candidate tuples, we have stalled
+				if i >= len(final_list):
+					has_stalled = True
+					break
+				
+				# extract the ith best tuple from the sorted list (desc order)
+				curr = (final_list[i][0], final_list[i][1])
+				curr_as_string = curr[0] + " " + curr[1]
+
+				# see if we have used this tuple to query before
+				# or if the tuple is the seed query
+				if (curr in all_queries) or \
+				   (curr_as_string == seed_query):
+					i += 1
+					continue
+				
+				# we found a new query, set it and break
+				else:
+					all_queries.add(curr)
+					current_query = curr_as_string
+					break	
+
+			# if we have stalled, lets break out of main loop and print what we have
+			if has_stalled:
+				print("\t\t\tISE has stalled. Cannot Augment. Will print what we have.")
+				break
 
 		# increment the iteration counter
 		num_searches += 1
+
+	#
+	# Sort in desc order for confidence, and print to screen
+	#
+
+	# sort the hash table and print to the screen
+	final_list = list()
+	for key in X.keys():
+		final_list.append((key[0], key[1], X[key]))
+
+	# sort the list in desc order according to the confidence val
+	final_list.sort(key = lambda x: x[2], reverse = True)
+
+	print("\n================== ALL RELATIONS for {} ( {} ) =================\n".format(\
+				RELATIONS[r], len(final_list)))
+	i = 1
+	for tup in final_list:
+		print("{}) Confidence: {}\tSubject: {}\tObject: {}".format(i, tup[2], tup[0], tup[1]))
+		i += 1
+	print("Total # of iterations = {}".format(num_searches))
+	print("\n\n")
 
 	# return from main
 	return
