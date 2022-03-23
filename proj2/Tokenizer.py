@@ -104,6 +104,7 @@ def is_valid_relation(rel_type: str, pair: dict) -> bool:
 	# of the above 4 rel types
 	else:
 		return False
+
 class Tokenizer(object):
 	
 	def __init__(self, url, current_tuples, relation, conf):
@@ -222,6 +223,8 @@ class Tokenizer(object):
 			for ex, pred in list(zip(candidate_pairs, relation_preds)):
 				print("\t\t\t=== Extracted Relation ===")
 				#print("[{},{}]".format(ex["subj"], ex["obj"]))
+				print("\t\t\tSubject Entity: {}".format(ex["subj"][1]))
+				print("\t\t\tObject Entity: {}".format(ex["obj"][1]))
 				print("\t\t\tInput Tokens: {}".format(ex['tokens']))
 				print("\t\t\tSubject: {}".format(ex["subj"][0]))
 				print("\t\t\tObject: {}".format(ex["obj"][0]))
