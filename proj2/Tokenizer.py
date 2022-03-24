@@ -15,10 +15,14 @@ import requests # use to execute a get request
 from bs4 import BeautifulSoup as bs # scraper
 import re # regex
 import spacy
-from SpanBERT.spacy_help_functions import * #import spacy help
-from SpanBERT.spanbert import SpanBERT 
+#from SpanBERT.spacy_help_functions import * #import spacy help
+#from SpanBERT.spanbert import SpanBERT 
+from spacy_help_functions import * #import spacy help
+from spanbert import SpanBERT 
 
-spanbert = SpanBERT("./SpanBERT/pretrained_spanbert")  
+
+spanbert = SpanBERT(pretrained_dir="./pretrained_spanbert")
+#spanbert = SpanBERT("/home/md3420/cs6111/proj2/SpanBERT/pretrained_spanbert")  
 
 ENTITIES_OF_INTEREST = ["ORGANIZATION", "PERSON", "LOCATION", "CITY", "STATE_OR_PROVINCE", "COUNTRY"]
 RELATIONS = {
