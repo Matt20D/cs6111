@@ -10,3 +10,4 @@ rm -rf SpanBERT/
 rm relations.txt 
 rm spacy_help_functions.py 
 rm spanbert.py
+rm requirements.txt

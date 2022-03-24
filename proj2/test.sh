@@ -1,7 +1,7 @@
-#  python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 2 .8 "bill gates microsoft" 5
-# python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 1 .8 "mark zuckerberg harvard" 10
-
- python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 3 .8 "megan repinoe redding" 10
+#  python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 2 0.8 "bill gates microsoft" 10
+# python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 1 0.8 "mark zuckerberg harvard" 10
+# python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 4 0.7 "sundar pichai google" 40
+ python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 3 0.8 "megan repinoe redding" 2
 #  python3 google-query.py <google API Key> <google engine id> <r> <t> <"seed query"> <k>
 
 # r ==> 1 for Schools_Attended, 2 for Work_For, 3 for Live_In, 4 Top_Member_Employees
