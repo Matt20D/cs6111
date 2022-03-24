@@ -2,5 +2,16 @@ venv/
 
 SpanBert/pretrained_spanbert
 SpanBert/pytorch_pretrained_bert
+pretrained_spanbert
+pytorch_pretrained_bert
 
 __pycache__/
+
+LICENSE 
+README.md 
+download_finetuned.sh 
+example_relations.py 
+SpanBERT/ 
+relations.txt 
+spacy_help_functions.py 
+spanbert.py
