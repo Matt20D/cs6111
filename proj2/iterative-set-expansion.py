@@ -22,7 +22,8 @@ import requests
 
 from collections import defaultdict
 from googleapiclient.discovery import build # for querying google using their API
-from SpanBERT.spacy_help_functions import * #import spacy help
+from spacy_help_functions import * #import spacy help
+#from SpanBERT.spacy_help_functions import * #import spacy help
 
 RELATIONS = {
 				1: "per:schools_attended",
