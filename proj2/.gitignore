@@ -15,3 +15,4 @@ SpanBERT/
 relations.txt 
 spacy_help_functions.py 
 spanbert.py
+requirements.txt
