@@ -1,0 +1,1277 @@
+Loading pre-trained spanBERT from ./pretrained_spanbert
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                      Welcome to Iterative Set Expansion                        +
++                     Written by Matt Duran and Ethan Garry                      +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key  				= AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key  				= 7c642eecbff553d82
+ Field to Extract			= per:employee_of
+ Confidence Threshold			= 0.7
+ Desired Number of Tuples		= 40
+ Number of Extracted Tuples		= 0
+ Query       				= sundar pichai google
+ Iteration   				= 1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+=========== Iteration: 1 - Query: sundar pichai google ===========
+
+URL ( 1 / 10): https://en.wikipedia.org/wiki/Sundar_Pichai
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 31962
+	Trimming Webpage Content from 31962 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 35, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 8
+			Generated Sentence entity pairs: 9, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 15
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Pichai', 'was', 'selected', 'to', 'become', 'the', 'next', 'CEO', 'of', 'Google', 'on', 'August', '10', ',', '2015', ',', 'after', 'previously', 'being', 'appointed', 'Product', 'Chief', 'by', 'CEO', 'Larry', 'Page', '.']
+			Subject: Larry Page
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9972172379493713
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 20
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 25
+			Generated Sentence entity pairs: 4, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 27
+			Generated Sentence entity pairs: 15, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Career', 'Pichai', 'speaking', 'at', 'the', '2015', 'Mobile', 'World', 'Congress', 'in', 'Barcelona', ',', 'Spain', 'Pichai', 'worked', 'in', 'engineering', 'and', 'product', 'management', 'at', 'Applied', 'Materials', 'and', 'in', 'management', 'consulting', 'at', 'McKinsey', '&']
+			Subject: Pichai
+			Object: Applied Materials
+			Relation: per:employee_of
+			Confidence: 0.9912437796592712
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Career', 'Pichai', 'speaking', 'at', 'the', '2015', 'Mobile', 'World', 'Congress', 'in', 'Barcelona', ',', 'Spain', 'Pichai', 'worked', 'in', 'engineering', 'and', 'product', 'management', 'at', 'Applied', 'Materials', 'and', 'in', 'management', 'consulting', 'at', 'McKinsey', '&', 'Company', '.']
+			Subject: Pichai
+			Object: McKinsey & Company
+			Relation: per:employee_of
+			Confidence: 0.9468342661857605
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 34
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 36
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Pichai', 'was', 'selected', 'to', 'become', 'the', 'next', 'CEO', 'of', 'Google', 'on', 'August', '10', ',', '2015', '[', '34', ']', 'after', 'previously', 'being', 'appointed', 'Product', 'Chief', 'by', 'CEO', ',', 'Larry', 'Page', '.']
+			Subject: Larry Page
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9972419738769531
+			Already present but higher confidence. Update it.
+			==========================
+
+		Processing sentence 38
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Pichai', 'had', 'been', 'suggested', 'as', 'a', 'contender', 'for', 'Microsoft', "'s", 'CEO', 'in', '2014', ',', 'a', 'position', 'that', 'was', 'eventually', 'given', 'to', 'Satya', 'Nadella', '.']
+			Subject: Satya Nadella
+			Object: Microsoft
+			Relation: per:employee_of
+			Confidence: 0.8969603180885315
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 50
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 51
+			Generated Sentence entity pairs: 4, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 54
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 152
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Siebel', 'Scholars', 'Archived', 'March', '21', ',', '2013', ',', 'at', 'the', 'Wayback', 'Machine', '.']
+			Subject: Siebel Scholars
+			Object: the Wayback Machine
+			Relation: per:employee_of
+			Confidence: 0.8447867035865784
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 176
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['"', 'Meet', 'Google', 'new', 'Android', 'chief', 'Sundar', 'Pichai', '"']
+			Subject: Sundar Pichai
+			Object: Android
+			Relation: per:employee_of
+			Confidence: 0.9960415363311768
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 183
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 208
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 245
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 270
+			Generated Sentence entity pairs: 6, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 324
+			Generated Sentence entity pairs: 10, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 341
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 342
+			Generated Sentence entity pairs: 15, remaining valid pairs: 9
+			Applying SpanBERT for each of the 9 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Sundar', 'Pichai', "'s", 'rise', 'to', 'fame', 'in', '90', 'seconds', '"', ',', 'Tech', 'Gurus', ',', 'The', 'Daily', 'Telegraph', 'Business', 'positions', 'Preceded', '\xa0', 'by', 'Larry', 'Page', 'CEO', 'of', 'Google', '2015', '–']
+			Subject: Sundar Pichai's
+			Object: Google 2015
+			Relation: per:employee_of
+			Confidence: 0.6636471748352051
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 343
+			Generated Sentence entity pairs: 10, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 344
+			Generated Sentence entity pairs: 27, remaining valid pairs: 5
+			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
+
+		Processing sentence 346
+			Generated Sentence entity pairs: 26, remaining valid pairs: 5
+			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
+
+		Processing sentence 350
+			Generated Sentence entity pairs: 0, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 351
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 353
+			Generated Sentence entity pairs: 27, remaining valid pairs: 8
+			Applying SpanBERT for each of the 8 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Former', 'Larry', 'Page', '(', 'CEO', ')', 'Sergey', 'Brin', '(', 'President', ')', 'David', 'Drummond', '(', 'CLO', ')']
+			Subject: Larry Page
+			Object: CLO
+			Relation: per:employee_of
+			Confidence: 0.7485876679420471
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CLO', ')', 'Board', 'of', 'directors', 'Current', 'Sergey', 'Brin', 'John', 'Doerr', 'John', 'L.', 'Hennessy', 'Ann', 'Mather', 'Alan', 'Mulally', 'Larry', 'Page', 'Sundar', 'Pichai', 'Ram', 'Shriram', 'Roger', 'W.', 'Ferguson', 'Jr.']
+			Subject: Sergey Brin
+			Object: CLO
+			Relation: per:employee_of
+			Confidence: 0.8441581130027771
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CLO', ')', 'Board', 'of', 'directors', 'Current', 'Sergey', 'Brin', 'John', 'Doerr', 'John', 'L.', 'Hennessy', 'Ann', 'Mather', 'Alan', 'Mulally', 'Larry', 'Page', 'Sundar', 'Pichai', 'Ram', 'Shriram', 'Roger', 'W.', 'Ferguson', 'Jr.']
+			Subject: John L. Hennessy Ann Mather
+			Object: CLO
+			Relation: per:employee_of
+			Confidence: 0.9566047787666321
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CLO', ')', 'Board', 'of', 'directors', 'Current', 'Sergey', 'Brin', 'John', 'Doerr', 'John', 'L.', 'Hennessy', 'Ann', 'Mather', 'Alan', 'Mulally', 'Larry', 'Page', 'Sundar', 'Pichai', 'Ram', 'Shriram', 'Roger', 'W.', 'Ferguson', 'Jr.']
+			Subject: Alan Mulally
+			Object: CLO
+			Relation: per:employee_of
+			Confidence: 0.9523993134498596
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CLO', ')', 'Board', 'of', 'directors', 'Current', 'Sergey', 'Brin', 'John', 'Doerr', 'John', 'L.', 'Hennessy', 'Ann', 'Mather', 'Alan', 'Mulally', 'Larry', 'Page', 'Sundar', 'Pichai', 'Ram', 'Shriram', 'Roger', 'W.', 'Ferguson', 'Jr.']
+			Subject: Larry Page Sundar Pichai Ram Shriram
+			Object: CLO
+			Relation: per:employee_of
+			Confidence: 0.979079008102417
+			Adding to set of extracted relations
+			==========================
+
+	Relations extracted from this website: 11 (Overall: 11)
+
+URL ( 2 / 10): https://mobile.twitter.com/sundarpichai?lang=en
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 401
+	Annotating the webpage using spacy...
+	Relations extracted from this website: 0 (Overall: 11)
+
+URL ( 3 / 10): https://www.bbc.com/news/technology-50656803
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 9284
+	Trimming Webpage Content from 9284 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 2
+			Generated Sentence entity pairs: 4, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 4
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 5
+			Generated Sentence entity pairs: 18, remaining valid pairs: 12
+			Applying SpanBERT for each of the 12 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Published', '4', 'December', '2019', 'Share', 'close', 'Share', 'page', 'Copy', 'link', 'About', 'sharing', 'Image', 'source', ',', 'AFP', 'Image', 'caption', ',', 'Sundar', 'Pichai', 'is', 'the', 'new', 'chief', 'executive', 'of', 'Alphabet', 'Sundar', 'Pichai', ',']
+			Subject: Sundar Pichai
+			Object: Share
+			Relation: per:employee_of
+			Confidence: 0.989183247089386
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Published', '4', 'December', '2019', 'Share', 'close', 'Share', 'page', 'Copy', 'link', 'About', 'sharing', 'Image', 'source', ',', 'AFP', 'Image', 'caption', ',', 'Sundar', 'Pichai', 'is', 'the', 'new', 'chief', 'executive', 'of', 'Alphabet', 'Sundar', 'Pichai', ',']
+			Subject: Sundar Pichai
+			Object: Share
+			Relation: per:employee_of
+			Confidence: 0.9802935719490051
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['AFP', 'Image', 'caption', ',', 'Sundar', 'Pichai', 'is', 'the', 'new', 'chief', 'executive', 'of', 'Alphabet', 'Sundar', 'Pichai', ',']
+			Subject: Sundar Pichai
+			Object: AFP Image
+			Relation: per:employee_of
+			Confidence: 0.838249683380127
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Sundar', 'Pichai', 'is', 'the', 'new', 'chief', 'executive', 'of', 'Alphabet', 'Sundar', 'Pichai', ',', 'the', 'chief', 'executive', 'of', 'Google', ',']
+			Subject: Sundar Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9956492781639099
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Sundar', 'Pichai', 'is', 'the', 'new', 'chief', 'executive', 'of', 'Alphabet', 'Sundar', 'Pichai', ',', 'the', 'chief', 'executive', 'of', 'Google', ',', 'has', 'been', 'put', 'in', 'charge', 'of', 'its', 'parent', 'company', 'Alphabet', ',']
+			Subject: Sundar Pichai
+			Object: Alphabet
+			Relation: per:employee_of
+			Confidence: 0.9945313930511475
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Sundar', 'Pichai', 'is', 'the', 'new', 'chief', 'executive', 'of', 'Alphabet', 'Sundar', 'Pichai', ',', 'the', 'chief', 'executive', 'of', 'Google', ',']
+			Subject: Sundar Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.8289967179298401
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Sundar', 'Pichai', 'is', 'the', 'new', 'chief', 'executive', 'of', 'Alphabet', 'Sundar', 'Pichai', ',', 'the', 'chief', 'executive', 'of', 'Google', ',', 'has', 'been', 'put', 'in', 'charge', 'of', 'its', 'parent', 'company', 'Alphabet', ',']
+			Subject: Sundar Pichai
+			Object: Alphabet
+			Relation: per:employee_of
+			Confidence: 0.8204324841499329
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['the', 'chief', 'executive', 'of', 'Google', ',', 'has', 'been', 'put', 'in', 'charge', 'of', 'its', 'parent', 'company', 'Alphabet', ',', 'after', 'co', '-', 'founders', 'Larry', 'Page', 'and', 'Sergey', 'Brin', 'announced', 'they', 'were', 'stepping', 'down', '.']
+			Subject: Larry Page
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9964139461517334
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['the', 'chief', 'executive', 'of', 'Google', ',', 'has', 'been', 'put', 'in', 'charge', 'of', 'its', 'parent', 'company', 'Alphabet', ',', 'after', 'co', '-', 'founders', 'Larry', 'Page', 'and', 'Sergey', 'Brin', 'announced', 'they', 'were', 'stepping', 'down', '.']
+			Subject: Sergey Brin
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9833403825759888
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['has', 'been', 'put', 'in', 'charge', 'of', 'its', 'parent', 'company', 'Alphabet', ',', 'after', 'co', '-', 'founders', 'Larry', 'Page', 'and', 'Sergey', 'Brin', 'announced', 'they', 'were', 'stepping', 'down', '.']
+			Subject: Larry Page
+			Object: Alphabet
+			Relation: per:employee_of
+			Confidence: 0.9967408776283264
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['has', 'been', 'put', 'in', 'charge', 'of', 'its', 'parent', 'company', 'Alphabet', ',', 'after', 'co', '-', 'founders', 'Larry', 'Page', 'and', 'Sergey', 'Brin', 'announced', 'they', 'were', 'stepping', 'down', '.']
+			Subject: Sergey Brin
+			Object: Alphabet
+			Relation: per:employee_of
+			Confidence: 0.9854480028152466
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 10
+			Generated Sentence entity pairs: 15, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Getty', 'Images', 'Image', 'caption', ',', 'Sundar', 'Pichai', 'giving', 'a', 'presentation', 'in', '2011', 'He', 'studied', 'Metallurgical', 'Engineering', 'at', 'the', 'Indian', 'Institute', 'of', 'Technology', 'in', 'Kharagpur', '(']
+			Subject: Getty Images Image
+			Object: the Indian Institute of Technology
+			Relation: per:employee_of
+			Confidence: 0.7548356652259827
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 15
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 24
+			Generated Sentence entity pairs: 2, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 28
+			Generated Sentence entity pairs: 21, remaining valid pairs: 5
+			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
+
+		Processing sentence 30
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 61
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 64
+			Generated Sentence entity pairs: 3, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 66
+			Generated Sentence entity pairs: 15, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+	Relations extracted from this website: 8 (Overall: 19)
+
+URL ( 4 / 10): https://blog.google/perspectives/sundar-pichai/
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 3752
+	Trimming Webpage Content from 3752 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 13
+			Generated Sentence entity pairs: 26, remaining valid pairs: 14
+			Applying SpanBERT for each of the 14 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.8444576263427734
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',', 'SVP', 'See', 'all', 'Outreach', '&']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.897068977355957
+			Already present but higher confidence. Update it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',', 'SVP', 'See', 'all', 'Outreach', '&', 'initiatives', 'Diversity', 'and', 'inclusion', 'Education', 'Google.org', 'Grow', 'with', 'Google', 'Sustainability']
+			Subject: Ruth Porat
+			Object: Diversity
+			Relation: per:employee_of
+			Confidence: 0.6223345398902893
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 16
+			Generated Sentence entity pairs: 13, remaining valid pairs: 8
+			Applying SpanBERT for each of the 8 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.8444576263427734
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',', 'SVP', 'See']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.9568319916725159
+			Already present but higher confidence. Update it.
+			==========================
+
+		Processing sentence 24
+			Generated Sentence entity pairs: 41, remaining valid pairs: 17
+			Applying SpanBERT for each of the 17 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.8444576263427734
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['SVP', 'and', 'CFO', 'Kent', 'Walker', ',', 'SVP', 'See', 'all', 'Press', 'corner', 'RSS', 'feed', 'Subscribe', 'Sundar', 'Pichai', 'CEO', 'of', 'Google', 'and', 'Alphabet', 'Sundar', 'is', 'the', 'CEO', 'of', 'Google', 'and', 'Alphabet', 'and', 'serves', 'on', 'Alphabet', '’s', 'Board', 'of', 'Directors', '.']
+			Subject: Kent Walker
+			Object: SVP See all Press
+			Relation: per:employee_of
+			Confidence: 0.9877371788024902
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['SVP', 'See', 'all', 'Press', 'corner', 'RSS', 'feed', 'Subscribe', 'Sundar', 'Pichai', 'CEO', 'of', 'Google', 'and', 'Alphabet', 'Sundar', 'is', 'the', 'CEO', 'of', 'Google', 'and', 'Alphabet', 'and', 'serves', 'on', 'Alphabet', '’s', 'Board', 'of', 'Directors', '.']
+			Subject: Sundar Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9271430969238281
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['SVP', 'See', 'all', 'Press', 'corner', 'RSS', 'feed', 'Subscribe', 'Sundar', 'Pichai', 'CEO', 'of', 'Google', 'and', 'Alphabet', 'Sundar', 'is', 'the', 'CEO', 'of', 'Google', 'and', 'Alphabet', 'and', 'serves', 'on', 'Alphabet', '’s', 'Board', 'of', 'Directors', '.']
+			Subject: Sundar Pichai
+			Object: Alphabet’s Board of Directors
+			Relation: per:employee_of
+			Confidence: 0.784065842628479
+			Adding to set of extracted relations
+			==========================
+
+	Relations extracted from this website: 3 (Overall: 22)
+
+URL ( 5 / 10): https://www.britannica.com/biography/Sundar-Pichai
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 6338
+	Trimming Webpage Content from 6338 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 41
+			Generated Sentence entity pairs: 30, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['in', 'full', 'Pichai', 'Sundararajan', ',', ' ', '(', 'born', 'June', '10', ',', '1972', ',', 'Madras', '[', 'now', 'Chennai', ']', ',', 'Tamil', 'Nadu', ',', 'India', ')', ',', 'Indian', '-', 'born', 'American', 'executive', 'who', 'was', 'CEO', 'of', 'both', 'Google', ',', 'Inc.', '(']
+			Subject: Pichai Sundararajan
+			Object: Google, Inc.
+			Relation: per:employee_of
+			Confidence: 0.9969310164451599
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 55
+			Generated Sentence entity pairs: 9, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Therefore', ',', 'when', 'Google', 'cofounders', 'Larry', 'Page', 'and', 'Sergey', 'Brin', 'announced', 'the', 'creation', 'of', 'Alphabet', 'Inc.', ',']
+			Subject: Larry Page
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9840458631515503
+			Already present but lower confidence. Discard it.
+			==========================
+
+	Relations extracted from this website: 1 (Overall: 23)
+
+URL ( 6 / 10): https://www.cnbc.com/2021/12/21/google-ceo-addresses-employee-concerns-over-loss-of-candor-and-honesty.html
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 7437
+	Trimming Webpage Content from 7437 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 4
+			Generated Sentence entity pairs: 1, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 8
+			Generated Sentence entity pairs: 6, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 11
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 31
+			Generated Sentence entity pairs: 10, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Founders', 'Larry', 'Page', 'and', 'Sergey', 'Brin', 'started', 'TGIFs', 'in', '1999', 'at', 'Google', "'s", 'campus', 'in', 'Mountain', 'View', ',']
+			Subject: Larry Page
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.975753128528595
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 52
+			Generated Sentence entity pairs: 16, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 59
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 0 (Overall: 23)
+
+URL ( 7 / 10): https://abc.xyz/
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 5708
+	Trimming Webpage Content from 5708 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 30
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['And', 'it', 'is', 'clear', 'to', 'us', 'and', 'our', 'board', 'that', 'it', 'is', 'time', 'for', 'Sundar', 'to', 'be', 'CEO', 'of', 'Google', '.']
+			Subject: Sundar
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9311553835868835
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 36
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 1 (Overall: 24)
+
+URL ( 8 / 10): https://www.inc.com/jeff-steen/googles-sundar-pichai-just-announced-a-100-million-educational-fund-it-might-mean-beginning-of-end-for-college.html
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 4465
+	Trimming Webpage Content from 4465 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 25
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['As', 'IBM', 'VP', 'of', 'talent', 'Joanna', 'Daley', 'told', 'CNBC', 'a', 'few', 'years', 'back', ',']
+			Subject: Joanna Daley
+			Object: IBM
+			Relation: per:employee_of
+			Confidence: 0.9928682446479797
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['As', 'IBM', 'VP', 'of', 'talent', 'Joanna', 'Daley', 'told', 'CNBC', 'a', 'few', 'years', 'back', ',']
+			Subject: Joanna Daley
+			Object: CNBC
+			Relation: per:employee_of
+			Confidence: 0.9798552393913269
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 27
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 28
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['like', 'former', 'CEO', 'Daniel', 'Schwartz', 'of', 'Restaurant', 'Brands', 'International', '(']
+			Subject: Daniel Schwartz
+			Object: Restaurant Brands International
+			Relation: per:employee_of
+			Confidence: 0.8283368349075317
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 41
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 3 (Overall: 27)
+
+URL ( 9 / 10): https://www.blog.google/technology/ai/ai-principles/
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 11811
+	Trimming Webpage Content from 11811 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 12
+			Generated Sentence entity pairs: 26, remaining valid pairs: 14
+			Applying SpanBERT for each of the 14 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.8444576263427734
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',', 'SVP', 'See', 'all', 'Outreach', '&']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.897068977355957
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',', 'SVP', 'See', 'all', 'Outreach', '&', 'initiatives', 'Diversity', 'and', 'inclusion', 'Education', 'Google.org', 'Grow', 'with', 'Google', 'Sustainability']
+			Subject: Ruth Porat
+			Object: Diversity
+			Relation: per:employee_of
+			Confidence: 0.6223345398902893
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 15
+			Generated Sentence entity pairs: 13, remaining valid pairs: 8
+			Applying SpanBERT for each of the 8 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.8444576263427734
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',', 'SVP', 'See']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.9568319916725159
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 23
+			Generated Sentence entity pairs: 20, remaining valid pairs: 11
+			Applying SpanBERT for each of the 11 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['CEO', 'Ruth', 'Porat', ',', 'SVP', 'and', 'CFO', 'Kent', 'Walker', ',']
+			Subject: Ruth Porat
+			Object: SVP
+			Relation: per:employee_of
+			Confidence: 0.8444576263427734
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 89
+			Generated Sentence entity pairs: 7, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 0 (Overall: 27)
+
+URL ( 10 / 10): https://www.nytimes.com/2021/06/21/technology/sundar-pichai-google.html
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 11862
+	Trimming Webpage Content from 11862 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 2
+			Generated Sentence entity pairs: 1, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 18
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Noam', 'Bardin', ',', 'who', 'joined', 'Google', 'in', '2013', 'when', 'the', 'company', 'acquired', 'mapping', 'service', 'Waze', ',']
+			Subject: Noam Bardin
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9946309924125671
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Noam', 'Bardin', ',', 'who', 'joined', 'Google', 'in', '2013', 'when', 'the', 'company', 'acquired', 'mapping', 'service', 'Waze', ',']
+			Subject: Noam Bardin
+			Object: Waze
+			Relation: per:employee_of
+			Confidence: 0.9902856945991516
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 20
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 21
+			Generated Sentence entity pairs: 7, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 23
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 24
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['A', 'Google', 'spokesman', 'said', 'internal', 'surveys', 'about', 'Mr.', 'Pichai', '’s', 'leadership', 'were', 'positive', '.']
+			Subject: Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9583836197853088
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 27
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['said', 'Caesar', 'Sengupta', ',', 'a', 'former', 'vice', 'president', 'who', 'worked', 'closely', 'with', 'Mr.', 'Pichai', 'during', 'his', '15', 'years', 'at', 'Google', '.']
+			Subject: Caesar Sengupta
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9946537613868713
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['a', 'former', 'vice', 'president', 'who', 'worked', 'closely', 'with', 'Mr.', 'Pichai', 'during', 'his', '15', 'years', 'at', 'Google', '.']
+			Subject: Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9928719997406006
+			Already present but higher confidence. Update it.
+			==========================
+
+		Processing sentence 35
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['The', 'Google', 'executives', 'complaining', 'about', 'Mr.', 'Pichai', '’s', 'leadership', 'acknowledge', 'that', ',']
+			Subject: Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.7258065342903137
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 38
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 44
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Mr.', 'Pichai', ',', 'a', 'former', 'McKinsey', 'consultant', ',']
+			Subject: Pichai
+			Object: McKinsey
+			Relation: per:employee_of
+			Confidence: 0.986678957939148
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 45
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Mr.', 'Pichai', 'took', 'over', 'as', 'Google', '’s', 'chief', 'executive', '.']
+			Subject: Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9977052211761475
+			Already present but higher confidence. Update it.
+			==========================
+
+		Processing sentence 46
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['He', 'was', 'promoted', 'again', 'to', 'oversee', 'the', 'parent', 'company', 'as', 'well', 'when', 'Larry', 'Page', ',', 'a', 'Google', 'co', '-']
+			Subject: Larry Page
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9529762268066406
+			Already present but lower confidence. Discard it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['He', 'was', 'promoted', 'again', 'to', 'oversee', 'the', 'parent', 'company', 'as', 'well', 'when', 'Larry', 'Page', ',', 'a', 'Google', 'co', '-', 'founder', ',', 'stepped', 'down', 'as', 'Alphabet', '’s', 'boss', 'four', 'years', 'later', '.']
+			Subject: Larry Page
+			Object: Alphabet
+			Relation: per:employee_of
+			Confidence: 0.9918877482414246
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 47
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['more', 'than', 'a', 'dozen', 'vice', 'presidents', 'at', 'Google', 'tried', 'to', 'warn', 'Mr.', 'Pichai', 'in', 'an', 'email', 'that', 'the', 'company', 'was', 'experiencing', 'significant', 'growing', 'pains', '.']
+			Subject: Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.695104718208313
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 62
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 64
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Jason', 'Post', ',', 'a', 'Google', 'spokesman', ',']
+			Subject: Jason Post
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.97319096326828
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 68
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['When', 'Google', 'promoted', 'Kent', 'Walker', 'to', 'senior', 'vice', 'president', 'of', 'global', 'affairs', 'in', '2018', ',']
+			Subject: Kent Walker
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9894785284996033
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 69
+			Generated Sentence entity pairs: 2, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 72
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 74
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 76
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 77
+			Generated Sentence entity pairs: 4, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Timnit', 'Gebru', ',', 'a', 'co', '-', 'leader', 'of', 'Google', '’s', 'Ethical', 'A.I.', 'team', 'and', 'one', 'of', 'its', 'best', '-']
+			Subject: Timnit Gebru
+			Object: Google’s Ethical A.I.
+			Relation: per:employee_of
+			Confidence: 0.5897097587585449
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 79
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 81
+			Generated Sentence entity pairs: 4, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['David', 'Baker', ',', 'a', 'former', 'director', 'of', 'engineering', 'at', 'Google', '’s', 'trust', 'and', 'safety', 'group', 'who', 'resigned', 'in', 'protest', 'of', 'Dr.', 'Gebru', '’s', 'dismissal', ',']
+			Subject: David Baker
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9589751362800598
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['a', 'former', 'director', 'of', 'engineering', 'at', 'Google', '’s', 'trust', 'and', 'safety', 'group', 'who', 'resigned', 'in', 'protest', 'of', 'Dr.', 'Gebru', '’s', 'dismissal', ',']
+			Subject: Gebru
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9938126802444458
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['a', 'former', 'director', 'of', 'engineering', 'at', 'Google', '’s', 'trust', 'and', 'safety', 'group', 'who', 'resigned', 'in', 'protest', 'of', 'Dr.', 'Gebru', '’s', 'dismissal', ',', 'said', 'Google', 'should', 'admit', 'that', 'it', 'had', 'made', 'a', 'mistake', 'instead', 'of', 'trying', 'to', 'save', 'face', '.']
+			Subject: Gebru
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.874021589756012
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 84
+			Generated Sentence entity pairs: 2, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 86
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Image', 'Aparna', 'Chennapragada', ',', 'a', 'former', 'Google', 'vice', 'president', ',', 'said', 'Mr.', 'Pichai', 'was', 'willing', 'to', 'make', 'hard', 'decisions', '.']
+			Subject: Pichai
+			Object: Image Aparna Chennapragada
+			Relation: per:employee_of
+			Confidence: 0.9960614442825317
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['a', 'former', 'Google', 'vice', 'president', ',', 'said', 'Mr.', 'Pichai', 'was', 'willing', 'to', 'make', 'hard', 'decisions', '.']
+			Subject: Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9972124695777893
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 88
+			Generated Sentence entity pairs: 6, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['said', 'Aparna', 'Chennapragada', ',', 'who', 'was', 'a', 'vice', 'president', 'at', 'Google', 'before', 'leaving', 'in', 'April', 'to', 'oversee', 'product', 'development', 'at', 'the', 'Robinhood', 'trading', 'app', '.']
+			Subject: Aparna Chennapragada
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9954489469528198
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['said', 'Aparna', 'Chennapragada', ',', 'who', 'was', 'a', 'vice', 'president', 'at', 'Google', 'before', 'leaving', 'in', 'April', 'to', 'oversee', 'product', 'development', 'at', 'the', 'Robinhood', 'trading', 'app', '.']
+			Subject: Aparna Chennapragada
+			Object: Robinhood
+			Relation: per:employee_of
+			Confidence: 0.9955610036849976
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 90
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['has', 'led', 'Mr.', 'Pichai', 'to', 'get', 'his', 'deputies', 'to', 'make', 'more', 'decisions', 'without', 'him', ',', 'the', 'Google', 'executives', 'said', '.']
+			Subject: Pichai
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9959551095962524
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 92
+			Generated Sentence entity pairs: 2, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['said', 'Sameer', 'Samat', ',', 'a', 'Google', 'vice', 'president', '.']
+			Subject: Sameer Samat
+			Object: Google
+			Relation: per:employee_of
+			Confidence: 0.9937416315078735
+			Adding to set of extracted relations
+			==========================
+
+	Relations extracted from this website: 13 (Overall: 40)
+
+
+================== ALL RELATIONS for per:employee_of ( 40 ) =================
+
+1) Confidence: 0.9977052211761475	Subject: Pichai	Object: Google
+2) Confidence: 0.9972419738769531	Subject: Larry Page	Object: Google
+3) Confidence: 0.9969310164451599	Subject: Pichai Sundararajan	Object: Google, Inc.
+4) Confidence: 0.9967408776283264	Subject: Larry Page	Object: Alphabet
+5) Confidence: 0.9960614442825317	Subject: Pichai	Object: Image Aparna Chennapragada
+6) Confidence: 0.9960415363311768	Subject: Sundar Pichai	Object: Android
+7) Confidence: 0.9956492781639099	Subject: Sundar Pichai	Object: Google
+8) Confidence: 0.9955610036849976	Subject: Aparna Chennapragada	Object: Robinhood
+9) Confidence: 0.9954489469528198	Subject: Aparna Chennapragada	Object: Google
+10) Confidence: 0.9946537613868713	Subject: Caesar Sengupta	Object: Google
+11) Confidence: 0.9946309924125671	Subject: Noam Bardin	Object: Google
+12) Confidence: 0.9945313930511475	Subject: Sundar Pichai	Object: Alphabet
+13) Confidence: 0.9938126802444458	Subject: Gebru	Object: Google
+14) Confidence: 0.9937416315078735	Subject: Sameer Samat	Object: Google
+15) Confidence: 0.9928682446479797	Subject: Joanna Daley	Object: IBM
+16) Confidence: 0.9912437796592712	Subject: Pichai	Object: Applied Materials
+17) Confidence: 0.9902856945991516	Subject: Noam Bardin	Object: Waze
+18) Confidence: 0.9894785284996033	Subject: Kent Walker	Object: Google
+19) Confidence: 0.989183247089386	Subject: Sundar Pichai	Object: Share
+20) Confidence: 0.9877371788024902	Subject: Kent Walker	Object: SVP See all Press
+21) Confidence: 0.986678957939148	Subject: Pichai	Object: McKinsey
+22) Confidence: 0.9854480028152466	Subject: Sergey Brin	Object: Alphabet
+23) Confidence: 0.9833403825759888	Subject: Sergey Brin	Object: Google
+24) Confidence: 0.9798552393913269	Subject: Joanna Daley	Object: CNBC
+25) Confidence: 0.979079008102417	Subject: Larry Page Sundar Pichai Ram Shriram	Object: CLO
+26) Confidence: 0.97319096326828	Subject: Jason Post	Object: Google
+27) Confidence: 0.9589751362800598	Subject: David Baker	Object: Google
+28) Confidence: 0.9568319916725159	Subject: Ruth Porat	Object: SVP
+29) Confidence: 0.9566047787666321	Subject: John L. Hennessy Ann Mather	Object: CLO
+30) Confidence: 0.9523993134498596	Subject: Alan Mulally	Object: CLO
+31) Confidence: 0.9468342661857605	Subject: Pichai	Object: McKinsey & Company
+32) Confidence: 0.9311553835868835	Subject: Sundar	Object: Google
+33) Confidence: 0.8969603180885315	Subject: Satya Nadella	Object: Microsoft
+34) Confidence: 0.8447867035865784	Subject: Siebel Scholars	Object: the Wayback Machine
+35) Confidence: 0.8441581130027771	Subject: Sergey Brin	Object: CLO
+36) Confidence: 0.838249683380127	Subject: Sundar Pichai	Object: AFP Image
+37) Confidence: 0.8283368349075317	Subject: Daniel Schwartz	Object: Restaurant Brands International
+38) Confidence: 0.784065842628479	Subject: Sundar Pichai	Object: Alphabet’s Board of Directors
+39) Confidence: 0.7548356652259827	Subject: Getty Images Image	Object: the Indian Institute of Technology
+40) Confidence: 0.7485876679420471	Subject: Larry Page	Object: CLO
+Total # of iterations = 1
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                       Program will terminate now...                            +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+

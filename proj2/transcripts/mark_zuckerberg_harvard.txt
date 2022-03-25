@@ -1,0 +1,1142 @@
+Loading pre-trained spanBERT from ./pretrained_spanbert
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                      Welcome to Iterative Set Expansion                        +
++                     Written by Matt Duran and Ethan Garry                      +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Client Key  				= AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
+ Engine Key  				= 7c642eecbff553d82
+ Field to Extract			= per:schools_attended
+ Confidence Threshold			= 0.7
+ Desired Number of Tuples		= 10
+ Number of Extracted Tuples		= 0
+ Query       				= mark zuckerberg harvard
+ Iteration   				= 1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+=========== Iteration: 1 - Query: mark zuckerberg harvard ===========
+
+URL ( 1 / 10): https://en.wikipedia.org/wiki/Mark_Zuckerberg
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 85741
+	Trimming Webpage Content from 85741 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 9, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 5
+			Generated Sentence entity pairs: 24, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 13
+			Generated Sentence entity pairs: 21, remaining valid pairs: 10
+			Applying SpanBERT for each of the 10 candidate pairs. This should take some time...
+
+		Processing sentence 17
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 18
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 19
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 20
+			Generated Sentence entity pairs: 6, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 28
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 30
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 33
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['The', 'New', 'Yorker', 'noted', 'that', 'by', 'the', 'time', 'Zuckerberg', 'began', 'classes', 'at', 'Harvard', 'in', '2002', ',']
+			Subject: Zuckerberg
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.7308000326156616
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 45
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 46
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 48
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['An', 'earlier', 'inspiration', 'for', 'Facebook', 'may', 'have', 'come', 'from', 'Phillips', 'Exeter', 'Academy', ',', 'the', 'prep', 'school', 'from', 'which', 'Zuckerberg', 'graduated', 'in', '2002', '.']
+			Subject: Zuckerberg
+			Object: Facebook
+			Relation: per:schools_attended
+			Confidence: 0.8358922600746155
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['An', 'earlier', 'inspiration', 'for', 'Facebook', 'may', 'have', 'come', 'from', 'Phillips', 'Exeter', 'Academy', ',', 'the', 'prep', 'school', 'from', 'which', 'Zuckerberg', 'graduated', 'in', '2002', '.']
+			Subject: Zuckerberg
+			Object: Phillips Exeter Academy
+			Relation: per:schools_attended
+			Confidence: 0.9694226980209351
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 52
+			Generated Sentence entity pairs: 15, remaining valid pairs: 8
+			Applying SpanBERT for each of the 8 candidate pairs. This should take some time...
+
+		Processing sentence 57
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 59
+			Generated Sentence entity pairs: 5, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 61
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 65
+			Generated Sentence entity pairs: 12, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 70
+			Generated Sentence entity pairs: 5, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 72
+			Generated Sentence entity pairs: 6, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 84
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 89
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 90
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 91
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 94
+			Generated Sentence entity pairs: 10, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 95
+			Generated Sentence entity pairs: 13, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 98
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 99
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 100
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 101
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 102
+			Generated Sentence entity pairs: 10, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 103
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 105
+			Generated Sentence entity pairs: 13, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 106
+			Generated Sentence entity pairs: 16, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 110
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 112
+			Generated Sentence entity pairs: 6, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 113
+			Generated Sentence entity pairs: 2, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Zuckerberg', ',', 'after', 'giving', 'a', 'commencement', 'speech', ',', '[', '62', ']', 'received', 'an', 'honorary', 'degree', 'from', 'Harvard', '.']
+			Subject: Zuckerberg
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.989377498626709
+			Already present but higher confidence. Update it.
+			==========================
+
+		Processing sentence 114
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 115
+			Generated Sentence entity pairs: 10, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 117
+			Generated Sentence entity pairs: 6, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 118
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 121
+			Generated Sentence entity pairs: 10, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 122
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 124
+			Generated Sentence entity pairs: 6, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 126
+			Generated Sentence entity pairs: 28, remaining valid pairs: 16
+			Applying SpanBERT for each of the 16 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['ConnectU', 'Harvard', 'students', 'Cameron', 'Winklevoss', ',']
+			Subject: Cameron Winklevoss
+			Object: ConnectU Harvard
+			Relation: per:schools_attended
+			Confidence: 0.692378580570221
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['ConnectU', 'Harvard', 'students', 'Cameron', 'Winklevoss', ',', 'Tyler', 'Winklevoss', ',']
+			Subject: Tyler Winklevoss
+			Object: ConnectU Harvard
+			Relation: per:schools_attended
+			Confidence: 0.8668490648269653
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 133
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 136
+			Generated Sentence entity pairs: 8, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 137
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 138
+			Generated Sentence entity pairs: 26, remaining valid pairs: 10
+			Applying SpanBERT for each of the 10 candidate pairs. This should take some time...
+
+		Processing sentence 140
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 141
+			Generated Sentence entity pairs: 14, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 144
+			Generated Sentence entity pairs: 10, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 146
+			Generated Sentence entity pairs: 3, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 148
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 149
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 150
+			Generated Sentence entity pairs: 2, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 4 (Overall: 4)
+
+URL ( 2 / 10): https://news.harvard.edu/gazette/story/2017/05/mark-zuckerbergs-speech-as-written-for-harvards-class-of-2017/
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 22896
+	Trimming Webpage Content from 22896 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 12, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 2
+			Generated Sentence entity pairs: 34, remaining valid pairs: 8
+			Applying SpanBERT for each of the 8 candidate pairs. This should take some time...
+
+		Processing sentence 4
+			Generated Sentence entity pairs: 12, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 5
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 6
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 7
+			Generated Sentence entity pairs: 4, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 34
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 46
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 232
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['I', 'met', 'David', 'Razu', 'Aznar', ',', 'graduating', 'from', 'the', 'Kennedy', 'School', 'today', '.']
+			Subject: David Razu Aznar
+			Object: the Kennedy School
+			Relation: per:schools_attended
+			Confidence: 0.9921025037765503
+			Adding to set of extracted relations
+			==========================
+
+	Relations extracted from this website: 1 (Overall: 5)
+
+URL ( 3 / 10): https://www.cnbc.com/2017/05/25/mark-zuckerberg-returns-to-the-harvard-dorm-where-facebook-was-born.html
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 3815
+	Trimming Webpage Content from 3815 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 6, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 8
+			Generated Sentence entity pairs: 5, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 18
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 22
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 26
+			Generated Sentence entity pairs: 0, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+	Relations extracted from this website: 0 (Overall: 5)
+
+URL ( 4 / 10): https://www.forbes.com/sites/susanadams/2021/12/08/zuckerberg-and-chan-pledge-500-million-of-their-facebook-fortune-to-create-an-ai-institute-at-harvard/
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 8680
+	Trimming Webpage Content from 8680 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 24, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 8
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 12
+			Generated Sentence entity pairs: 0, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 21
+			Generated Sentence entity pairs: 2, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 26
+			Generated Sentence entity pairs: 6, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 27
+			Generated Sentence entity pairs: 10, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 29
+			Generated Sentence entity pairs: 10, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 30
+			Generated Sentence entity pairs: 5, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Zuckerberg', 'and', 'Chan', ',', 'who', 'met', 'at', 'a', 'Harvard', 'fraternity', 'party', 'in', '2003', ',']
+			Subject: Chan
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.7690861225128174
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 41
+			Generated Sentence entity pairs: 6, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 49
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 50
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Chan', ',', '36', ',', 'graduated', 'from', 'Harvard', 'in', '2007', '.']
+			Subject: Chan
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.9932754635810852
+			Already present but higher confidence. Update it.
+			==========================
+
+	Relations extracted from this website: 1 (Overall: 6)
+
+URL ( 5 / 10): https://www.thecrimson.com/article/2004/6/10/mark-e-zuckerberg-06-the-whiz/
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 12058
+	Trimming Webpage Content from 12058 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 4
+			Generated Sentence entity pairs: 0, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 8
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 43
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 46
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 47
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 49
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 55
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Zuckerberg', 'attended', 'local', 'Ardsley', 'High', 'School', 'until', 'his', 'junior', 'year', ',', 'when', 'he', 'transferred', 'to', 'Phillips', 'Exeter', 'Academy', '.']
+			Subject: Zuckerberg
+			Object: Phillips Exeter Academy
+			Relation: per:schools_attended
+			Confidence: 0.9690465331077576
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 72
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Adam', 'D’Angelo', '(', 'now', 'a', 'student', 'at', 'CalTech', 'and', 'still', 'a', 'close', 'friend', ')']
+			Subject: Adam D’Angelo
+			Object: CalTech
+			Relation: per:schools_attended
+			Confidence: 0.7787959575653076
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['now', 'a', 'student', 'at', 'CalTech', 'and', 'still', 'a', 'close', 'friend', ')', 'Zuckerberg', 'designed', 'a', 'program', 'that', 'learned', 'a', 'listener', '’s', 'musical', 'tastes', ',']
+			Subject: Zuckerberg
+			Object: CalTech
+			Relation: per:schools_attended
+			Confidence: 0.9541848301887512
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 87
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 90
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 97
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 98
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 110
+			Generated Sentence entity pairs: 19, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 2 (Overall: 8)
+
+URL ( 6 / 10): https://www.thedailybeast.com/mark-zuckerberg-at-harvard-the-truth-behind-the-social-network
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 17882
+	Trimming Webpage Content from 17882 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 10
+			Generated Sentence entity pairs: 18, remaining valid pairs: 11
+			Applying SpanBERT for each of the 11 candidate pairs. This should take some time...
+
+		Processing sentence 12
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 13
+			Generated Sentence entity pairs: 10, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 15
+			Generated Sentence entity pairs: 15, remaining valid pairs: 9
+			Applying SpanBERT for each of the 9 candidate pairs. This should take some time...
+
+		Processing sentence 18
+			Generated Sentence entity pairs: 0, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 19
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 27
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['founders', 'and', 'students', 'who', 'were', 'at', 'Harvard', 'when', 'Zuckerberg', 'and', 'I', 'were', 'classmates', ',']
+			Subject: Zuckerberg
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.9525324106216431
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 35
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 36
+			Generated Sentence entity pairs: 6, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['As', 'a', 'student', 'at', 'Phillips', 'Exeter', 'Academy', ',', 'Mark', 'had', 'created', 'an', 'adaptive', 'music', 'player', '(']
+			Subject: Mark
+			Object: Phillips Exeter Academy
+			Relation: per:schools_attended
+			Confidence: 0.9421365857124329
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 38
+			Generated Sentence entity pairs: 5, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['says', 'one', 'of', 'Mark', '’s', 'classmates', 'at', 'both', 'Exeter', 'and', 'Harvard', ',']
+			Subject: Mark
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.5696510672569275
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 46
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 47
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 48
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 49
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 51
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 56
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 57
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 64
+			Generated Sentence entity pairs: 5, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 67
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 68
+			Generated Sentence entity pairs: 6, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 74
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 83
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 86
+			Generated Sentence entity pairs: 2, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 99
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 100
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 103
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['according', 'to', 'Zuckerberg', '—', 'about', '55', 'percent', 'of', 'Harvard', 'undergraduates', '.']
+			Subject: Zuckerberg
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.7199879288673401
+			Already present but lower confidence. Discard it.
+			==========================
+
+		Processing sentence 109
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 113
+			Generated Sentence entity pairs: 14, remaining valid pairs: 7
+			Applying SpanBERT for each of the 7 candidate pairs. This should take some time...
+
+		Processing sentence 118
+			Generated Sentence entity pairs: 12, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 121
+			Generated Sentence entity pairs: 4, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 123
+			Generated Sentence entity pairs: 9, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 124
+			Generated Sentence entity pairs: 5, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 134
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 136
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 139
+			Generated Sentence entity pairs: 2, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 1 (Overall: 9)
+
+URL ( 7 / 10): https://www.britannica.com/biography/Mark-Zuckerberg
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 7312
+	Trimming Webpage Content from 7312 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 39
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 41
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 46
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 49
+			Generated Sentence entity pairs: 21, remaining valid pairs: 10
+			Applying SpanBERT for each of the 10 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Mark', 'Zuckerberg', 'dropped', 'out', 'of', 'college', 'in', '2004', 'to', 'devote', 'himself', 'to', 'Facebook', ',', 'which', 'he', 'had', 'founded', 'at', 'Harvard', 'University', 'with', 'four', 'fellow', 'students', 'there', '—']
+			Subject: Mark Zuckerberg
+			Object: Harvard University
+			Relation: per:schools_attended
+			Confidence: 0.9253530502319336
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Mark', 'Zuckerberg', 'dropped', 'out', 'of', 'college', 'in', '2004', 'to', 'devote', 'himself', 'to', 'Facebook', ',', 'which', 'he', 'had', 'founded', 'at', 'Harvard', 'University', 'with', 'four', 'fellow', 'students', 'there', '—', 'Eduardo', 'Saverin', ',']
+			Subject: Eduardo Saverin
+			Object: Facebook
+			Relation: per:schools_attended
+			Confidence: 0.5693463683128357
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Mark', 'Zuckerberg', 'dropped', 'out', 'of', 'college', 'in', '2004', 'to', 'devote', 'himself', 'to', 'Facebook', ',', 'which', 'he', 'had', 'founded', 'at', 'Harvard', 'University', 'with', 'four', 'fellow', 'students', 'there', '—', 'Eduardo', 'Saverin', ',', 'Andrew', 'McCollum', ',', 'Dustin', 'Moskovitz', ',']
+			Subject: Dustin Moskovitz
+			Object: Facebook
+			Relation: per:schools_attended
+			Confidence: 0.8260026574134827
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Mark', 'Zuckerberg', 'dropped', 'out', 'of', 'college', 'in', '2004', 'to', 'devote', 'himself', 'to', 'Facebook', ',', 'which', 'he', 'had', 'founded', 'at', 'Harvard', 'University', 'with', 'four', 'fellow', 'students', 'there', '—', 'Eduardo', 'Saverin', ',', 'Andrew', 'McCollum', ',', 'Dustin', 'Moskovitz', ',', 'and', 'Chris', 'Hughes', '.']
+			Subject: Chris Hughes
+			Object: Facebook
+			Relation: per:schools_attended
+			Confidence: 0.8189148306846619
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['which', 'he', 'had', 'founded', 'at', 'Harvard', 'University', 'with', 'four', 'fellow', 'students', 'there', '—', 'Eduardo', 'Saverin', ',']
+			Subject: Eduardo Saverin
+			Object: Harvard University
+			Relation: per:schools_attended
+			Confidence: 0.974037766456604
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['which', 'he', 'had', 'founded', 'at', 'Harvard', 'University', 'with', 'four', 'fellow', 'students', 'there', '—', 'Eduardo', 'Saverin', ',', 'Andrew', 'McCollum', ',']
+			Subject: Andrew McCollum
+			Object: Harvard University
+			Relation: per:schools_attended
+			Confidence: 0.9782661199569702
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['which', 'he', 'had', 'founded', 'at', 'Harvard', 'University', 'with', 'four', 'fellow', 'students', 'there', '—', 'Eduardo', 'Saverin', ',', 'Andrew', 'McCollum', ',', 'Dustin', 'Moskovitz', ',']
+			Subject: Dustin Moskovitz
+			Object: Harvard University
+			Relation: per:schools_attended
+			Confidence: 0.9816164374351501
+			Adding to set of extracted relations
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['which', 'he', 'had', 'founded', 'at', 'Harvard', 'University', 'with', 'four', 'fellow', 'students', 'there', '—', 'Eduardo', 'Saverin', ',', 'Andrew', 'McCollum', ',', 'Dustin', 'Moskovitz', ',', 'and', 'Chris', 'Hughes', '.']
+			Subject: Chris Hughes
+			Object: Harvard University
+			Relation: per:schools_attended
+			Confidence: 0.963668167591095
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 50
+			Generated Sentence entity pairs: 14, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 51
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['After', 'attending', 'Phillips', 'Exeter', 'Academy', ',', 'Zuckerberg', 'enrolled', 'at', 'Harvard', 'University', 'in', '2002', '.']
+			Subject: Zuckerberg
+			Object: Phillips Exeter Academy
+			Relation: per:schools_attended
+			Confidence: 0.9737498164176941
+			Already present but higher confidence. Update it.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Zuckerberg', 'enrolled', 'at', 'Harvard', 'University', 'in', '2002', '.']
+			Subject: Zuckerberg
+			Object: Harvard University
+			Relation: per:schools_attended
+			Confidence: 0.48830410838127136
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 59
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 63
+			Generated Sentence entity pairs: 3, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 65
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 7 (Overall: 16)
+
+URL ( 8 / 10): https://www.npr.org/sections/thetwo-way/2017/05/26/530159142/mark-zuckerberg-tells-harvard-graduates-to-embrace-globalism-a-sense-of-purpose
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 5483
+	Trimming Webpage Content from 5483 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 7
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 10
+			Generated Sentence entity pairs: 4, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['2017', '4:50', 'AM', 'ET', 'James', 'Doubek', 'Twitter', 'Harvard', 'University', 'via', 'YouTube', 'Harvard', 'dropout', 'Mark', 'Zuckerberg', 'returned', 'to', 'the', 'university', 'Thursday', 'to', 'give', 'graduates', 'a', 'commencement', 'address', ',']
+			Subject: James Doubek
+			Object: Harvard University
+			Relation: per:schools_attended
+			Confidence: 0.4302404522895813
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 15
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 21
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 30
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 32
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Zuckerberg', 'launched', 'Facebook', 'from', 'his', 'Harvard', 'dorm', 'in', '2004', ',']
+			Subject: Zuckerberg
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.690071702003479
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+	Relations extracted from this website: 0 (Overall: 16)
+
+URL ( 9 / 10): https://www.bbc.com/news/world-us-canada-40053163
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 6046
+	Trimming Webpage Content from 6046 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 13, remaining valid pairs: 7
+			Applying SpanBERT for each of the 7 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Mark', 'Zuckerberg', 'gets', 'honorary', 'Harvard', 'degree', 'after', 'dropping', 'out', '-', 'BBC', 'News', 'BBC', 'Homepage', 'Skip', 'to', 'content', 'Accessibility', 'Help', 'Your', 'account', 'Home', 'News', 'Sport', 'Reel', 'Worklife']
+			Subject: Homepage Skip
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.5170848965644836
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 4
+			Generated Sentence entity pairs: 5, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Canada', 'Mark', 'Zuckerberg', 'gets', 'honorary', 'Harvard', 'degree', 'after', 'dropping', 'out', 'Published', '25', 'May', '2017']
+			Subject: Mark Zuckerberg
+			Object: Harvard
+			Relation: per:schools_attended
+			Confidence: 0.8870842456817627
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 5
+			Generated Sentence entity pairs: 6, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 11
+			Generated Sentence entity pairs: 14, remaining valid pairs: 8
+			Applying SpanBERT for each of the 8 candidate pairs. This should take some time...
+
+		Processing sentence 13
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 20
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 27
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 28
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 36
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 39
+			Generated Sentence entity pairs: 13, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+	Relations extracted from this website: 1 (Overall: 17)
+
+URL ( 10 / 10): https://www.theverge.com/2017/3/7/14847968/facebook-mark-zuckerberg-harvard-commencement-honorary-degree
+	Fetching text from url ...
+	Getting the webpage using GET request
+	Webpage length (num characters): 4424
+	Trimming Webpage Content from 4424 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 9
+			Generated Sentence entity pairs: 5, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 10
+			Generated Sentence entity pairs: 8, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 12
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 13
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 16
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 19
+			Generated Sentence entity pairs: 10, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 20
+			Generated Sentence entity pairs: 6, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Bill', 'Gates', ',', 'a', 'fellow', 'Harvard', 'dropout', ',', 'also', 'left', 'school', 'after', 'just', 'two', 'years', 'to', 'co', '-', 'found', 'Microsoft', 'with', 'Paul', 'Allen', '.']
+			Subject: Bill Gates
+			Object: Microsoft
+			Relation: per:schools_attended
+			Confidence: 0.47769567370414734
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 21
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 22
+			Generated Sentence entity pairs: 6, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 24
+			Generated Sentence entity pairs: 6, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 0 (Overall: 17)
+
+
+================== ALL RELATIONS for per:schools_attended ( 17 ) =================
+
+1) Confidence: 0.9932754635810852	Subject: Chan	Object: Harvard
+2) Confidence: 0.9921025037765503	Subject: David Razu Aznar	Object: the Kennedy School
+3) Confidence: 0.989377498626709	Subject: Zuckerberg	Object: Harvard
+4) Confidence: 0.9816164374351501	Subject: Dustin Moskovitz	Object: Harvard University
+5) Confidence: 0.9782661199569702	Subject: Andrew McCollum	Object: Harvard University
+6) Confidence: 0.974037766456604	Subject: Eduardo Saverin	Object: Harvard University
+7) Confidence: 0.9737498164176941	Subject: Zuckerberg	Object: Phillips Exeter Academy
+8) Confidence: 0.963668167591095	Subject: Chris Hughes	Object: Harvard University
+9) Confidence: 0.9541848301887512	Subject: Zuckerberg	Object: CalTech
+10) Confidence: 0.9421365857124329	Subject: Mark	Object: Phillips Exeter Academy
+11) Confidence: 0.9253530502319336	Subject: Mark Zuckerberg	Object: Harvard University
+12) Confidence: 0.8870842456817627	Subject: Mark Zuckerberg	Object: Harvard
+13) Confidence: 0.8668490648269653	Subject: Tyler Winklevoss	Object: ConnectU Harvard
+14) Confidence: 0.8358922600746155	Subject: Zuckerberg	Object: Facebook
+15) Confidence: 0.8260026574134827	Subject: Dustin Moskovitz	Object: Facebook
+16) Confidence: 0.8189148306846619	Subject: Chris Hughes	Object: Facebook
+17) Confidence: 0.7787959575653076	Subject: Adam D’Angelo	Object: CalTech
+Total # of iterations = 1
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                       Program will terminate now...                            +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
