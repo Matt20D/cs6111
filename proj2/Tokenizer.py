@@ -39,7 +39,7 @@ RELATIONS = {
 SPANBERT_RELATIONS = {
 	"Schools_Attended": "per:schools_attended",
 	"Work_For": "per:employee_of", 		
-	"Live_In": 	"per:cities_of_residence"
+	"Live_In": 	"per:cities_of_residence",
 	"Top_Member_Employees": "org:top_members/employees"
 }
 
@@ -233,6 +233,7 @@ class Tokenizer(object):
 			# Print Extracted Relations
 			for ex, pred in list(zip(candidate_pairs, relation_preds)):
 				if pred[0] == SPANBERT_RELATIONS[self.relation_type]:				
+				#if pred[0] != "no_relation":				
 					print("\t\t\t=== Extracted Relation ===")
 					#print("[{},{}]".format(ex["subj"], ex["obj"]))
 					print("\t\t\tSubject Entity: {}".format(ex["subj"][1]))
