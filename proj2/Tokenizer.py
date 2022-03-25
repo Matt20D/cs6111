@@ -1,10 +1,10 @@
 """
-file: Tokenizer.py
-description: Tokenizer class used for parsing html documents into tokens
-which is a big part of the document analysis. We need to be able to 
-get a list of all the words in a document so that we can create inverted
-lists.
-authors: Matthew Duran and Ethan Garry
+File: Tokenizer.py
+Description: This file handles executing a get request and doing
+information extraction using web scraping, spanBERT and spacy. For
+a given url, we will extract sentences, candidate pairs, and then final
+spanBert approved relations.
+Authors: Matthew Duran and Ethan Garry
 """
 
 #
@@ -15,15 +15,16 @@ import requests # use to execute a get request
 from bs4 import BeautifulSoup as bs # scraper
 import re # regex
 import spacy
-#from SpanBERT.spacy_help_functions import * #import spacy help
-#from SpanBERT.spanbert import SpanBERT 
 from spacy_help_functions import * #import spacy help
 from spanbert import SpanBERT 
 
-
+# load spanbert model from my pwd
 spanbert = SpanBERT(pretrained_dir="./pretrained_spanbert")
-#spanbert = SpanBERT("/home/md3420/cs6111/proj2/SpanBERT/pretrained_spanbert")  
 
+"""
+The following global datastructures allow me to do data validation checks
+in the below code.
+"""
 ENTITIES_OF_INTEREST = ["ORGANIZATION", "PERSON", "LOCATION", "CITY", "STATE_OR_PROVINCE", "COUNTRY"]
 RELATIONS = {
 	"Schools_Attended": 
@@ -35,7 +36,6 @@ RELATIONS = {
 	"Top_Member_Employees": 
 		{"Subject": "ORGANIZATION", "Object": "PERSON"}
 }
-
 SPANBERT_RELATIONS = {
 	"Schools_Attended": "per:schools_attended",
 	"Work_For": "per:employee_of", 		
@@ -43,6 +43,18 @@ SPANBERT_RELATIONS = {
 	"Top_Member_Employees": "org:top_members/employees"
 }
 
+"""
+desc: 
+Given a sentence, lets look at the extracted ents (via spacy) to see
+if we can make at least ONE valid subject object pair. If we can then
+return true and lets process the sentence further. Else we can return
+false to skip the expensive bert calculations.
+
+params:
+rel_type: string relation that is passed in so we can determine
+if a sentence has enough valid entities to make pairs
+ents: list of extracted ents
+"""
 def check_sentence_entities(rel_type: str, ents: list) -> bool:
 	#print(rel_type)
 	#print(ents)
@@ -78,6 +90,16 @@ def check_sentence_entities(rel_type: str, ents: list) -> bool:
 	else:
 		return False
 
+"""
+desc: 
+Given a pair, lets ensure that the subject and object will actually
+form a valid relation (i.e. what we are looking for).
+
+params:
+rel_type: string relation that is passed in so we can determine
+if a sentence has enough valid entities to make pairs
+pair: map of data to check
+"""
 def is_valid_relation(rel_type: str, pair: dict) -> bool:
 
 	#
@@ -116,14 +138,29 @@ def is_valid_relation(rel_type: str, pair: dict) -> bool:
 	else:
 		return False
 
+"""
+desc: Tokenizer class that handles get request and data parsing.
+"""
 class Tokenizer(object):
 	
+	"""
+	desc: constructor
+	params:
+	url: webpage link
+	currenct_tuples: the full list of extracted relations
+	relation: the type of relation we are searching for
+	conf: threshold to keep a relation
+	"""
 	def __init__(self, url, current_tuples, relation, conf):
 		self.webpage       = url
 		self.curr_tuples   = current_tuples # Hash Table, value is the confidence
 		self.relation_type = relation
 		self.threshold     = conf
 
+	"""
+	desc: handle the get request and do the web scraping and 
+	information extraction
+	"""
 	def execute_get_request(self) -> None:
 
 		# send get request for the webpage
@@ -230,12 +267,12 @@ class Tokenizer(object):
 
 			# get predictions: list of (relation, confidence) pairs 
 			relation_preds = spanbert.predict(candidate_pairs)     
+
 			# Print Extracted Relations
 			for ex, pred in list(zip(candidate_pairs, relation_preds)):
 				if pred[0] == SPANBERT_RELATIONS[self.relation_type]:				
 				#if pred[0] != "no_relation":				
 					print("\t\t\t=== Extracted Relation ===")
-					#print("[{},{}]".format(ex["subj"], ex["obj"]))
 					print("\t\t\tSubject Entity: {}".format(ex["subj"][1]))
 					print("\t\t\tObject Entity: {}".format(ex["obj"][1]))
 					print("\t\t\tInput Tokens: {}".format(ex['tokens']))
