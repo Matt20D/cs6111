@@ -1,6 +1,29 @@
-http://www.cs.columbia.edu/~gravano/cs6111/Proj2/example_relations.py
-used this source in order to get an example of how to work with spacy and
-with spanBert
+--------------------------------------------------
+Proj 1: References for Matt Duran and Ethan Garry
+--------------------------------------------------
 
-http://www.cs.columbia.edu/~gravano/cs6111/Proj2/spacy_help_functions.py
-used this source in order to get an example of how to work with spacy
+using google api, and pprint module:
+1) https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
+
+Gravano's provided example for querying the google search engine. This was the main example used
+in order to learn how to use google query api. I simply, used my same code
+from project 1, but I figured I would pull in the source I used then
+anyways.
+
+using spacy and spanBERT examples:
+2) http://www.cs.columbia.edu/~gravano/cs6111/Proj2/example_relations.py
+3) http://www.cs.columbia.edu/~gravano/cs6111/Proj2/spacy_help_functions.py
+used these sources in order to get an example of how to work with spacy and
+with spanBert. I utilized a lot of the same commands (like we were advised
+to do) in order to tokenize the sentences and then of course pass to bert.
+The provided sample scripts were very good at explaining the steps we had to
+do in order to scrape, process, and extract sentences and relation tuples.
+
+web-scraping/beautiful soup:
+4) https://stackoverflow.com/questions/45954949/parse-text-response-from-http-request-in-python
+5) https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
+These references were useful for figuring out how to scrape data using the
+BeautifulSoup package.
+
+
