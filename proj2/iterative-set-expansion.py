@@ -291,6 +291,9 @@ def main() -> None:
 	# sort the list in desc order according to the confidence val
 	final_list.sort(key = lambda x: x[2], reverse = True)
 
+	#print("hash table size {}".format(len(final_list)))
+	#print("after removing duplicates: {}".format(len(set(final_list))))
+
 	print("\n================== ALL RELATIONS for {} ( {} ) =================\n".format(\
 				RELATIONS[r], len(final_list)))
 	i = 1
