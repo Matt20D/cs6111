@@ -36,6 +36,13 @@ RELATIONS = {
 		{"Subject": "ORGANIZATION", "Object": "PERSON"}
 }
 
+SPANBERT_RELATIONS = {
+	"Schools_Attended": "per:schools_attended",
+	"Work_For": "per:employee_of", 		
+	"Live_In": 	"per:cities_of_residence"
+	"Top_Member_Employees": "org:top_members/employees"
+}
+
 def check_sentence_entities(rel_type: str, ents: list) -> bool:
 	#print(rel_type)
 	#print(ents)
@@ -225,48 +232,49 @@ class Tokenizer(object):
 			relation_preds = spanbert.predict(candidate_pairs)     
 			# Print Extracted Relations
 			for ex, pred in list(zip(candidate_pairs, relation_preds)):
-				print("\t\t\t=== Extracted Relation ===")
-				#print("[{},{}]".format(ex["subj"], ex["obj"]))
-				print("\t\t\tSubject Entity: {}".format(ex["subj"][1]))
-				print("\t\t\tObject Entity: {}".format(ex["obj"][1]))
-				print("\t\t\tInput Tokens: {}".format(ex['tokens']))
-				print("\t\t\tSubject: {}".format(ex["subj"][0]))
-				print("\t\t\tObject: {}".format(ex["obj"][0]))
-				print("\t\t\tRelation: {}".format(pred[0]))
-				print("\t\t\tConfidence: {}".format(pred[1]))
+				if pred[0] == SPANBERT_RELATIONS[self.relation_type]:				
+					print("\t\t\t=== Extracted Relation ===")
+					#print("[{},{}]".format(ex["subj"], ex["obj"]))
+					print("\t\t\tSubject Entity: {}".format(ex["subj"][1]))
+					print("\t\t\tObject Entity: {}".format(ex["obj"][1]))
+					print("\t\t\tInput Tokens: {}".format(ex['tokens']))
+					print("\t\t\tSubject: {}".format(ex["subj"][0]))
+					print("\t\t\tObject: {}".format(ex["obj"][0]))
+					print("\t\t\tRelation: {}".format(pred[0]))
+					print("\t\t\tConfidence: {}".format(pred[1]))
 
-				# lets keep the extracted tuple, hopefully!
-				if pred[1] >= self.threshold:
+					# lets keep the extracted tuple, hopefully!
+					if pred[1] >= self.threshold:
 
-					
-					new_tuple = (ex["subj"][0], ex["obj"][0])
-					new_conf  = pred[1]
+						
+						new_tuple = (ex["subj"][0], ex["obj"][0])
+						new_conf  = pred[1]
 
-					# if not in set, just add it	
-					if new_tuple not in self.curr_tuples.keys():
+						# if not in set, just add it	
+						if new_tuple not in self.curr_tuples.keys():
 
-						print("\t\t\tAdding to set of extracted relations")
-					
-						self.curr_tuples[new_tuple] = new_conf
-						num_tuples_added += 1
-
-					# if in set, keep the higher confidence version
-					else:
-						#print("already in set")
-						#print("old conf: {}".format(self.curr_tuples[new_tuple]))
-						#print("new conf: {}".format(new_conf))
-						if self.curr_tuples[new_tuple] < new_conf:
-							print("\t\t\tAlready present but higher confidence. Update it.")
+							print("\t\t\tAdding to set of extracted relations")
+						
 							self.curr_tuples[new_tuple] = new_conf
+							num_tuples_added += 1
+
+						# if in set, keep the higher confidence version
 						else:
-							print("\t\t\tAlready present but lower confidence. Discard it.")
-						#print("after check conf: {}".format(self.curr_tuples[new_tuple]))
+							#print("already in set")
+							#print("old conf: {}".format(self.curr_tuples[new_tuple]))
+							#print("new conf: {}".format(new_conf))
+							if self.curr_tuples[new_tuple] < new_conf:
+								print("\t\t\tAlready present but higher confidence. Update it.")
+								self.curr_tuples[new_tuple] = new_conf
+							else:
+								print("\t\t\tAlready present but lower confidence. Discard it.")
+							#print("after check conf: {}".format(self.curr_tuples[new_tuple]))
 
-				# ignore, move on
-				else:
-					print("\t\t\tConfidence is lower than threshold confidence. Ignoring this.")
+					# ignore, move on
+					else:
+						print("\t\t\tConfidence is lower than threshold confidence. Ignoring this.")
 
-				print("\t\t\t==========================\n")
+					print("\t\t\t==========================\n")
          	
 		print("\tRelations extracted from this website: {} (Overall: {})\n".format(\
 										num_tuples_added, len(self.curr_tuples)))
