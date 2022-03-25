@@ -1,5 +1,5 @@
 --------------------------------------------------
-Proj 1: References for Matt Duran and Ethan Garry
+Proj 2: References for Matt Duran and Ethan Garry
 --------------------------------------------------
 
 using google api, and pprint module:
