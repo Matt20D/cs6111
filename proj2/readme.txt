@@ -17,7 +17,7 @@ project=cs6111
 ├── proj2/
     ├── readme.txt <-- You are reading this file 
     ├── sources.txt
-    ├── dir_cleanup.sh*
+    ├── dir_cleanup.sh* [Note: ensure that the shell file has executable permissions]   
     ├── setup.sh* [Note: ensure that the shell file has executable permissions]   
     ├── my_requirements.txt
     ├── test.sh*  [Note: ensure that the shell file has executable permissions] 
@@ -27,10 +27,10 @@ project=cs6111
     ├── Tokenizer.py
     ├── .gitignore
     ├── transcripts/ [Note: will be submitted separately as well]
-        ├── bill_gates_microsoft.txt [TODO] 
-        ├── megan_repinoe_redding.txt [TODO] 
-        ├── mark_zuckerberg_harvard.txt [TODO] 
-        ├── sundar_pichai_google.txt [TODO] 
+        ├── bill_gates_microsoft.txt 
+        ├── megan_repinoe_redding.txt  
+        ├── mark_zuckerberg_harvard.txt  
+        ├── sundar_pichai_google.txt 
 
     ------------------------------------
     How to install and run our software
@@ -61,7 +61,50 @@ relocated spanbert files.
 
 4) to exit the venv type `deactivate` into the shell.
 
+In the event that any of the software package installations fail, you can manually do the
+following steps:
 
-TODO 
+create virtual environment for our software dependencies:
+    python3 -m venv venv
+    source venv/bin/activate
+    pip3 install -r my_requirements.txt
 
-A transcript of the run of your program on input parameters: 2 0.7 "bill gates microsoft" 10 (i.e., for r=2, t=0.7, q=[bill gates microsoft], and k=10). The format of your transcript should closely follow the format of the reference implementation, and should print the same information (i.e., number of characters, sentences, relations, etc.) as the corresponding session of the reference implementation.
+determine the issue with spanbert:
+    clone the repo, and move all of the files up a dir to where my source
+    code is.
+
+Sometimes there are issues with installing bert, so you may need to trouble
+shoot that, but our code needs the dependencies in my_requirements.txt to be
+able to run!
+
+    ------------------------------------
+    Overall Code Description
+    ------------------------------------
+
+  talk about all the external libraries here too
+
+    ------------------------------------
+    Relation Extraction Algorithm
+    ------------------------------------
+
+A detailed description of how you carried out Step 3 in the "Description" section above
+
+    ------------------------------------
+    Important Note regarding SPANBERT Filtering
+    ------------------------------------
+
+We believe that the number of iterations that the code takes to complete is
+highly correlated with the output relation that spanbert model produces. We 
+have documented cases on Edstem where spanbert receives subj: "megan
+Rapinoe" and obj: "redding" for the Live_In relation and we can receive two
+different outputs. I have extracted the same pair and passed to bert back to
+back and have received a "no_relation" followed by the correct 
+"per:cities_of_residence" predicted relation. Thus, before we chose to filter
+out all of those tuples that don't match the desired relation we were
+extracting hundreds of tuples, and now we mostly hit the target like in the
+reference implementation.
+
+Keep in mind that we are passing only pairs that have the CORRECT subject
+entity pairs into spanbert, so we believe the potential noise in the tuple
+extraction/iteration number comes from the spanbert model which we cannot
+control.
