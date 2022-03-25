@@ -1,17 +1,13 @@
 """
-file: google-query.py
-description: Main Driver for Google Query Relevance Feedback
-authors: Matthew Duran and Ethan Garry
+File: iterative-set-expansion.py
+Description: Main Driver for ISE through web scraping
+Authors: Matthew Duran and Ethan Garry
 """
 
 #
 # Library Modules Needed
 #
 
-# from ctypes.wintypes import WORD
-# import re # regex
-# import pprint # printing out Datastructures in a readable format
-# import os
 from logging import exception, raiseExceptions
 from operator import inv
 import sys
@@ -23,7 +19,6 @@ import requests
 from collections import defaultdict
 from googleapiclient.discovery import build # for querying google using their API
 from spacy_help_functions import * #import spacy help
-#from SpanBERT.spacy_help_functions import * #import spacy help
 
 RELATIONS = {
 				1: "per:schools_attended",
@@ -75,7 +70,6 @@ key: 	 google API key
 citation:
 https://github.com/googleapis/google-api-python-client/blob/main/samples/customsearch/main.py
 """
-#def query_google_search(query: list, eid: str, key: str) -> list():	
 def query_google_search(query: str, eid: str, key: str) -> list():	
 	# use google api for querying
 	service = build("customsearch", "v1",
@@ -99,8 +93,17 @@ def query_google_search(query: str, eid: str, key: str) -> list():
 
 	return clean_results
 
-# here we will execute get request and return the updated set of 
-# extracted relations.
+"""
+desc: 
+Here we will execute get request for a particular URL and return the 
+updated set of extracted relations.
+
+params:
+url: url we need to execute a get request for
+tupels: map of tuples and their confidence
+relation: user defined relation we want to extract
+conf: threshold for keeping a relation
+"""
 def do_pipeline(url: str, tuples: dict, relation: str, conf: float) -> dict: 	
 
 	#instantiate tokenizer object
