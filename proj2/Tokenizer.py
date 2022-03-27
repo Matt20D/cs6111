@@ -166,7 +166,11 @@ class Tokenizer(object):
 		# send get request for the webpage
 		try:
 			print("\tGetting the webpage using GET request") 
-			request = requests.get(self.webpage, timeout=5) # need to timeout and not hang
+
+			# by adding in the headers, we may not get denied by certain webpages
+			# also upping the timeout to 20 like the TA mentions
+			request = requests.get(self.webpage, headers={'User-Agent': 'Mozilla/5.0'},\
+												timeout=20) # need to timeout and not hang
 		except:
 			# raise exception, which is a catch all for timeouts or other http errors
 			raise requests.exceptions.HTTPError
