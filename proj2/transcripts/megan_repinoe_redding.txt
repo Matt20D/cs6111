@@ -35,7 +35,7 @@ URL ( 1 / 10): https://www.redding.com/story/news/local/2019/07/08/after-world-c
 			Subject: Alayna Shulman
 			Object: Shasta County
 			Relation: per:cities_of_residence
-			Confidence: 0.8120825290679932
+			Confidence: 0.8120825886726379
 			Adding to set of extracted relations
 			==========================
 
@@ -60,8 +60,8 @@ URL ( 1 / 10): https://www.redding.com/story/news/local/2019/07/08/after-world-c
 URL ( 2 / 10): https://www.mercurynews.com/2019/07/06/womens-world-cup-hometown-star-out-of-step-in-californias-trump-country/
 	Fetching text from url ...
 	Getting the webpage using GET request
-	Webpage length (num characters): 20788
-	Trimming Webpage Content from 20788 to 2000 characters
+	Webpage length (num characters): 20507
+	Trimming Webpage Content from 20507 to 2000 characters
 	Annotating the webpage using spacy...
 		Processing sentence 3
 			Generated Sentence entity pairs: 0, remaining valid pairs: 0
@@ -71,63 +71,59 @@ URL ( 2 / 10): https://www.mercurynews.com/2019/07/06/womens-world-cup-hometown-
 			Generated Sentence entity pairs: 0, remaining valid pairs: 0
 			No valid candidate pairs, no need for Bert
 
-		Processing sentence 10
-			Generated Sentence entity pairs: 11, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 12
+		Processing sentence 14
 			Generated Sentence entity pairs: 26, remaining valid pairs: 5
 			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
 
-		Processing sentence 15
+		Processing sentence 17
 			Generated Sentence entity pairs: 3, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 17
+		Processing sentence 19
 			Generated Sentence entity pairs: 10, remaining valid pairs: 6
 			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 19
+		Processing sentence 21
 			Generated Sentence entity pairs: 13, remaining valid pairs: 7
 			Applying SpanBERT for each of the 7 candidate pairs. This should take some time...
 
-		Processing sentence 22
+		Processing sentence 24
 			Generated Sentence entity pairs: 10, remaining valid pairs: 6
 			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 24
+		Processing sentence 26
 			Generated Sentence entity pairs: 14, remaining valid pairs: 6
 			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 27
+		Processing sentence 29
 			Generated Sentence entity pairs: 10, remaining valid pairs: 6
 			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 29
+		Processing sentence 31
 			Generated Sentence entity pairs: 9, remaining valid pairs: 4
 			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
 
-		Processing sentence 32
+		Processing sentence 34
 			Generated Sentence entity pairs: 3, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 34
+		Processing sentence 36
 			Generated Sentence entity pairs: 10, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 37
+		Processing sentence 39
 			Generated Sentence entity pairs: 3, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 40
+		Processing sentence 42
 			Generated Sentence entity pairs: 6, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 44
+		Processing sentence 46
 			Generated Sentence entity pairs: 15, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 45
+		Processing sentence 47
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
@@ -138,15 +134,15 @@ URL ( 2 / 10): https://www.mercurynews.com/2019/07/06/womens-world-cup-hometown-
 			Subject: Rapinoe
 			Object: Redding
 			Relation: per:cities_of_residence
-			Confidence: 0.9906389117240906
+			Confidence: 0.9906389713287354
 			Adding to set of extracted relations
 			==========================
 
-		Processing sentence 47
+		Processing sentence 49
 			Generated Sentence entity pairs: 15, remaining valid pairs: 6
 			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 48
+		Processing sentence 50
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
@@ -157,35 +153,35 @@ URL ( 2 / 10): https://www.mercurynews.com/2019/07/06/womens-world-cup-hometown-
 			Subject: Rapinoe
 			Object: Redding
 			Relation: per:cities_of_residence
-			Confidence: 0.9906389117240906
+			Confidence: 0.9906389713287354
 			Already present but lower confidence. Discard it.
 			==========================
 
-		Processing sentence 50
+		Processing sentence 52
 			Generated Sentence entity pairs: 9, remaining valid pairs: 6
 			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 51
+		Processing sentence 53
 			Generated Sentence entity pairs: 3, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 55
+		Processing sentence 57
 			Generated Sentence entity pairs: 2, remaining valid pairs: 0
 			No valid candidate pairs, no need for Bert
 
-		Processing sentence 57
+		Processing sentence 59
 			Generated Sentence entity pairs: 6, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 59
+		Processing sentence 61
 			Generated Sentence entity pairs: 3, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 60
+		Processing sentence 62
 			Generated Sentence entity pairs: 15, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 61
+		Processing sentence 63
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
@@ -196,39 +192,39 @@ URL ( 2 / 10): https://www.mercurynews.com/2019/07/06/womens-world-cup-hometown-
 			Subject: Rapinoe
 			Object: Redding
 			Relation: per:cities_of_residence
-			Confidence: 0.9906389117240906
+			Confidence: 0.9906389713287354
 			Already present but lower confidence. Discard it.
 			==========================
 
-		Processing sentence 73
+		Processing sentence 75
 			Generated Sentence entity pairs: 3, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 75
+		Processing sentence 77
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 88
+		Processing sentence 90
 			Generated Sentence entity pairs: 3, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 91
+		Processing sentence 93
 			Generated Sentence entity pairs: 6, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 94
+		Processing sentence 96
 			Generated Sentence entity pairs: 10, remaining valid pairs: 6
 			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 102
+		Processing sentence 104
 			Generated Sentence entity pairs: 10, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 109
+		Processing sentence 111
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 123
+		Processing sentence 125
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
@@ -239,31 +235,46 @@ URL ( 2 / 10): https://www.mercurynews.com/2019/07/06/womens-world-cup-hometown-
 			Subject: Rapinoe
 			Object: Seattle
 			Relation: per:cities_of_residence
-			Confidence: 0.964465320110321
+			Confidence: 0.9644652605056763
 			Adding to set of extracted relations
 			==========================
 
-		Processing sentence 124
+		Processing sentence 126
 			Generated Sentence entity pairs: 0, remaining valid pairs: 0
 			No valid candidate pairs, no need for Bert
-
-		Processing sentence 132
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
 		Processing sentence 134
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 144
-			Generated Sentence entity pairs: 1, remaining valid pairs: 0
-			No valid candidate pairs, no need for Bert
+		Processing sentence 136
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 146
-			Generated Sentence entity pairs: 21, remaining valid pairs: 12
-			Applying SpanBERT for each of the 12 candidate pairs. This should take some time...
+		Processing sentence 145
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-	Relations extracted from this website: 2 (Overall: 3)
+		Processing sentence 155
+			Generated Sentence entity pairs: 11, remaining valid pairs: 7
+			Applying SpanBERT for each of the 7 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: LOCATION
+			Input Tokens: ['old', 'Oakland', 'girl', 'found', 'dead', 'in', 'Sacramento', 'Harriette', 'Cole', ':', 'They', 'did', 'n’t', 'even', 'go', 'to', 'college', 'and', 'they', 'have', 'better', 'jobs', 'Harriette', 'Cole', ':']
+			Subject: Harriette Cole
+			Object: Oakland
+			Relation: per:cities_of_residence
+			Confidence: 0.7797598838806152
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 163
+			Generated Sentence entity pairs: 4, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 3 (Overall: 4)
 
 URL ( 3 / 10): https://www.kqed.org/news/11759612/megan-rapinoes-relationship-with-redding-its-complicated
 	Fetching text from url ...
@@ -307,73 +318,69 @@ URL ( 3 / 10): https://www.kqed.org/news/11759612/megan-rapinoes-relationship-wi
 			Generated Sentence entity pairs: 4, remaining valid pairs: 0
 			No valid candidate pairs, no need for Bert
 
-	Relations extracted from this website: 0 (Overall: 3)
+	Relations extracted from this website: 0 (Overall: 4)
 
 URL ( 4 / 10): https://www.espn.com/espnw/sports/article/24486574/us-soccer-star-megan-rapinoe-launches-fire-relief-fund-redding-hometown
 	Fetching text from url ...
 	Getting the webpage using GET request
-	Webpage length (num characters): 9762
-	Trimming Webpage Content from 9762 to 2000 characters
+	Webpage length (num characters): 9791
+	Trimming Webpage Content from 9791 to 2000 characters
 	Annotating the webpage using spacy...
 		Processing sentence 1
 			Generated Sentence entity pairs: 3, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
 		Processing sentence 5
-			Generated Sentence entity pairs: 3, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+			Generated Sentence entity pairs: 24, remaining valid pairs: 5
+			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
 
-		Processing sentence 7
-			Generated Sentence entity pairs: 45, remaining valid pairs: 4
-			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+		Processing sentence 8
+			Generated Sentence entity pairs: 30, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
 		Processing sentence 10
-			Generated Sentence entity pairs: 19, remaining valid pairs: 5
-			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
+			Generated Sentence entity pairs: 15, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 11
-			Generated Sentence entity pairs: 14, remaining valid pairs: 5
-			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
-
-		Processing sentence 17
+		Processing sentence 16
 			Generated Sentence entity pairs: 6, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 20
+		Processing sentence 19
 			Generated Sentence entity pairs: 18, remaining valid pairs: 6
 			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
 
-		Processing sentence 44
+		Processing sentence 43
 			Generated Sentence entity pairs: 6, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 52
+		Processing sentence 51
 			Generated Sentence entity pairs: 3, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 57
+		Processing sentence 56
 			Generated Sentence entity pairs: 0, remaining valid pairs: 0
 			No valid candidate pairs, no need for Bert
 
-		Processing sentence 75
+		Processing sentence 74
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 90
+		Processing sentence 89
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 92
+		Processing sentence 91
 			Generated Sentence entity pairs: 0, remaining valid pairs: 0
 			No valid candidate pairs, no need for Bert
 
-	Relations extracted from this website: 0 (Overall: 3)
+	Relations extracted from this website: 0 (Overall: 4)
 
 URL ( 5 / 10): https://www.biography.com/athlete/megan-rapinoe
 	Fetching text from url ...
 	Getting the webpage using GET request
-	Webpage length (num characters): 13257
-	Trimming Webpage Content from 13257 to 2000 characters
+	Webpage length (num characters): 13247
+	Trimming Webpage Content from 13247 to 2000 characters
 	Annotating the webpage using spacy...
 		Processing sentence 2
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
@@ -394,7 +401,7 @@ URL ( 5 / 10): https://www.biography.com/athlete/megan-rapinoe
 			Subject: Rapinoe
 			Object: California
 			Relation: per:cities_of_residence
-			Confidence: 0.7735806107521057
+			Confidence: 0.7735806703567505
 			Adding to set of extracted relations
 			==========================
 
@@ -422,43 +429,39 @@ URL ( 5 / 10): https://www.biography.com/athlete/megan-rapinoe
 			Generated Sentence entity pairs: 3, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 57
-			Generated Sentence entity pairs: 6, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 67
+		Processing sentence 69
 			Generated Sentence entity pairs: 3, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 79
+		Processing sentence 81
 			Generated Sentence entity pairs: 10, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 86
+		Processing sentence 88
 			Generated Sentence entity pairs: 3, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 92
+		Processing sentence 94
 			Generated Sentence entity pairs: 6, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 102
+		Processing sentence 104
 			Generated Sentence entity pairs: 4, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 109
+		Processing sentence 111
 			Generated Sentence entity pairs: 5, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 113
+		Processing sentence 115
 			Generated Sentence entity pairs: 2, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 114
+		Processing sentence 116
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-	Relations extracted from this website: 1 (Overall: 4)
+	Relations extracted from this website: 1 (Overall: 5)
 
 URL ( 6 / 10): https://www.sacbee.com/news/local/article232410607.html
 	Fetching text from url ...
@@ -586,12 +589,76 @@ URL ( 7 / 10): https://en.wikipedia.org/wiki/Megan_Rapinoe
 			Generated Sentence entity pairs: 6, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-	Relations extracted from this website: 0 (Overall: 4)
+	Relations extracted from this website: 0 (Overall: 5)
 
 URL ( 8 / 10): https://www.teamusa.org/us-soccer/athletes/megan-rapinoe
 	Fetching text from url ...
 	Getting the webpage using GET request
-	HTTPError, skipping this document
+	Webpage length (num characters): 10165
+	Trimming Webpage Content from 10165 to 2000 characters
+	Annotating the webpage using spacy...
+		Processing sentence 1
+			Generated Sentence entity pairs: 3, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 4
+			Generated Sentence entity pairs: 12, remaining valid pairs: 5
+			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
+
+		Processing sentence 18
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 23
+			Generated Sentence entity pairs: 30, remaining valid pairs: 6
+			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+
+		Processing sentence 30
+			Generated Sentence entity pairs: 0, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+		Processing sentence 43
+			Generated Sentence entity pairs: 3, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 49
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 50
+			Generated Sentence entity pairs: 3, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 51
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 52
+			Generated Sentence entity pairs: 10, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 54
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 57
+			Generated Sentence entity pairs: 10, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
+
+		Processing sentence 58
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 60
+			Generated Sentence entity pairs: 2, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 66
+			Generated Sentence entity pairs: 2, remaining valid pairs: 0
+			No valid candidate pairs, no need for Bert
+
+	Relations extracted from this website: 0 (Overall: 5)
+
 URL ( 9 / 10): https://krcrtv.com/news/local/students-from-redding-head-to-megan-rapinoe-game-after-the-carr-fire
 	Fetching text from url ...
 	Getting the webpage using GET request
@@ -601,47 +668,153 @@ URL ( 9 / 10): https://krcrtv.com/news/local/students-from-redding-head-to-megan
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-	Relations extracted from this website: 0 (Overall: 4)
+	Relations extracted from this website: 0 (Overall: 5)
 
-URL ( 10 / 10): https://www.abc10.com/article/news/woodland-residents-have-mixed-feelings-about-hometown-star-megan-rapinoe/103-c498ec91-4d0e-4cd5-b7e9-c5eaba6a306b
+URL ( 10 / 10): https://www.thedailybeast.com/the-mystical-megachurch-ruling-over-world-cup-soccer-star-megan-rapinoes-hometown
 	Fetching text from url ...
 	Getting the webpage using GET request
-	Webpage length (num characters): 3188
-	Trimming Webpage Content from 3188 to 2000 characters
+	Webpage length (num characters): 16408
+	Trimming Webpage Content from 16408 to 2000 characters
 	Annotating the webpage using spacy...
-		Processing sentence 1
-			Generated Sentence entity pairs: 0, remaining valid pairs: 0
-			No valid candidate pairs, no need for Bert
+		Processing sentence 10
+			Generated Sentence entity pairs: 6, remaining valid pairs: 4
+			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
 
-		Processing sentence 9
-			Generated Sentence entity pairs: 7, remaining valid pairs: 6
-			Applying SpanBERT for each of the 6 candidate pairs. This should take some time...
+		Processing sentence 11
+			Generated Sentence entity pairs: 5, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
 		Processing sentence 13
-			Generated Sentence entity pairs: 5, remaining valid pairs: 3
-			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
-
-		Processing sentence 19
 			Generated Sentence entity pairs: 3, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 29
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: LOCATION
+			Input Tokens: ['Rapinoe', 'grew', 'up', 'in', 'the', 'small', 'logging', 'town', 'of', 'Redding', ',']
+			Subject: Rapinoe
+			Object: Redding
+			Relation: per:cities_of_residence
+			Confidence: 0.5226380228996277
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 15
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 31
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: LOCATION
+			Input Tokens: ['Redding', 'declared', 'July', '21', '“', 'Megan', 'Rapinoe', 'Day', ',', '”', 'named', 'a', 'street', 'in', 'her', 'honor', ',', 'and', 'changed', 'the', 'address', 'of', 'their', 'soccer', 'field', 'to', '“', '15', 'Rapinoe', 'Way', ',']
+			Subject: Rapinoe Way
+			Object: Redding
+			Relation: per:cities_of_residence
+			Confidence: 0.6476086378097534
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+		Processing sentence 16
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 20
+			Generated Sentence entity pairs: 9, remaining valid pairs: 3
+			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
+
+		Processing sentence 23
+			Generated Sentence entity pairs: 10, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 26
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 30
+			Generated Sentence entity pairs: 9, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 35
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 36
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 42
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 44
+			Generated Sentence entity pairs: 3, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 57
+			Generated Sentence entity pairs: 2, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: LOCATION
+			Input Tokens: ['said', 'Nathan', 'Blaze', ',', 'a', '15', '-', 'year', 'Redding', 'resident', 'and', 'the', 'administrator', 'of', 'two', 'Redding', '-']
+			Subject: Nathan Blaze
+			Object: Redding
+			Relation: per:cities_of_residence
+			Confidence: 0.786027729511261
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 59
 			Generated Sentence entity pairs: 3, remaining valid pairs: 2
 			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-	Relations extracted from this website: 0 (Overall: 4)
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: LOCATION
+			Input Tokens: ['Will', 'Smith', ',', 'a', 'former', 'Bethel', 'member', 'who', 'lives', 'in', 'the', 'Bay', 'Area', ',']
+			Subject: Will Smith
+			Object: Bethel
+			Relation: per:cities_of_residence
+			Confidence: 0.5597870945930481
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: LOCATION
+			Input Tokens: ['Will', 'Smith', ',', 'a', 'former', 'Bethel', 'member', 'who', 'lives', 'in', 'the', 'Bay', 'Area', ',']
+			Subject: Will Smith
+			Object: the Bay Area
+			Relation: per:cities_of_residence
+			Confidence: 0.9786309003829956
+			Adding to set of extracted relations
+			==========================
+
+		Processing sentence 76
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
+
+		Processing sentence 90
+			Generated Sentence entity pairs: 13, remaining valid pairs: 5
+			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
+
+		Processing sentence 104
+			Generated Sentence entity pairs: 10, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+	Relations extracted from this website: 2 (Overall: 7)
 
 
-================== ALL RELATIONS for per:cities_of_residence ( 4 ) =================
+================== ALL RELATIONS for per:cities_of_residence ( 7 ) =================
 
-1) Confidence: 0.9906389117240906	Subject: Rapinoe	Object: Redding
-2) Confidence: 0.964465320110321	Subject: Rapinoe	Object: Seattle
-3) Confidence: 0.8120825290679932	Subject: Alayna Shulman	Object: Shasta County
-4) Confidence: 0.7735806107521057	Subject: Rapinoe	Object: California
+1) Confidence: 0.9906389713287354	Subject: Rapinoe	Object: Redding
+2) Confidence: 0.9786309003829956	Subject: Will Smith	Object: the Bay Area
+3) Confidence: 0.9644652605056763	Subject: Rapinoe	Object: Seattle
+4) Confidence: 0.8120825886726379	Subject: Alayna Shulman	Object: Shasta County
+5) Confidence: 0.786027729511261	Subject: Nathan Blaze	Object: Redding
+6) Confidence: 0.7797598838806152	Subject: Harriette Cole	Object: Oakland
+7) Confidence: 0.7735806703567505	Subject: Rapinoe	Object: California
 Total # of iterations = 1
 
 
