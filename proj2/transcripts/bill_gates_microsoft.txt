@@ -629,8 +629,8 @@ URL ( 5 / 10): https://twitter.com/billgates
 URL ( 6 / 10): https://www.wsj.com/articles/microsoft-executives-told-bill-gates-to-stop-emailing-a-female-staffer-years-ago-11634559950
 	Fetching text from url ...
 	Getting the webpage using GET request
-	Webpage length (num characters): 18198
-	Trimming Webpage Content from 18198 to 2000 characters
+	Webpage length (num characters): 10834
+	Trimming Webpage Content from 10834 to 2000 characters
 	Annotating the webpage using spacy...
 		Processing sentence 1
 			Generated Sentence entity pairs: 6, remaining valid pairs: 3
@@ -640,15 +640,15 @@ URL ( 6 / 10): https://www.wsj.com/articles/microsoft-executives-told-bill-gates
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 12
+		Processing sentence 11
 			Generated Sentence entity pairs: 8, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 20
+		Processing sentence 18
 			Generated Sentence entity pairs: 8, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 26
+		Processing sentence 23
 			Generated Sentence entity pairs: 5, remaining valid pairs: 4
 			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
 
@@ -663,22 +663,26 @@ URL ( 6 / 10): https://www.wsj.com/articles/microsoft-executives-told-bill-gates
 			Already present but lower confidence. Discard it.
 			==========================
 
-		Processing sentence 28
-			Generated Sentence entity pairs: 2, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+		Processing sentence 25
+			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
 			=== Extracted Relation ===
 			Subject Entity: PERSON
 			Object Entity: ORGANIZATION
-			Input Tokens: ['By', 'Emily', 'Glazer', 'Updated', 'Oct.', '18', ',', '2021', '10:44', 'am', 'ET', 'The', '2019', 'letter', 'from', 'a', 'Microsoft', 'Corp.', 'MSFT', '-0.14', '%']
+			Input Tokens: ['By', 'Emily', 'Glazer', 'Updated', 'Oct.', '18', ',', '2021', '10:44', 'am', 'ET', 'print', 'Text']
 			Subject: Emily Glazer
-			Object: Microsoft Corp. MSFT
+			Object: ET
 			Relation: per:employee_of
-			Confidence: 0.9886899590492249
+			Confidence: 0.9854902625083923
 			Adding to set of extracted relations
 			==========================
 
-		Processing sentence 29
+		Processing sentence 26
+			Generated Sentence entity pairs: 3, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
+
+		Processing sentence 27
 			Generated Sentence entity pairs: 4, remaining valid pairs: 4
 			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
 
@@ -726,412 +730,11 @@ URL ( 6 / 10): https://www.wsj.com/articles/microsoft-executives-told-bill-gates
 			Already present but lower confidence. Discard it.
 			==========================
 
-		Processing sentence 31
-			Generated Sentence entity pairs: 6, remaining valid pairs: 3
-			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Two', 'top', 'Microsoft', 'executives', ',', 'then', '-', 'General', 'Counsel', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Brad', 'Smith', '\n\n\n\n      ', 'and', 'then', '-']
-			Subject: Brad Smith
-
-
-
-      
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9965593814849854
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Two', 'top', 'Microsoft', 'executives', ',', 'then', '-', 'General', 'Counsel', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Brad', 'Smith', '\n\n\n\n      ', 'and', 'then', '-', 'Chief', 'People', 'Officer', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Lisa', 'Brummel', ',']
-			Subject: Lisa Brummel
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9960956573486328
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Two', 'top', 'Microsoft', 'executives', ',', 'then', '-', 'General', 'Counsel', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Brad', 'Smith', '\n\n\n\n      ', 'and', 'then', '-', 'Chief', 'People', 'Officer', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Lisa', 'Brummel', ',', '\n\n\n\n      ', 'met', 'with', 'Mr.', 'Gates', 'and', 'told', 'him', 'the', 'behavior', 'was', 'inappropriate', 'and', 'needed', 'to', 'stop', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9898381233215332
-			Already present but lower confidence. Discard it.
-			==========================
-
-		Processing sentence 35
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Microsoft', 'spokesman', 'Frank', 'Shaw', 'said', 'that', 'in', '2008', ',']
-			Subject: Frank Shaw
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.4986787736415863
-			Confidence is lower than threshold confidence. Ignoring this.
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Microsoft', 'spokesman', 'Frank', 'Shaw', 'said', 'that', 'in', '2008', ',', 'shortly', 'before', 'Mr.', 'Gates', 'retired', 'as', 'a', 'full', '-']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9680138826370239
-			Already present but lower confidence. Discard it.
-			==========================
-
-		Processing sentence 40
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+		Processing sentence 30
+			Generated Sentence entity pairs: 12, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', ',', 'one', 'of', 'the', 'world', '’s', 'richest', 'people', ',', 'was', 'Microsoft', '’s', 'chief', 'executive', 'until', '2000', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9962714314460754
-			Already present but higher confidence. Update it.
-			==========================
-
-		Processing sentence 45
-			Generated Sentence entity pairs: 3, remaining valid pairs: 3
-			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['At', 'the', 'time', 'Mr.', 'Gates', 'resigned', 'from', 'the', 'Microsoft', 'board', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9971611499786377
-			Already present but higher confidence. Update it.
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['At', 'the', 'time', 'Mr.', 'Gates', 'resigned', 'from', 'the', 'Microsoft', 'board', ',', 'a', 'board', 'committee', 'had', 'hired', 'a', 'law', 'firm', 'to', 'investigate', 'a', 'female', 'engineer', '’s', '2019', 'letter', 'alleging', 'a', 'prior', 'sexual', 'relationship', 'with', 'Mr.', 'Gates', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9903565049171448
-			Already present but lower confidence. Discard it.
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['a', 'board', 'committee', 'had', 'hired', 'a', 'law', 'firm', 'to', 'investigate', 'a', 'female', 'engineer', '’s', '2019', 'letter', 'alleging', 'a', 'prior', 'sexual', 'relationship', 'with', 'Mr.', 'Gates', ',', 'The', 'Wall', 'Street', 'Journal', 'reported', 'in', 'May.']
-			Subject: Gates
-			Object: The Wall Street Journal
-			Relation: per:employee_of
-			Confidence: 0.9919426441192627
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 47
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 49
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Smith', ',', 'who', 'is', 'now', 'Microsoft', '’s', 'president', 'and', 'vice', 'chair', ',']
-			Subject: Smith
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9972800016403198
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['who', 'is', 'now', 'Microsoft', '’s', 'president', 'and', 'vice', 'chair', ',', 'and', 'CEO', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Satya', 'Nadella', '\n\n\n\n      ', 'were', 'among', 'the', 'executives', 'who', 'reviewed', 'the', '2019', 'letter', ',']
-			Subject: Satya Nadella
-
-
-
-      
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9935880899429321
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 50
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Microsoft', 'CEO', 'Satya', 'Nadella', ',']
-			Subject: Satya Nadella
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9951575398445129
-			Already present but lower confidence. Discard it.
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Microsoft', 'CEO', 'Satya', 'Nadella', ',', 'in', 'glasses', ',', 'and', 'President', 'and', 'Vice', 'Chair', 'Brad', 'Smith', 'during', 'the', 'company', '’s', 'annual', 'shareholders', 'meeting', 'in', '2017', '.']
-			Subject: Brad Smith
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.6220123171806335
-			Confidence is lower than threshold confidence. Ignoring this.
-			==========================
-
-		Processing sentence 51
-			Generated Sentence entity pairs: 4, remaining valid pairs: 3
-			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Photo', ':', 'David', 'Ryder', '/', 'Bloomberg', 'News', 'Microsoft', '’s', 'board', 'chair', 'at', 'the', 'time', ',']
-			Subject: David Ryder
-			Object: Bloomberg News Microsoft’s
-			Relation: per:employee_of
-			Confidence: 0.7366621494293213
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Bloomberg', 'News', 'Microsoft', '’s', 'board', 'chair', 'at', 'the', 'time', ',', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'John', 'W.', 'Thompson', ',']
-			Subject: John W. Thompson
-			Object: Bloomberg News Microsoft’s
-			Relation: per:employee_of
-			Confidence: 0.9364299774169922
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 54
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 55
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Microsoft', '’s', 'Mr.', 'Shaw', 'said', 'under', 'the', 'board', '’s', 'governance', 'guidelines', ',']
-			Subject: Shaw
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9959028363227844
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 57
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'relinquished', 'his', 'board', 'seat', 'after', 'some', 'directors', 'decided', 'he', 'should', 'step', 'down', 'but', 'before', 'the', 'investigation', 'was', 'completed', ',', 'the', 'Journal', 'previously', 'reported', '.']
-			Subject: Gates
-			Object: Journal
-			Relation: per:employee_of
-			Confidence: 0.9622740745544434
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 60
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Bill', 'Gates', ',', 'shown', 'at', 'a', 'conference', 'in', '2008', ',', 'served', 'on', 'the', 'Microsoft', 'board', 'for', 'more', 'than', 'four', 'decades', '.']
-			Subject: Bill Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9964329600334167
-			Already present but higher confidence. Update it.
-			==========================
-
-		Processing sentence 61
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Photo', ':', 'Toshiyuki', 'Aizawa', '/', 'BLOOMBERG', 'NEWS', 'Several', 'current', 'and', 'former', 'Microsoft', 'board', 'members', 'and', 'executives', 'said', 'they', 'believed', 'the', 'concerns', 'about', 'Mr.', 'Gates', '’s', 'behavior', 'with', 'female', 'employees', 'were', 'properly', 'handled', '.']
-			Subject: Toshiyuki Aizawa
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.984917163848877
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['BLOOMBERG', 'NEWS', 'Several', 'current', 'and', 'former', 'Microsoft', 'board', 'members', 'and', 'executives', 'said', 'they', 'believed', 'the', 'concerns', 'about', 'Mr.', 'Gates', '’s', 'behavior', 'with', 'female', 'employees', 'were', 'properly', 'handled', '.']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9965336918830872
-			Already present but lower confidence. Discard it.
-			==========================
-
-		Processing sentence 63
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 64
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 67
-			Generated Sentence entity pairs: 2, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 70
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Ms.', 'French', 'Gates', 'was', 'a', 'Microsoft', 'employee', 'when', 'she', 'first', 'met', 'Mr.', 'Gates', 'in', '1987', '.']
-			Subject: French Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9943540096282959
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Ms.', 'French', 'Gates', 'was', 'a', 'Microsoft', 'employee', 'when', 'she', 'first', 'met', 'Mr.', 'Gates', 'in', '1987', '.']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9206134676933289
-			Already present but lower confidence. Discard it.
-			==========================
-
-		Processing sentence 71
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['They', 'married', 'in', '1994', 'and', 'Ms.', 'French', 'Gates', 'stopped', 'working', 'at', 'Microsoft', 'in', '1996', ',']
-			Subject: French Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9965726733207703
-			Already present but higher confidence. Update it.
-			==========================
-
-		Processing sentence 72
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 74
-			Generated Sentence entity pairs: 6, remaining valid pairs: 3
-			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'remains', 'a', 'technical', 'adviser', 'to', 'Mr.', 'Nadella', ',', 'who', 'took', 'over', 'as', 'Microsoft', '’s', 'board', 'chair', 'in', 'June', 'for', 'Mr.', 'Thompson', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.996383547782898
-			Already present but lower confidence. Discard it.
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'remains', 'a', 'technical', 'adviser', 'to', 'Mr.', 'Nadella', ',', 'who', 'took', 'over', 'as', 'Microsoft', '’s', 'board', 'chair', 'in', 'June', 'for', 'Mr.', 'Thompson', ',']
-			Subject: Nadella
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9970470070838928
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['who', 'took', 'over', 'as', 'Microsoft', '’s', 'board', 'chair', 'in', 'June', 'for', 'Mr.', 'Thompson', ',']
-			Subject: Thompson
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.997100293636322
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 75
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['A', 'Microsoft', 'spokesman', 'said', 'at', 'the', 'time', 'the', 'chairman', 'change', 'was', 'unrelated', 'to', 'Mr.', 'Gates', '’s', 'exit', 'from', 'the', 'board', '.']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9963065981864929
-			Already present but lower confidence. Discard it.
-			==========================
-
-		Processing sentence 80
-			Generated Sentence entity pairs: 2, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 81
-			Generated Sentence entity pairs: 12, remaining valid pairs: 5
-			Applying SpanBERT for each of the 5 candidate pairs. This should take some time...
-
-		Processing sentence 85
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 87
-			Generated Sentence entity pairs: 41, remaining valid pairs: 10
-			Applying SpanBERT for each of the 10 candidate pairs. This should take some time...
-
-	Relations extracted from this website: 15 (Overall: 32)
+	Relations extracted from this website: 2 (Overall: 19)
 
 URL ( 7 / 10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-for-july-2008-transition-for-bill-gates/
 	Fetching text from url ...
@@ -1523,285 +1126,80 @@ URL ( 7 / 10): https://news.microsoft.com/2006/06/15/microsoft-announces-plans-f
 			Generated Sentence entity pairs: 10, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-	Relations extracted from this website: 22 (Overall: 54)
+	Relations extracted from this website: 22 (Overall: 41)
 
 URL ( 8 / 10): https://www.wsj.com/articles/microsoft-directors-decided-bill-gates-needed-to-leave-board-due-to-prior-relationship-with-staffer-11621205803
 	Fetching text from url ...
 	Getting the webpage using GET request
-	Webpage length (num characters): 17408
-	Trimming Webpage Content from 17408 to 2000 characters
+	Webpage length (num characters): 10864
+	Trimming Webpage Content from 10864 to 2000 characters
 	Annotating the webpage using spacy...
 		Processing sentence 1
 			Generated Sentence entity pairs: 6, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
+			=== Extracted Relation ===
+			Subject Entity: PERSON
+			Object Entity: ORGANIZATION
+			Input Tokens: ['Bill', 'Gates', 'Left', 'Microsoft', 'Board', 'Amid', 'Probe', 'Into', 'Prior', 'Relationship', 'With', 'Staffer', '-', 'WSJ', 'Skip', 'to', 'Main', 'Content', 'Dow', 'Jones', ',', 'a', 'News', 'Corp', 'company', 'About', 'WSJ', 'News', 'Corp', 'is', 'a', 'global', ',']
+			Subject: Bill Gates
+			Object: News Corp
+			Relation: per:employee_of
+			Confidence: 0.6645851731300354
+			Confidence is lower than threshold confidence. Ignoring this.
+			==========================
+
 		Processing sentence 6
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 12
+		Processing sentence 11
 			Generated Sentence entity pairs: 8, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 20
+		Processing sentence 18
 			Generated Sentence entity pairs: 8, remaining valid pairs: 3
 			Applying SpanBERT for each of the 3 candidate pairs. This should take some time...
 
-		Processing sentence 27
-			Generated Sentence entity pairs: 6, remaining valid pairs: 0
-			No valid candidate pairs, no need for Bert
+		Processing sentence 23
+			Generated Sentence entity pairs: 9, remaining valid pairs: 2
+			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
 
-		Processing sentence 29
+		Processing sentence 25
 			Generated Sentence entity pairs: 15, remaining valid pairs: 4
 			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
 
 			=== Extracted Relation ===
 			Subject Entity: PERSON
 			Object Entity: ORGANIZATION
-			Input Tokens: ['Agence', 'France', '-', 'Presse', '/', 'Getty', 'Images', 'By', 'Emily', 'Glazer', ',', 'Justin', 'Baer', ',', 'Khadeeja', 'Safdar', 'and', 'Aaron', 'Tilley', 'Updated', 'May', '16', ',']
+			Input Tokens: ['Agence', 'France', '-', 'Presse', '/', 'Getty', 'Images', 'By', 'Emily', 'Glazer', ',', 'Justin', 'Baer', ',', 'Khadeeja', 'Safdar', 'and', 'Aaron', 'Tilley', 'Updated', 'May.', '16', ',']
 			Subject: Khadeeja Safdar
 			Object: Agence France-Presse/Getty Images
 			Relation: per:employee_of
-			Confidence: 0.7246304154396057
+			Confidence: 0.8062421679496765
 			Adding to set of extracted relations
 			==========================
 
 			=== Extracted Relation ===
 			Subject Entity: PERSON
 			Object Entity: ORGANIZATION
-			Input Tokens: ['Agence', 'France', '-', 'Presse', '/', 'Getty', 'Images', 'By', 'Emily', 'Glazer', ',', 'Justin', 'Baer', ',', 'Khadeeja', 'Safdar', 'and', 'Aaron', 'Tilley', 'Updated', 'May', '16', ',']
+			Input Tokens: ['Agence', 'France', '-', 'Presse', '/', 'Getty', 'Images', 'By', 'Emily', 'Glazer', ',', 'Justin', 'Baer', ',', 'Khadeeja', 'Safdar', 'and', 'Aaron', 'Tilley', 'Updated', 'May.', '16', ',']
 			Subject: Aaron Tilley
 			Object: Agence France-Presse/Getty Images
 			Relation: per:employee_of
-			Confidence: 0.9689412117004395
+			Confidence: 0.9369731545448303
 			Adding to set of extracted relations
 			==========================
 
-		Processing sentence 30
+		Processing sentence 26
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-		Processing sentence 33
-			Generated Sentence entity pairs: 2, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 39
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
+		Processing sentence 28
+			Generated Sentence entity pairs: 12, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'resigned', 'from', 'the', 'Microsoft', 'board', 'on', 'March', '13', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9976367354393005
-			Already present but higher confidence. Update it.
-			==========================
-
-		Processing sentence 40
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['In', 'a', 'press', 'release', 'filed', 'with', 'regulators', 'and', 'a', 'post', 'on', 'LinkedIn', ',', 'the', 'billionaire', 'said', 'then', 'he', 'wanted', 'to', 'focus', 'on', 'his', 'philanthropy', 'and', 'would', 'continue', 'to', 'serve', 'as', 'a', 'technical', 'adviser', 'to', 'Chief', 'Executive', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Satya', 'Nadella', '.']
-			Subject: Satya Nadella
-			Object: LinkedIn
-			Relation: per:employee_of
-			Confidence: 0.5559029579162598
-			Confidence is lower than threshold confidence. Ignoring this.
-			==========================
-
-		Processing sentence 41
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['he', 'also', 'vacated', 'his', 'board', 'seat', 'at', 'Berkshire', 'Hathaway', 'Inc.', ',', 'the', 'conglomerate', 'run', 'by', 'Mr.', 'Gates', '’s', 'friend', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Warren', 'Buffett', '.']
-			Subject: Gates
-			Object: Berkshire Hathaway Inc.
-			Relation: per:employee_of
-			Confidence: 0.9938496947288513
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['he', 'also', 'vacated', 'his', 'board', 'seat', 'at', 'Berkshire', 'Hathaway', 'Inc.', ',', 'the', 'conglomerate', 'run', 'by', 'Mr.', 'Gates', '’s', 'friend', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Warren', 'Buffett', '.']
-			Subject: Warren Buffett
-			Object: Berkshire Hathaway Inc.
-			Relation: per:employee_of
-			Confidence: 0.9944820404052734
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 49
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 51
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 54
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'was', 'Microsoft', '’s', 'chief', 'executive', 'until', '2000', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9968435764312744
-			Already present but lower confidence. Discard it.
-			==========================
-
-		Processing sentence 55
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'continued', 'to', 'serve', 'on', 'the', 'board', 'and', 'as', 'a', 'technical', 'adviser', 'to', 'Mr.', 'Nadella', 'even', 'as', 'he', 'shifted', 'his', 'focus', 'to', 'his', 'philanthropy', ',', 'the', 'Bill', '&', 'Melinda', 'Gates', 'Foundation', '.']
-			Subject: Gates
-			Object: the Bill & Melinda Gates Foundation
-			Relation: per:employee_of
-			Confidence: 0.9937833547592163
-			Adding to set of extracted relations
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'continued', 'to', 'serve', 'on', 'the', 'board', 'and', 'as', 'a', 'technical', 'adviser', 'to', 'Mr.', 'Nadella', 'even', 'as', 'he', 'shifted', 'his', 'focus', 'to', 'his', 'philanthropy', ',', 'the', 'Bill', '&', 'Melinda', 'Gates', 'Foundation', '.']
-			Subject: Nadella
-			Object: the Bill & Melinda Gates Foundation
-			Relation: per:employee_of
-			Confidence: 0.9938307404518127
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 59
-			Generated Sentence entity pairs: 2, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 61
-			Generated Sentence entity pairs: 2, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Members', 'of', 'the', 'Microsoft', 'board', 'became', 'aware', 'in', 'late', '2019', 'of', 'the', 'letter', 'from', 'the', 'female', 'engineer', ',', 'who', 'demanded', 'changes', 'to', 'her', 'Microsoft', 'job', 'and', 'also', 'shared', 'details', 'of', 'her', 'relationship', 'with', 'Mr.', 'Gates', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9967427849769592
-			Already present but lower confidence. Discard it.
-			==========================
-
-		Processing sentence 65
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'was', 're', '-', 'elected', 'to', 'Microsoft', '’s', 'board', 'at', 'the', 'annual', 'shareholder', 'meeting', '.']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9946879148483276
-			Already present but lower confidence. Discard it.
-			==========================
-
-		Processing sentence 66
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 67
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 69
-			Generated Sentence entity pairs: 6, remaining valid pairs: 4
-			Applying SpanBERT for each of the 4 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'started', 'Microsoft', 'in', '1975', 'with', 'childhood', 'friend', '\n\n\n\n\n\n\n\n\n\n      \n      ', 'Paul', 'Allen', '\n\n\n\n      ', 'and', 'built', 'it', 'into', 'one', 'of', 'the', 'world', '’s', 'biggest', 'companies', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.555972695350647
-			Confidence is lower than threshold confidence. Ignoring this.
-			==========================
-
-		Processing sentence 70
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'married', 'Melinda', 'French', ',', 'then', 'a', 'Microsoft', 'employee', ',']
-			Subject: Gates
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9953359961509705
-			Already present but lower confidence. Discard it.
-			==========================
-
-			=== Extracted Relation ===
-			Subject Entity: PERSON
-			Object Entity: ORGANIZATION
-			Input Tokens: ['Mr.', 'Gates', 'married', 'Melinda', 'French', ',', 'then', 'a', 'Microsoft', 'employee', ',']
-			Subject: Melinda French
-			Object: Microsoft
-			Relation: per:employee_of
-			Confidence: 0.9951717853546143
-			Adding to set of extracted relations
-			==========================
-
-		Processing sentence 73
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 74
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 76
-			Generated Sentence entity pairs: 1, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 78
-			Generated Sentence entity pairs: 3, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 82
-			Generated Sentence entity pairs: 11, remaining valid pairs: 2
-			Applying SpanBERT for each of the 2 candidate pairs. This should take some time...
-
-		Processing sentence 86
-			Generated Sentence entity pairs: 4, remaining valid pairs: 1
-			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
-
-		Processing sentence 87
-			Generated Sentence entity pairs: 35, remaining valid pairs: 9
-			Applying SpanBERT for each of the 9 candidate pairs. This should take some time...
-
-	Relations extracted from this website: 7 (Overall: 61)
+	Relations extracted from this website: 2 (Overall: 43)
 
 URL ( 9 / 10): https://www.nytimes.com/2021/10/18/business/bill-gates-microsoft.html
 	Fetching text from url ...
@@ -1829,7 +1227,7 @@ URL ( 9 / 10): https://www.nytimes.com/2021/10/18/business/bill-gates-microsoft.
 			Object: Microsoft
 			Relation: per:employee_of
 			Confidence: 0.9948728680610657
-			Already present but lower confidence. Discard it.
+			Already present but higher confidence. Update it.
 			==========================
 
 			=== Extracted Relation ===
@@ -1945,7 +1343,7 @@ URL ( 9 / 10): https://www.nytimes.com/2021/10/18/business/bill-gates-microsoft.
 			Generated Sentence entity pairs: 1, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-	Relations extracted from this website: 2 (Overall: 63)
+	Relations extracted from this website: 2 (Overall: 45)
 
 URL ( 10 / 10): https://nypost.com/2022/01/14/microsoft-orders-probe-of-bill-gates-harassment-allegations/
 	Fetching text from url ...
@@ -2000,7 +1398,7 @@ URL ( 10 / 10): https://nypost.com/2022/01/14/microsoft-orders-probe-of-bill-gat
 			Object: Microsoft
 			Relation: per:employee_of
 			Confidence: 0.9969291090965271
-			Already present but lower confidence. Discard it.
+			Already present but higher confidence. Update it.
 			==========================
 
 		Processing sentence 30
@@ -2019,82 +1417,56 @@ URL ( 10 / 10): https://nypost.com/2022/01/14/microsoft-orders-probe-of-bill-gat
 			Generated Sentence entity pairs: 3, remaining valid pairs: 1
 			Applying SpanBERT for each of the 1 candidate pairs. This should take some time...
 
-	Relations extracted from this website: 0 (Overall: 63)
+	Relations extracted from this website: 0 (Overall: 45)
 
 
-================== ALL RELATIONS for per:employee_of ( 63 ) =================
+================== ALL RELATIONS for per:employee_of ( 45 ) =================
 
-1) Confidence: 0.9976367354393005	Subject: Gates	Object: Microsoft
-2) Confidence: 0.9975891709327698	Subject: James I. Cash	Object: Harvard Business School
-3) Confidence: 0.9975853562355042	Subject: James I. Cash	Object: Microsoft
-4) Confidence: 0.9975349307060242	Subject: Todd Haselton	Object: Microsoft
-5) Confidence: 0.9972800016403198	Subject: Smith	Object: Microsoft
-6) Confidence: 0.9971849322319031	Subject: James E. Robison	Object: Harvard Business School
-7) Confidence: 0.9971440434455872	Subject: Jordan Novet	Object: Microsoft
-8) Confidence: 0.997100293636322	Subject: Thompson	Object: Microsoft
-9) Confidence: 0.9970470070838928	Subject: Jeff Bezos	Object: Amazon
-10) Confidence: 0.9970470070838928	Subject: Nadella	Object: Microsoft
-11) Confidence: 0.9969053864479065	Subject: Satya Nadella	Object: Microsoft
-12) Confidence: 0.9966734051704407	Subject: Mundie	Object: Microsoft
-13) Confidence: 0.9966724514961243	Subject: Jeff Bezos	Object: Gates
-14) Confidence: 0.9965726733207703	Subject: French Gates	Object: Microsoft
-15) Confidence: 0.9965593814849854	Subject: Brad Smith
-
-
-
-      	Object: Microsoft
-16) Confidence: 0.9965004324913025	Subject: James E. Robison	Object: Microsoft
-17) Confidence: 0.9964329600334167	Subject: Bill Gates	Object: Microsoft
-18) Confidence: 0.9960956573486328	Subject: Lisa Brummel	Object: Microsoft
-19) Confidence: 0.9959028363227844	Subject: Shaw	Object: Microsoft
-20) Confidence: 0.9955676198005676	Subject: Ballmer	Object: Microsoft
-21) Confidence: 0.9951717853546143	Subject: Melinda French	Object: Microsoft
-22) Confidence: 0.994773268699646	Subject: Steve Ballmer	Object: Microsoft
-23) Confidence: 0.9945977926254272	Subject: Bill Gates	Object: Microsoft Corp.
-24) Confidence: 0.9944820404052734	Subject: Warren Buffett	Object: Berkshire Hathaway Inc.
-25) Confidence: 0.9938496947288513	Subject: Gates	Object: Berkshire Hathaway Inc.
-26) Confidence: 0.9938307404518127	Subject: Nadella	Object: the Bill & Melinda Gates Foundation
-27) Confidence: 0.9937833547592163	Subject: Gates	Object: the Bill & Melinda Gates Foundation
-28) Confidence: 0.9935880899429321	Subject: Satya Nadella
-
-
-
-      	Object: Microsoft
-29) Confidence: 0.9934440851211548	Subject: Ozzie	Object: Microsoft
-30) Confidence: 0.9933578968048096	Subject: Bill Gates	Object: Fast Money Microsoft
-31) Confidence: 0.9919426441192627	Subject: Gates	Object: The Wall Street Journal
-32) Confidence: 0.9911908507347107	Subject: Craig Mundie	Object: Redmond, Wash
-33) Confidence: 0.9910745620727539	Subject: Craig Mundie	Object: Microsoft
-34) Confidence: 0.9900259971618652	Subject: Bill Gates	Object: Redmond, Wash
-35) Confidence: 0.9896889925003052	Subject: Ozzie	Object: Groove Networks
-36) Confidence: 0.9886899590492249	Subject: Emily Glazer	Object: Microsoft Corp. MSFT
-37) Confidence: 0.9881677627563477	Subject: Allen	Object: Microsoft
-38) Confidence: 0.9868191480636597	Subject: Bill Gates	Object: Microsoft Corporation
-39) Confidence: 0.9855861663818359	Subject: James E. Robison	Object: Ph.D.
-40) Confidence: 0.984917163848877	Subject: Toshiyuki Aizawa	Object: Microsoft
-41) Confidence: 0.9831716418266296	Subject: William Henry Gates III	Object: Microsoft Corporation
-42) Confidence: 0.9767241477966309	Subject: Jim Allchin	Object: Microsoft
-43) Confidence: 0.972763180732727	Subject: Emily Flitter	Object: Microsoft
-44) Confidence: 0.9727112650871277	Subject: Frank Shaw	Object: Microsoft
-45) Confidence: 0.9696159958839417	Subject: Brad Smith	Object: Microsoft
-46) Confidence: 0.9689412117004395	Subject: Aaron Tilley	Object: Agence France-Presse/Getty Images
-47) Confidence: 0.9622740745544434	Subject: Gates	Object: Journal
-48) Confidence: 0.9558250904083252	Subject: Ballmer	Object: Gates
-49) Confidence: 0.944237232208252	Subject: Paul Allen	Object: Microsoft
-50) Confidence: 0.9364299774169922	Subject: John W. Thompson	Object: Bloomberg News Microsoft’s
-51) Confidence: 0.9248223304748535	Subject: Ozzie	Object: Lotus Symphony
-52) Confidence: 0.9111670851707458	Subject: Robbie Bach	Object: Microsoft
-53) Confidence: 0.9101613759994507	Subject: Melinda	Object: Bill & Melinda Gates Foundation
-54) Confidence: 0.9043082594871521	Subject: Mundie	Object: the Consumer Platforms Division
-55) Confidence: 0.9038960933685303	Subject: Jack Sams	Object: IBM
-56) Confidence: 0.899346649646759	Subject: Kevin Johnson	Object: Microsoft
-57) Confidence: 0.8876245617866516	Subject: Craig	Object: Gates
-58) Confidence: 0.8860666751861572	Subject: Bill Gates	Object: news &
-59) Confidence: 0.8542830944061279	Subject: Mary Maxwell Gates	Object: IBM
-60) Confidence: 0.7989218831062317	Subject: John Opel	Object: IBM
-61) Confidence: 0.7719218134880066	Subject: Jeff Raikes	Object: Microsoft
-62) Confidence: 0.7366621494293213	Subject: David Ryder	Object: Bloomberg News Microsoft’s
-63) Confidence: 0.7246304154396057	Subject: Khadeeja Safdar	Object: Agence France-Presse/Getty Images
+1) Confidence: 0.9975891709327698	Subject: James I. Cash	Object: Harvard Business School
+2) Confidence: 0.9975853562355042	Subject: James I. Cash	Object: Microsoft
+3) Confidence: 0.9975349307060242	Subject: Todd Haselton	Object: Microsoft
+4) Confidence: 0.9971849322319031	Subject: James E. Robison	Object: Harvard Business School
+5) Confidence: 0.9971440434455872	Subject: Jordan Novet	Object: Microsoft
+6) Confidence: 0.9970470070838928	Subject: Jeff Bezos	Object: Amazon
+7) Confidence: 0.9969291090965271	Subject: Gates	Object: Microsoft
+8) Confidence: 0.9969053864479065	Subject: Satya Nadella	Object: Microsoft
+9) Confidence: 0.9966734051704407	Subject: Mundie	Object: Microsoft
+10) Confidence: 0.9966724514961243	Subject: Jeff Bezos	Object: Gates
+11) Confidence: 0.9965004324913025	Subject: James E. Robison	Object: Microsoft
+12) Confidence: 0.9963312745094299	Subject: Bill Gates	Object: Microsoft
+13) Confidence: 0.9955676198005676	Subject: Ballmer	Object: Microsoft
+14) Confidence: 0.994773268699646	Subject: Steve Ballmer	Object: Microsoft
+15) Confidence: 0.9945977926254272	Subject: Bill Gates	Object: Microsoft Corp.
+16) Confidence: 0.9934440851211548	Subject: Ozzie	Object: Microsoft
+17) Confidence: 0.9933578968048096	Subject: Bill Gates	Object: Fast Money Microsoft
+18) Confidence: 0.9911908507347107	Subject: Craig Mundie	Object: Redmond, Wash
+19) Confidence: 0.9910745620727539	Subject: Craig Mundie	Object: Microsoft
+20) Confidence: 0.9900259971618652	Subject: Bill Gates	Object: Redmond, Wash
+21) Confidence: 0.9896889925003052	Subject: Ozzie	Object: Groove Networks
+22) Confidence: 0.9881677627563477	Subject: Allen	Object: Microsoft
+23) Confidence: 0.9868191480636597	Subject: Bill Gates	Object: Microsoft Corporation
+24) Confidence: 0.9855861663818359	Subject: James E. Robison	Object: Ph.D.
+25) Confidence: 0.9854902625083923	Subject: Emily Glazer	Object: ET
+26) Confidence: 0.9831716418266296	Subject: William Henry Gates III	Object: Microsoft Corporation
+27) Confidence: 0.9767241477966309	Subject: Jim Allchin	Object: Microsoft
+28) Confidence: 0.972763180732727	Subject: Emily Flitter	Object: Microsoft
+29) Confidence: 0.9727112650871277	Subject: Frank Shaw	Object: Microsoft
+30) Confidence: 0.9696159958839417	Subject: Brad Smith	Object: Microsoft
+31) Confidence: 0.9558250904083252	Subject: Ballmer	Object: Gates
+32) Confidence: 0.944237232208252	Subject: Paul Allen	Object: Microsoft
+33) Confidence: 0.9369731545448303	Subject: Aaron Tilley	Object: Agence France-Presse/Getty Images
+34) Confidence: 0.9248223304748535	Subject: Ozzie	Object: Lotus Symphony
+35) Confidence: 0.9111670851707458	Subject: Robbie Bach	Object: Microsoft
+36) Confidence: 0.9101613759994507	Subject: Melinda	Object: Bill & Melinda Gates Foundation
+37) Confidence: 0.9043082594871521	Subject: Mundie	Object: the Consumer Platforms Division
+38) Confidence: 0.9038960933685303	Subject: Jack Sams	Object: IBM
+39) Confidence: 0.899346649646759	Subject: Kevin Johnson	Object: Microsoft
+40) Confidence: 0.8876245617866516	Subject: Craig	Object: Gates
+41) Confidence: 0.8860666751861572	Subject: Bill Gates	Object: news &
+42) Confidence: 0.8542830944061279	Subject: Mary Maxwell Gates	Object: IBM
+43) Confidence: 0.8062421679496765	Subject: Khadeeja Safdar	Object: Agence France-Presse/Getty Images
+44) Confidence: 0.7989218831062317	Subject: John Opel	Object: IBM
+45) Confidence: 0.7719218134880066	Subject: Jeff Raikes	Object: Microsoft
 Total # of iterations = 1
 
 
