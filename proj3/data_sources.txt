@@ -1,0 +1,9 @@
+1) unbanked and underbanked populations in NYC by neighborhood
+https://data.cityofnewyork.us/Business/Where-Are-the-Unbanked-and-Underbanked-in-New-York/v5w4-adxa
+
+2) Broadband Adoption Basic Indicators
+https://data.cityofnewyork.us/City-Government/Broadband-Adoption-Basic-Indicators/6wy6-6agj/
+
+3) Neighborhood Conversions
+https://www1.nyc.gov/site/planning/data-maps/nyc-population/geographic-reference.page
+https://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/ntas.pdf
