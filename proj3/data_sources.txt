@@ -1,3 +1,7 @@
+proj3 data sources
+
+Most of the data is pulled from NYC open Data per the spec requirement
+
 1) unbanked and underbanked populations in NYC by neighborhood
 https://data.cityofnewyork.us/Business/Where-Are-the-Unbanked-and-Underbanked-in-New-York/v5w4-adxa
 
@@ -7,3 +11,9 @@ https://data.cityofnewyork.us/City-Government/Broadband-Adoption-Basic-Indicator
 3) Neighborhood Conversions
 https://www1.nyc.gov/site/planning/data-maps/nyc-population/geographic-reference.page
 https://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/ntas.pdf
+
+4) School location by neighborhood
+https://data.cityofnewyork.us/Education/2019-DOE-High-School-Directory/uq7m-95z8
+
+5) NYC regents scores by school
+https://data.cityofnewyork.us/Education/2014-15-2018-19-NYC-Regents-Exam-Public/2h3w-9uj9
