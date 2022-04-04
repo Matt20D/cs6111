@@ -17,3 +17,8 @@ https://data.cityofnewyork.us/Education/2019-DOE-High-School-Directory/uq7m-95z8
 
 5) NYC regents scores by school
 https://data.cityofnewyork.us/Education/2014-15-2018-19-NYC-Regents-Exam-Public/2h3w-9uj9
+
+integrated_data_final.csv will contain the union of the most interesting
+columns of data from the above 5 sources. This was not a trivial process.
+Took about 2 days of data wrangling and sourcing 5 different NYC open
+datasets.
