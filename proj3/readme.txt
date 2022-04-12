@@ -75,6 +75,8 @@ cleaning to do (for poorly kept data).
 *) Filter (1,2,4,5) on year to 2018-2019, and clean out a majority of the
 features.
 
+*) Delete NTA column
+
 -------------------------------------
 Final File
 -------------------------------------
@@ -82,3 +84,8 @@ integrated_data_final.csv will contain the union of the most interesting
 columns of data from the above 5 sources. This was not a trivial process.
 Took about 2 days of data wrangling and sourcing 5 different NYC open
 datasets.
+
+-------------------------------------
+A Priori Implementation
+-------------------------------------
+
