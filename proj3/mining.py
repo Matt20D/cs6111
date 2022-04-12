@@ -134,6 +134,11 @@ def generate_optimized_combinations(Lk, iteration):
 	
 
 	'''
+
+	#NOTE: this function is comprised of two steps
+	# 1) join Lk-1 with itself and perform the SQL statement outlined in the paper
+	# 2) delete itemsets that contain subsets that did not occur in the previous iteration
+	
 	Ck = set()
 
 	for c in Ck:
