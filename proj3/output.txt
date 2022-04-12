@@ -1,0 +1,194 @@
+==Frequent itemsets (min_sup=50.0%)
+['0-20_bus_routes'], 89.05166775670372%
+['0-25_total_transit_ways'], 88.7246566383257%
+['General Academic'], 87.99215173315893%
+['0-20_bus_routes', '0-25_total_transit_ways'], 86.841073%
+['Yes_Free_Public_wifi'], 85.8600392413342%
+['General Academic', '0-20_bus_routes'], 80.640942%
+['General Academic', '0-25_total_transit_ways'], 80.497057%
+['High school'], 79.84303466317854%
+['General Academic', '0-20_bus_routes', '0-25_total_transit_ways'], 79.306736%
+['0-20_bus_routes', 'Yes_Free_Public_wifi'], 76.324395%
+['0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 75.160235%
+['General Academic', 'Yes_Free_Public_wifi'], 75.042511%
+['<10%_unbanked'], 74.80706344015697%
+['0-20_bus_routes', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 74.1138%
+['High school', '0-20_bus_routes'], 69.640288%
+['High school', '0-25_total_transit_ways'], 69.548725%
+['General Academic', '0-20_bus_routes', 'Yes_Free_Public_wifi'], 68.606933%
+['High school', 'Yes_Free_Public_wifi'], 68.2276%
+['General Academic', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 68.122956%
+['General Academic', 'High school'], 67.835186%
+['High school', '0-20_bus_routes', '0-25_total_transit_ways'], 67.665141%
+['General Academic', '0-20_bus_routes', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 67.272727%
+['General Academic', '<10%_unbanked'], 65.179856%
+['0-20_bus_routes', '<10%_unbanked'], 64.342708%
+['>50%_of_class_PASSED_TEST'], 64.21190320470896%
+['0-25_total_transit_ways', '<10%_unbanked'], 63.81949%
+['1-5_subway_stops'], 63.29627207325049%
+['<10%_unbanked', 'Yes_Free_Public_wifi'], 63.283192%
+['0-20_bus_routes', '0-25_total_transit_ways', '<10%_unbanked'], 62.132112%
+['1-5_subway_stops', '0-25_total_transit_ways'], 61.935906%
+['51%-75%_mobile_broadband'], 61.386527141922826%
+['<10%_poor_percentage'], 61.360366252452586%
+['<10%_unbanked', '<10%_poor_percentage'], 61.360366%
+['General Academic', 'High school', '0-25_total_transit_ways'], 61.321125%
+['General Academic', 'High school', '0-20_bus_routes'], 61.229562%
+['High school', '<10%_unbanked'], 61.072596%
+['1-5_subway_stops', '0-20_bus_routes'], 60.313931%
+['1-5_subway_stops', '0-20_bus_routes', '0-25_total_transit_ways'], 60.313931%
+['General Academic', 'High school', '0-20_bus_routes', '0-25_total_transit_ways'], 60.130804%
+['0-25_total_transit_ways', '51%-75%_mobile_broadband'], 59.882276%
+['High school', '0-20_bus_routes', 'Yes_Free_Public_wifi'], 59.175932%
+['0-20_bus_routes', '51%-75%_mobile_broadband'], 59.11053%
+['0-20_bus_routes', '0-25_total_transit_ways', '51%-75%_mobile_broadband'], 59.11053%
+['High school', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 58.24722%
+['General Academic', '0-20_bus_routes', '<10%_unbanked'], 58.116416%
+['General Academic', '0-25_total_transit_ways', '<10%_unbanked'], 57.972531%
+['General Academic', 'High school', 'Yes_Free_Public_wifi'], 57.410072%
+['High school', '0-20_bus_routes', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 57.200785%
+['General Academic', '>50%_of_class_PASSED_TEST'], 56.834532%
+['81%-90%_attend_rate'], 56.80837148463048%
+['General Academic', '0-20_bus_routes', '0-25_total_transit_ways', '<10%_unbanked'], 56.782211%
+['General Academic', '1-5_subway_stops'], 56.76913%
+['1-5_AP_CLASSES'], 56.533682145192934%
+['>50%_of_class_PASSED_TEST', '0-20_bus_routes'], 56.102027%
+['>50%_of_class_PASSED_TEST', '0-25_total_transit_ways'], 55.984303%
+['General Academic', '51%-75%_mobile_broadband'], 55.696534%
+['General Academic', '1-5_subway_stops', '0-25_total_transit_ways'], 55.618051%
+['General Academic', '0-25_total_transit_ways', '51%-75%_mobile_broadband'], 54.885546%
+['General Academic', '<10%_unbanked', 'Yes_Free_Public_wifi'], 54.610857%
+['>50%_of_class_PASSED_TEST', '0-20_bus_routes', '0-25_total_transit_ways'], 54.558535%
+['General Academic', '0-20_bus_routes', '51%-75%_mobile_broadband'], 54.545455%
+['General Academic', '0-20_bus_routes', '0-25_total_transit_ways', '51%-75%_mobile_broadband'], 54.545455%
+['General Academic', '1-5_subway_stops', '0-20_bus_routes'], 54.427731%
+['General Academic', '1-5_subway_stops', '0-20_bus_routes', '0-25_total_transit_ways'], 54.427731%
+['0-20_bus_routes', '<10%_unbanked', 'Yes_Free_Public_wifi'], 54.231524%
+['General Academic', '<10%_poor_percentage'], 54.022237%
+['General Academic', '<10%_unbanked', '<10%_poor_percentage'], 54.022237%
+['>50%_of_class_PASSED_TEST', 'Yes_Free_Public_wifi'], 53.81295%
+['0-20_bus_routes', '<10%_poor_percentage'], 52.962721%
+['0-20_bus_routes', '<10%_unbanked', '<10%_poor_percentage'], 52.962721%
+['0-25_total_transit_ways', '<10%_unbanked', 'Yes_Free_Public_wifi'], 52.871158%
+['<10%_poor_percentage', 'Yes_Free_Public_wifi'], 52.64879%
+['<10%_unbanked', '<10%_poor_percentage', 'Yes_Free_Public_wifi'], 52.64879%
+['51%-75%_mobile_broadband', 'Yes_Free_Public_wifi'], 52.295618%
+['1-5_subway_stops', 'Yes_Free_Public_wifi'], 52.099411%
+['0-20_bus_routes', '0-25_total_transit_ways', '<10%_unbanked', 'Yes_Free_Public_wifi'], 52.020929%
+['0-25_total_transit_ways', '<10%_poor_percentage'], 51.929366%
+['0-25_total_transit_ways', '<10%_unbanked', '<10%_poor_percentage'], 51.929366%
+['High school', '<10%_unbanked', 'Yes_Free_Public_wifi'], 51.785481%
+['General Academic', 'High school', '0-20_bus_routes', 'Yes_Free_Public_wifi'], 51.45847%
+['General Academic', 'High school', '<10%_unbanked'], 51.445389%
+['High school', '0-20_bus_routes', '<10%_unbanked'], 51.353826%
+['1-5_subway_stops', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 51.314585%
+['General Academic', 'High school', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 51.209941%
+['General Academic', '>50%_of_class_PASSED_TEST', '0-20_bus_routes'], 51.157619%
+['0-20_bus_routes', '0-25_total_transit_ways', '<10%_poor_percentage'], 51.092217%
+['0-20_bus_routes', '0-25_total_transit_ways', '<10%_unbanked', '<10%_poor_percentage'], 51.092217%
+['High school', '0-25_total_transit_ways', '<10%_unbanked'], 51.066056%
+['General Academic', '>50%_of_class_PASSED_TEST', '0-25_total_transit_ways'], 50.922171%
+['0-25_total_transit_ways', '51%-75%_mobile_broadband', 'Yes_Free_Public_wifi'], 50.791367%
+['>50%_of_class_PASSED_TEST', '<10%_unbanked'], 50.673643%
+['0-25_total_transit_ways', '81%-90%_attend_rate'], 50.673643%
+['0-20_bus_routes', '81%-90%_attend_rate'], 50.647482%
+['1-5_AP_CLASSES', '0-20_bus_routes'], 50.634402%
+['0-20_bus_routes', '51%-75%_mobile_broadband', 'Yes_Free_Public_wifi'], 50.59516%
+['0-20_bus_routes', '0-25_total_transit_ways', '51%-75%_mobile_broadband', 'Yes_Free_Public_wifi'], 50.59516%
+['1-5_AP_CLASSES', '0-25_total_transit_ways'], 50.58208%
+['2019'], 50.35971223021583%
+['General Academic', 'High school', '0-20_bus_routes', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 50.359712%
+['High school', '>50%_of_class_PASSED_TEST'], 50.333551%
+['1-5_subway_stops', '0-20_bus_routes', 'Yes_Free_Public_wifi'], 50.268149%
+['1-5_subway_stops', '0-20_bus_routes', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'], 50.268149%
+['High school', '<10%_poor_percentage'], 50.098103%
+['High school', '<10%_unbanked', '<10%_poor_percentage'], 50.098103%
+['General Academic', '>50%_of_class_PASSED_TEST', '0-20_bus_routes', '0-25_total_transit_ways'], 50.045782%
+
+
+==High-confidence association rules (min_conf=90.0%)
+['<10%_poor_percentage'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 61.360366%)
+['1-5_subway_stops', '0-20_bus_routes'] => ['0-25_total_transit_ways'], (Conf: 100.0%, Supp: 60.313931%)
+['General Academic', '<10%_poor_percentage'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 54.022237%)
+['0-20_bus_routes', '51%-75%_mobile_broadband'] => ['0-25_total_transit_ways'], (Conf: 100.0%, Supp: 59.11053%)
+['0-20_bus_routes', '<10%_poor_percentage'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 52.962721%)
+['0-25_total_transit_ways', '<10%_poor_percentage'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 51.929366%)
+['<10%_poor_percentage', 'Yes_Free_Public_wifi'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 52.64879%)
+['High school', '<10%_poor_percentage'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 50.098103%)
+['General Academic', '1-5_subway_stops', '0-20_bus_routes'] => ['0-25_total_transit_ways'], (Conf: 100.0%, Supp: 54.427731%)
+['General Academic', '0-20_bus_routes', '51%-75%_mobile_broadband'] => ['0-25_total_transit_ways'], (Conf: 100.0%, Supp: 54.545455%)
+['1-5_subway_stops', '0-20_bus_routes', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 100.0%, Supp: 50.268149%)
+['0-20_bus_routes', '0-25_total_transit_ways', '<10%_poor_percentage'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 51.092217%)
+['0-20_bus_routes', '51%-75%_mobile_broadband', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 100.0%, Supp: 50.59516%)
+['0-25_total_transit_ways', '51%-75%_mobile_broadband', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 99.613701%, Supp: 50.59516%)
+['General Academic', '0-25_total_transit_ways', '51%-75%_mobile_broadband'] => ['0-20_bus_routes'], (Conf: 99.380362%, Supp: 54.545455%)
+['General Academic', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 98.75192%, Supp: 67.272727%)
+['0-25_total_transit_ways', '51%-75%_mobile_broadband'] => ['0-20_bus_routes'], (Conf: 98.711228%, Supp: 59.11053%)
+['0-25_total_transit_ways', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 98.607727%, Supp: 74.1138%)
+['General Academic', '51%-75%_mobile_broadband'] => ['0-25_total_transit_ways'], (Conf: 98.543917%, Supp: 54.885546%)
+['General Academic', '0-25_total_transit_ways'] => ['0-20_bus_routes'], (Conf: 98.521287%, Supp: 79.306736%)
+['1-5_subway_stops', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 98.493598%, Supp: 51.314585%)
+['0-25_total_transit_ways', '<10%_unbanked', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 98.391885%, Supp: 52.020929%)
+['0-25_total_transit_ways', '<10%_poor_percentage'] => ['0-20_bus_routes'], (Conf: 98.387909%, Supp: 51.092217%)
+['0-25_total_transit_ways', '<10%_unbanked', '<10%_poor_percentage'] => ['0-20_bus_routes'], (Conf: 98.387909%, Supp: 51.092217%)
+['General Academic', '0-20_bus_routes'] => ['0-25_total_transit_ways'], (Conf: 98.345499%, Supp: 79.306736%)
+['General Academic', 'High school', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 98.339719%, Supp: 50.359712%)
+['General Academic', '>50%_of_class_PASSED_TEST', '0-25_total_transit_ways'] => ['0-20_bus_routes'], (Conf: 98.278962%, Supp: 50.045782%)
+['General Academic', 'High school', '0-20_bus_routes'] => ['0-25_total_transit_ways'], (Conf: 98.205512%, Supp: 60.130804%)
+['High school', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 98.203458%, Supp: 57.200785%)
+['General Academic', 'High school', '0-25_total_transit_ways'] => ['0-20_bus_routes'], (Conf: 98.058874%, Supp: 60.130804%)
+['General Academic', '0-20_bus_routes', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 98.055291%, Supp: 67.272727%)
+['General Academic', '1-5_subway_stops'] => ['0-25_total_transit_ways'], (Conf: 97.97235%, Supp: 55.618051%)
+['1-5_subway_stops', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 97.960744%, Supp: 50.268149%)
+['General Academic', '0-25_total_transit_ways', '<10%_unbanked'] => ['0-20_bus_routes'], (Conf: 97.946751%, Supp: 56.782211%)
+['General Academic', '51%-75%_mobile_broadband'] => ['0-20_bus_routes'], (Conf: 97.933302%, Supp: 54.545455%)
+['0-25_total_transit_ways'] => ['0-20_bus_routes'], (Conf: 97.877046%, Supp: 86.841073%)
+['General Academic', 'High school', '0-20_bus_routes', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 97.864769%, Supp: 50.359712%)
+['General Academic', '1-5_subway_stops', '0-25_total_transit_ways'] => ['0-20_bus_routes'], (Conf: 97.859831%, Supp: 54.427731%)
+['1-5_subway_stops'] => ['0-25_total_transit_ways'], (Conf: 97.850796%, Supp: 61.935906%)
+['General Academic', '>50%_of_class_PASSED_TEST', '0-20_bus_routes'] => ['0-25_total_transit_ways'], (Conf: 97.826643%, Supp: 50.045782%)
+['General Academic', '0-20_bus_routes', '<10%_unbanked'] => ['0-25_total_transit_ways'], (Conf: 97.704254%, Supp: 56.782211%)
+['51%-75%_mobile_broadband'] => ['0-25_total_transit_ways'], (Conf: 97.549542%, Supp: 59.882276%)
+['0-20_bus_routes'] => ['0-25_total_transit_ways'], (Conf: 97.517626%, Supp: 86.841073%)
+['>50%_of_class_PASSED_TEST', '0-25_total_transit_ways'] => ['0-20_bus_routes'], (Conf: 97.453271%, Supp: 54.558535%)
+['1-5_subway_stops', '0-25_total_transit_ways'] => ['0-20_bus_routes'], (Conf: 97.381204%, Supp: 60.313931%)
+['0-25_total_transit_ways', '<10%_unbanked'] => ['0-20_bus_routes'], (Conf: 97.356016%, Supp: 62.132112%)
+['High school', '0-25_total_transit_ways'] => ['0-20_bus_routes'], (Conf: 97.291706%, Supp: 67.665141%)
+['>50%_of_class_PASSED_TEST', '0-20_bus_routes'] => ['0-25_total_transit_ways'], (Conf: 97.248776%, Supp: 54.558535%)
+['High school', '0-20_bus_routes'] => ['0-25_total_transit_ways'], (Conf: 97.163787%, Supp: 67.665141%)
+['51%-75%_mobile_broadband', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 97.123562%, Supp: 50.791367%)
+['0-20_bus_routes', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 97.103685%, Supp: 74.1138%)
+['51%-75%_mobile_broadband', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 96.748374%, Supp: 50.59516%)
+['High school', '0-20_bus_routes', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 96.662246%, Supp: 57.200785%)
+['0-20_bus_routes', '<10%_unbanked'] => ['0-25_total_transit_ways'], (Conf: 96.564342%, Supp: 62.132112%)
+['1-5_subway_stops', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 96.485062%, Supp: 50.268149%)
+['0-20_bus_routes', '<10%_poor_percentage'] => ['0-25_total_transit_ways'], (Conf: 96.468264%, Supp: 51.092217%)
+['0-20_bus_routes', '<10%_unbanked', '<10%_poor_percentage'] => ['0-25_total_transit_ways'], (Conf: 96.468264%, Supp: 51.092217%)
+['51%-75%_mobile_broadband'] => ['0-20_bus_routes'], (Conf: 96.29235%, Supp: 59.11053%)
+['0-20_bus_routes', '<10%_unbanked', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 95.923782%, Supp: 52.020929%)
+['General Academic', '1-5_subway_stops'] => ['0-20_bus_routes'], (Conf: 95.875576%, Supp: 54.427731%)
+['1-5_subway_stops'] => ['0-20_bus_routes'], (Conf: 95.288283%, Supp: 60.313931%)
+['0-20_bus_routes', '51%-75%_mobile_broadband'] => ['General Academic'], (Conf: 92.277052%, Supp: 54.545455%)
+['0-20_bus_routes', '0-25_total_transit_ways', '51%-75%_mobile_broadband'] => ['General Academic'], (Conf: 92.277052%, Supp: 54.545455%)
+['>50%_of_class_PASSED_TEST', '0-20_bus_routes', '0-25_total_transit_ways'] => ['General Academic'], (Conf: 91.728602%, Supp: 50.045782%)
+['0-25_total_transit_ways', '51%-75%_mobile_broadband'] => ['General Academic'], (Conf: 91.655745%, Supp: 54.885546%)
+['General Academic'] => ['0-20_bus_routes'], (Conf: 91.645607%, Supp: 80.640942%)
+['General Academic'] => ['0-25_total_transit_ways'], (Conf: 91.482087%, Supp: 80.497057%)
+['General Academic', 'Yes_Free_Public_wifi'] => ['0-20_bus_routes'], (Conf: 91.424089%, Supp: 68.606933%)
+['0-20_bus_routes', '0-25_total_transit_ways', '<10%_unbanked'] => ['General Academic'], (Conf: 91.389474%, Supp: 56.782211%)
+['0-20_bus_routes', '0-25_total_transit_ways'] => ['General Academic'], (Conf: 91.323995%, Supp: 79.306736%)
+['>50%_of_class_PASSED_TEST', '0-20_bus_routes'] => ['General Academic'], (Conf: 91.186757%, Supp: 51.157619%)
+['>50%_of_class_PASSED_TEST', '0-25_total_transit_ways'] => ['General Academic'], (Conf: 90.957944%, Supp: 50.922171%)
+['0-25_total_transit_ways', '<10%_unbanked'] => ['General Academic'], (Conf: 90.838287%, Supp: 57.972531%)
+['General Academic', 'Yes_Free_Public_wifi'] => ['0-25_total_transit_ways'], (Conf: 90.779153%, Supp: 68.122956%)
+['0-20_bus_routes', '0-25_total_transit_ways', 'Yes_Free_Public_wifi'] => ['General Academic'], (Conf: 90.769502%, Supp: 67.272727%)
+['51%-75%_mobile_broadband'] => ['General Academic'], (Conf: 90.730876%, Supp: 55.696534%)
+['0-25_total_transit_ways'] => ['General Academic'], (Conf: 90.726817%, Supp: 80.497057%)
+['0-25_total_transit_ways', 'Yes_Free_Public_wifi'] => ['General Academic'], (Conf: 90.636965%, Supp: 68.122956%)
+['0-20_bus_routes'] => ['General Academic'], (Conf: 90.555229%, Supp: 80.640942%)
+['General Academic', 'High school'] => ['0-25_total_transit_ways'], (Conf: 90.397223%, Supp: 61.321125%)
+['0-20_bus_routes', '<10%_unbanked'] => ['General Academic'], (Conf: 90.323236%, Supp: 58.116416%)
+['General Academic', 'High school'] => ['0-20_bus_routes'], (Conf: 90.262245%, Supp: 61.229562%)
+['1-5_subway_stops', '0-20_bus_routes'] => ['General Academic'], (Conf: 90.240729%, Supp: 54.427731%)
+['1-5_subway_stops', '0-20_bus_routes', '0-25_total_transit_ways'] => ['General Academic'], (Conf: 90.240729%, Supp: 54.427731%)
+['General Academic', '>50%_of_class_PASSED_TEST'] => ['0-20_bus_routes'], (Conf: 90.011507%, Supp: 51.157619%)
