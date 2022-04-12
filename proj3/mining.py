@@ -4,6 +4,7 @@ Description: File which extracts association rules from desired dataset
 Authors: Matthew Duran and Ethan Garry
 """
 
+from ast import Del
 from enum import unique
 import sys
 import csv
@@ -65,16 +66,7 @@ def get_frequency_counts(datafile, combinations, iteration):
 				row_set = set(row) # convert row to set for easy lookup
 				for combo in list_of_combos:
 					if combo[0].issubset(row_set):
-						freq_counts[combo[1]] += 1
-				# loop through all elems in combo to make sure they also exist 											
-				# for combo in list_combos:					
-				# 	trigger = True
-				# 	for item in combo:					
-				# 		if item not in row_set:
-				# 			trigger = False
-				# 			break
-				# 	if trigger:										
-				# 		freq_counts[combo] += 1
+						freq_counts[combo[1]] += 1				
 
 			num_transactions += 1
 	
@@ -102,14 +94,13 @@ def get_association_rules(high_support_itemsets, num_transactions, min_conf):
 	'''
 	
 	returns: nothing, but adds high_confidence rules to the 
-	HIGH_CONFIDENCE set 	
+	HIGH_CONFIDENCE list 	
 
 	:param high_support_itemsets: list of items that meet min_sup threshold
-
+	:param num_transactions: number of transactions in the dataset
+	:param min_conf: minimum confidence specified by user
 	'''
 
-	
-	# print(FREQUENT_ITEMS["M"])
 	for itemset in high_support_itemsets:				
 		supp_LHS_U_RHS = FREQUENT_ITEMS[itemset]		
 		for item in itemset:
@@ -128,6 +119,32 @@ def get_association_rules(high_support_itemsets, num_transactions, min_conf):
 				assoc_rule = "{} => [\'{}\']".format(LHS, RHS)
 				HIGH_CONFIDENCE.append((assoc_rule, conf, supp_LHS_U_RHS/num_transactions))
 	return
+
+def generate_optimized_combinations(Lk, iteration):
+	'''
+
+	returns: list of combinations for the next iteration
+	in a set of tuples more efficiently than brute force
+
+	uses the outline/algorithm specified in secrtion 2.1.1
+	http://www.cs.columbia.edu/~gravano/Qual/Papers/agrawal94.pdf
+
+	:param Lk: frequency distribution of previous iterations combinations
+	:param iteration: current iteration number 
+	
+
+	'''
+	Ck = set()
+
+	for c in Ck:
+		k_minus_1_subsets = combinations(c,len(c)-1)
+		for s in k_minus_1_subsets:
+			if s not in Lk.keys():
+				Ck.remove(c)
+				break
+
+
+	return Ck
 
 def main() -> None:
 
@@ -189,7 +206,12 @@ def main() -> None:
 	while len(Lk.keys()) > 0:
 		print('\nWorking on iteration {}...'.format(i))
 		# phase 1: use Lk-1 to generate Lk candidates
-		Ck = combinations(L1.keys(), i) # creates list of combinations depending on iteration				
+
+		Ck = generate_optimized_combinations(Lk, i)
+
+		Ck = combinations(L1.keys(), i) # creates list of combinations depending on iteration	
+
+					
 
 		# scan database to find frequency for each itemset		
 		print('Getting frequency counts...')
