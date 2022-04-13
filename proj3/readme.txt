@@ -75,7 +75,7 @@ cleaning to do (for poorly kept data).
 *) Filter (1,2,4,5) on year to 2018-2019, and clean out a majority of the
 features.
 
-*) Delete NTA column
+*) Delete NTA column, Number of busways, and Number of subways columns.
 
 -------------------------------------
 Final File

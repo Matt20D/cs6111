@@ -43,8 +43,7 @@ def get_frequency_counts(datafile, combinations, iteration):
 		combo_set = set(combo)
 		list_of_combos.append((combo_set, combo))
 
-	print('NUMBER OF COMBINATIONS TO GO THROUGH')
-	print(len(list_of_combos))
+	print('Number of combinations to go through: ', len(list_of_combos))	
 
 	freq_counts = defaultdict(int)
 	with open(datafile) as csv_file:
@@ -132,24 +131,53 @@ def generate_optimized_combinations(Lk, iteration):
 	:param Lk: frequency distribution of previous iterations combinations
 	:param iteration: current iteration number 
 	
-
 	'''
 
 	#NOTE: this function is comprised of two steps
-	# 1) join Lk-1 with itself and perform the SQL statement outlined in the paper
-	# 2) delete itemsets that contain subsets that did not occur in the previous iteration
+	# 1) join Lk-1 with itself and perform the SQL statement outlined in the paper	
 	
 	Ck = set()
 
+	if iteration == 2:
+		for s in Lk.keys():
+			for s2 in Lk.keys():
+				if s != s2:													
+					list_to_add = [s, s2]															
+					tup_to_add = tuple(sorted(list_to_add))					
+					Ck.add(tup_to_add)
+	else:
+		for tup in Lk.keys():
+			for tup2 in Lk.keys():								
+				if tup != tup2 and tup[:-1] == tup2[:-1] and tup[-1] < tup2[-1]:									
+					new_list = list(tup)
+					elem_to_add = tup2[-1]
+					new_list.append(elem_to_add)				
+					Ck.add(tuple(new_list))				
+	
+	Ck_before_delete = len(Ck)
+	# 2) delete itemsets that contain subsets that did not occur in the previous iteration -- the subsets need to be sorted
+	
+	new_Ck = set()
 	for c in Ck:
-		k_minus_1_subsets = combinations(c,len(c)-1)
-		for s in k_minus_1_subsets:
-			if s not in Lk.keys():
-				Ck.remove(c)
-				break
+		# print('Checking new combination...')
+		add_to_newCk = True		
+		for i in range(len(c)):
+			subset = c[:i] + c[i+1:]	
+			# print('Checking subset: ', subset)			
+			if len(subset) == 1:
+				if subset[0] not in Lk.keys():
+					add_to_newCk = False
+					break
+			elif subset not in Lk.keys():
+				add_to_newCk = False
+				break			
+		if add_to_newCk:
+			new_Ck.add(c)
 
 
-	return Ck
+	print("Number of itemsets pruned: ", Ck_before_delete-len(new_Ck))	
+	
+	return new_Ck
 
 def main() -> None:
 
@@ -212,17 +240,14 @@ def main() -> None:
 		print('\nWorking on iteration {}...'.format(i))
 		# phase 1: use Lk-1 to generate Lk candidates
 
-		Ck = generate_optimized_combinations(Lk, i)
+		Ck = generate_optimized_combinations(Lk, i) # this is the optimized implementation
 
-		Ck = combinations(L1.keys(), i) # creates list of combinations depending on iteration	
-
-					
-
+		# Ck = combinations(L1.keys(), i) # creates list of combinations depending on iteration -- this is the basic implementation
+				
 		# scan database to find frequency for each itemset		
 		print('Getting frequency counts...')
 		freq_counts = get_frequency_counts(datafile, Ck, i)
-		
-		
+				
 		# filter out items that don't meet min_sup
 		print('Checking min_sup...')
 		Lk = get_frequent_items(freq_counts, num_transactions, min_sup) 
@@ -243,11 +268,12 @@ def main() -> None:
 	# sort frequent_items
 	sorted_freq = sorted(FREQUENT_ITEMS.items(), key=lambda x: x[1], reverse=True)
 
-	sorted_conf = sorted(HIGH_CONFIDENCE, key=lambda x: x[1], reverse=True)
+	sorted_conf = sorted(HIGH_CONFIDENCE, key=lambda x: (x[1],x[2]), reverse=True)
 	# sort high_confidence
 	
 	# PRINT RESULTS
-	with open("output.txt", "w") as f:
+
+	with open("output3.txt", "w") as f:
 		f.write("==Frequent itemsets (min_sup={}%)\n".format((min_sup*100)))
 		for elem in sorted_freq:		
 			if isinstance(elem[0], str):				
