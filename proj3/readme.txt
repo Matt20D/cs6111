@@ -178,3 +178,32 @@ datasets.
 A Priori Implementation
 -------------------------------------
 
+We decided to implement A Priori exactly as presribed in section 2.1.1
+of http://www.cs.columbia.edu/~gravano/Qual/Papers/agrawal94.pdf. We implemented
+the SQL optimization with the following methodology (for iteration k):
+
+1) a nested for loop on k-1 candidate tuples 
+    a) check if outer tuple's first k-2 elements match inner tuples first k-2 elements 
+    AND check if last element of inner tuple is greater than the last element of the outer 
+    tuple
+        i) then add to Ck
+
+The first iteration of this method is handled slightly differently. Since python stores tuples
+of single values in a strange manner, we decided to just store itemsets of 1 value as strings.
+
+The pruning step is even simpler. We simply check if the first k-1 elements
+of all of the candidate tuples above (for iteration k) existed as a candidate
+tuple in the previous iteration. If it didn't, we remove the candidate tuple for iteration
+k.
+
+-------------------------------------
+example-run.txt
+-------------------------------------
+    
+Since our dataset is very large, using a low support threshold still takes a good chunk of time
+(even with the SQL optimization and pruning). We thought a good example threshold would be 
+min_sup = .2 and min_conf = .9. This still yields a large amount of results, but in particular 
+here are some good nuggets:
+
+
+

@@ -288,7 +288,7 @@ def main() -> None:
 	
 	# Write results to output.txt
 
-	with open("output.txt", "w") as f:
+	with open("example-run.txt", "w") as f:
 		f.write("==Frequent itemsets (min_sup={}%)\n".format((min_sup*100)))
 		for elem in sorted_freq:		
 			if isinstance(elem[0], str):				
