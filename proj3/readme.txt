@@ -166,6 +166,9 @@ features.
 
 *) Delete NTA column, Number of busways, and Number of subways columns.
 
+*) then would need to discretize all numeric values, using the observed ranges
+seen in our csb file
+
 -------------------------------------
 Final File
 -------------------------------------
@@ -205,5 +208,30 @@ Since our dataset is very large, using a low support threshold still takes a goo
 min_sup = .2 and min_conf = .9. This still yields a large amount of results, but in particular 
 here are some good nuggets:
 
+line number refers to the line in 'example-run.txt'
 
+line 3420) ['<10%_poor_percentage', 'Yes_Free_Public_wifi'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 52.64879%)
+explanation: neighborhoods that have less poor people and have free wifi, tend to be unbanked. This association
+seems to make sense with our hypothesis, and general economic analysis.
 
+line 3431) ['<10%_underbanked'] => ['<20%_foregin_born'], (Conf: 100.0%, Supp: 45.402224%)
+explanation: neighborhoods with less people that are unbanked, tend to be not foreign born. This association also
+seems to be in line with our hypothesis.
+
+line 3472) ['.71%-80%_mobile_broadband'] => ['0-25_total_transit_ways'], (Conf: 100.0%, Supp: 43.374755%)
+explanation: neighborhoods with high access to mobile broadband have 0-25 modes of transportation. Unfortunately there
+werent many data points similar to this, that could allow us to compare and constrast. I would have liked to have seen
+if there was a relationship between broadband access and mass transit connectivity given they are both government handled.
+
+line 3478) ['<10%_unbanked', '<5%_unemployment', 'General_Academic_School_Type'] => ['<10%_poor_percentage'], (Conf: 100.0%, Supp: 42.223676%)
+explanation: neighborhoods that have low unbanked population, tend to have low unemployment rates, and thus low poor percentage. General Academic
+schools is just a type of school, like technical/vocational schools. We would have liked more datapoints to contrast with this type of data.
+
+line 3728) ['<10%_poor_percentage', '>50%_of_class_PASSED_TEST', 'Yes_Free_Public_wifi'] => ['<10%_unbanked'], (Conf: 100.0%, Supp: 34.074559%)
+explanation: neighborhoods with low poor percentages, high pass rates, access to free broadband tend to be wealthier. This is exactly the 
+relationship that we were seeking. However, we had hoped to mine rules that were the opposite of what we saw, such as low access, or low quality access
+to internet yielded poor test scores.
+
+We didnt try to manufacture results that we thought would exist, rather extract the relationships that are inherent in the data.
+This was a fun project, and we hope that you can get some interesting insights into the socioeconomic, internet and transit infrastructure,
+and educational relationships that we desired to extract from NYC open data.
