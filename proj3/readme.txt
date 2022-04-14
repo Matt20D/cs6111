@@ -14,6 +14,7 @@ Ethan Garry (epg2136)
     ├── setup.sh* [Note: ensure that the shell file has executable permissions]   
     ├── run.sh* [Note: ensure that the shell file has executable permissions]   
     ├── requirements.txt
+    ├── example-run.txt
 
     ------------------------------------
     How to install and run our software
