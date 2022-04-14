@@ -23,10 +23,14 @@ FREQUENT_ITEMS = {} # tracks all itemsets that are above a certain min_supp thre
 
 HIGH_CONFIDENCE = []
 
+# Store the data from the DB file
+# list of sets
+# where ith element is the ith transaction stored as a set
+CSV_DATA = []
 
 
 
-def get_frequency_counts(datafile: str, combinations: set, iteration):
+def scan_database(combinations: set):
 	''''
 
 	returns: frequency dict of all item sets in combinations
@@ -37,39 +41,17 @@ def get_frequency_counts(datafile: str, combinations: set, iteration):
 	'''
 	# list_combos = list(combinations)
 
-	# this list will store a set version as well as a tuple version
-	list_of_combos = list()
-	for combo in combinations:
-		combo_set = set(combo)
-		list_of_combos.append((combo_set, combo))
+	print('\tNumber of combinations to go through: ', len(combinations))	
 
-	print('\tNumber of combinations to go through: ', len(list_of_combos))	
-
+	# get the support for an itemset
 	freq_counts = defaultdict(int)
 	
 	# scan the data
-	with open(datafile) as csv_file:
-		csv_reader = csv.reader(csv_file, delimiter=",")
-		num_transactions = 0
-
-		 # track frequency of item
-		for row in csv_reader:
-			if num_transactions == 0:
-				# print("colnames: {}".format(row))
-				pass
-			else:				
-				# print("{}) {}".format(num_transactions, row))
-				# print('\n')
-				
-				#NOTE: should we try and process the whole database so it's a list of sets? 
-				# So we don't have to keep doing this conversion?
-
-				row_set = set(row) # convert row to set for easy lookup
-				for combo in list_of_combos:
-					if combo[0].issubset(row_set):
-						freq_counts[combo[1]] += 1				
-
-			num_transactions += 1
+	for row_set in CSV_DATA:
+	
+		for combo in combinations:
+			if set(combo).issubset(row_set):
+				freq_counts[combo] += 1				
 	
 	return freq_counts
 
@@ -164,6 +146,7 @@ def generate_optimized_combinations(Lk, iteration):
 	
 	# 2) delete itemsets that contain subsets that did not occur in the previous iteration -- the subsets need to be sorted
 	new_Ck = set()
+	key_set = Lk.keys()
 	for c in Ck:
 		# print('Checking new combination...')
 		add_to_newCk = True		
@@ -173,12 +156,10 @@ def generate_optimized_combinations(Lk, iteration):
 			if len(subset) == 1:
 				# first get the intersection between subset and key_set
 				# if the intersection != subset, then subset is not a subset LOL
-				#if ( set(subset) & set(Lk.keys()) ) != set(subset):
-				if subset[0] not in Lk.keys():
+				if subset[0] not in key_set: 
 					add_to_newCk = False
 					break
-			#elif ( set(subset) & set(Lk.keys()) ) != set(subset):
-			elif subset not in Lk.keys():
+			elif subset not in key_set:
 				add_to_newCk = False
 				break			
 		if add_to_newCk:
@@ -240,6 +221,9 @@ def main() -> None:
 					if item != "":												
 						starting_freq[item] += 1
 				
+				# store the row that we read in, so we only touch the data once
+				CSV_DATA.append(set(row))
+
 				# increase the row count				
 				num_transactions += 1
 
@@ -255,11 +239,12 @@ def main() -> None:
 			sys.exit("There are 0 transactions in the \'{}\' csv file".format(datafile))
 	
 	print("\tThere are {} transactions in the \'{}\' file.\n".format(num_transactions, datafile))
-	
 	# do first pass to get unique items that also meet min_sup
 	# Lk is a frequency dictionary ==> {'item1': 2, 'item3': 3, 'item4': 1, ...}
 	print('Working on iteration 1...')
 	print("\tNumber of individual items: {}".format(len(starting_freq.keys())))
+	
+	# get the frequent itemsets that are above min support
 	L1 = get_frequent_items(starting_freq, num_transactions, min_sup)
 	Lk = L1
 
@@ -276,12 +261,13 @@ def main() -> None:
 
 		Ck = generate_optimized_combinations(Lk, i) # this is the optimized implementation
 
-		# Ck = combinations(L1.keys(), i) # creates list of combinations depending on iteration -- this is the basic implementation
+		#Ck = list(combinations(L1.keys(), i)) # creates list of combinations depending on iteration -- this is the basic implementation
 				
 		# scan database to find frequency for each itemset		
 		print('\tGetting frequency counts...')
-		freq_counts = get_frequency_counts(datafile, Ck, i)
-				
+		freq_counts = scan_database(Ck)
+		
+		# get the frequent itemsets that are above min support
 		# filter out items that don't meet min_sup
 		print('\tChecking min_sup...')
 		Lk = get_frequent_items(freq_counts, num_transactions, min_sup) 
@@ -292,19 +278,17 @@ def main() -> None:
 						
 		i+=1
 
-	# STEP 4: Again, find the significant items based on the support threshold
-
-	# STEP 5: Now, make a set of three items that are bought together based on the significant items from Step 4
 
 	# sort frequent_items
 	sorted_freq = sorted(FREQUENT_ITEMS.items(), key=lambda x: x[1], reverse=True)
 
-	sorted_conf = sorted(HIGH_CONFIDENCE, key=lambda x: (x[1],x[2]), reverse=True)
 	# sort high_confidence
-	
-	# PRINT RESULTS
+	sorted_conf = sorted(HIGH_CONFIDENCE, key=lambda x: (x[1],x[2]), reverse=True)
 
-	with open("output4.txt", "w") as f:
+	
+	# Write results to output.txt
+
+	with open("output.txt", "w") as f:
 		f.write("==Frequent itemsets (min_sup={}%)\n".format((min_sup*100)))
 		for elem in sorted_freq:		
 			if isinstance(elem[0], str):				
@@ -321,6 +305,7 @@ def main() -> None:
 
 	end_time = datetime.datetime.now()
 
+	print()
 	print('Algorithm Time Taken: {}'.format(end_time-start_time))
 		
 
@@ -355,11 +340,11 @@ if __name__ == "__main__":
 		print()
 	
 	# handles exceptions such as error in reading file
-	# except Exception as other_exception:
+	except Exception as other_exception:
 		
-	# 	print()
-	# 	print("Exception Error: {}".format(other_exception))
-	# 	print()
+		print()
+		print("Exception Error: {}".format(other_exception))
+		print()
 
 	finally:
 		
