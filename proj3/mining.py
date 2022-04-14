@@ -26,7 +26,7 @@ HIGH_CONFIDENCE = []
 
 
 
-def get_frequency_counts(datafile, combinations, iteration):
+def get_frequency_counts(datafile: str, combinations: set, iteration):
 	''''
 
 	returns: frequency dict of all item sets in combinations
@@ -43,9 +43,11 @@ def get_frequency_counts(datafile, combinations, iteration):
 		combo_set = set(combo)
 		list_of_combos.append((combo_set, combo))
 
-	print('Number of combinations to go through: ', len(list_of_combos))	
+	print('\tNumber of combinations to go through: ', len(list_of_combos))	
 
 	freq_counts = defaultdict(int)
+	
+	# scan the data
 	with open(datafile) as csv_file:
 		csv_reader = csv.reader(csv_file, delimiter=",")
 		num_transactions = 0
@@ -78,8 +80,8 @@ def get_frequent_items(itemset, num_transactions, min_sup):
 	returns: frequency dictionary of itemsets that meet min_sup
 
 	:param itemset: frequency dictionary of items
-	:param num_transactions: length of input file
-	:param min_sup: minimum frequency the itemset needs to meet)
+	:param num_transactions: length of input file - column header
+	:param min_sup: minimum support frequency the itemset needs to meet
 
 	'''
 	res = {}
@@ -134,6 +136,7 @@ def generate_optimized_combinations(Lk, iteration):
 	'''
 
 	#NOTE: this function is comprised of two steps
+	
 	# 1) join Lk-1 with itself and perform the SQL statement outlined in the paper	
 	
 	Ck = set()
@@ -147,7 +150,10 @@ def generate_optimized_combinations(Lk, iteration):
 					Ck.add(tup_to_add)
 	else:
 		for tup in Lk.keys():
-			for tup2 in Lk.keys():								
+			for tup2 in Lk.keys():
+				# SQL optimization for sorting
+				# ensure that tup_i_k-1 and tup2_i_k-1 are equivalent 
+				# and tup_k < tup2_k 								
 				if tup != tup2 and tup[:-1] == tup2[:-1] and tup[-1] < tup2[-1]:									
 					new_list = list(tup)
 					elem_to_add = tup2[-1]
@@ -155,19 +161,23 @@ def generate_optimized_combinations(Lk, iteration):
 					Ck.add(tuple(new_list))				
 	
 	Ck_before_delete = len(Ck)
-	# 2) delete itemsets that contain subsets that did not occur in the previous iteration -- the subsets need to be sorted
 	
+	# 2) delete itemsets that contain subsets that did not occur in the previous iteration -- the subsets need to be sorted
 	new_Ck = set()
 	for c in Ck:
 		# print('Checking new combination...')
 		add_to_newCk = True		
 		for i in range(len(c)):
-			subset = c[:i] + c[i+1:]	
+			subset = c[:i] + c[i+1:]
 			# print('Checking subset: ', subset)			
 			if len(subset) == 1:
+				# first get the intersection between subset and key_set
+				# if the intersection != subset, then subset is not a subset LOL
+				#if ( set(subset) & set(Lk.keys()) ) != set(subset):
 				if subset[0] not in Lk.keys():
 					add_to_newCk = False
 					break
+			#elif ( set(subset) & set(Lk.keys()) ) != set(subset):
 			elif subset not in Lk.keys():
 				add_to_newCk = False
 				break			
@@ -175,7 +185,7 @@ def generate_optimized_combinations(Lk, iteration):
 			new_Ck.add(c)
 
 
-	print("Number of itemsets pruned: ", Ck_before_delete-len(new_Ck))	
+	print("\tNumber of itemsets pruned: ", Ck_before_delete-len(new_Ck))	
 	
 	return new_Ck
 
@@ -202,39 +212,63 @@ def main() -> None:
 	# followed tutorial: https://realpython.com/python-csv/ to read the csv
 	# in a clean manner. I have used this code before to read other csv's
 
+	#
+	# Read in the CSV, and do first pass on it
+	#
 	starting_freq = defaultdict(int) # dictionary to track starting frequencies
-	print('Working on iteration 1...')
+	
+	print("Reading data from \'{}\' file".format(datafile))
 	with open(datafile) as csv_file:
 		csv_reader = csv.reader(csv_file, delimiter=",")
 		num_transactions = 0
 
 		 # track frequency of item
 		for row in csv_reader:
+			
+			# this is row 1, i.e the col headers
 			if num_transactions == 0:
 				# print("colnames: {}".format(row))
 				# print('\n')
-				pass
+				
+				# essentially skip the col headers
+				num_transactions = 1
+				#pass
 			else:				
 				# print("{}) {}".format(num_transactions, row))
 				# print('\n')
 				for item in row:
 					if item != "":												
 						starting_freq[item] += 1
-			num_transactions += 1
+				
+				# increase the row count				
+				num_transactions += 1
 
 			# temporary break for testing
 			# if num_transactions == 6:
 			# 	break
+		
+		# subtract one to remove column header "transaction"
+		num_transactions = num_transactions-1
+
+		# sanity check that the file has data
+		if num_transactions <= 0:
+			sys.exit("There are 0 transactions in the \'{}\' csv file".format(datafile))
+	
+	print("\tThere are {} transactions in the \'{}\' file.\n".format(num_transactions, datafile))
+	
 	# do first pass to get unique items that also meet min_sup
 	# Lk is a frequency dictionary ==> {'item1': 2, 'item3': 3, 'item4': 1, ...}
-	num_transactions = num_transactions-1
+	print('Working on iteration 1...')
 	print("\tNumber of individual items: {}".format(len(starting_freq.keys())))
 	L1 = get_frequent_items(starting_freq, num_transactions, min_sup)
-	
 	Lk = L1
-	# main loop --> create combinations based on iteration number, 
-	# stops when reaching max number of items (e.g. if there are 
+
+	#
+	# main loop --> create combinations based on iteration number 
+	# terminate when reaching max number of items (e.g. if there are 
 	# 3 total unique items ==> we want this loop to look at item1, item2, and item3)
+	#
+
 	i = 2
 	while len(Lk.keys()) > 0:
 		print('\nWorking on iteration {}...'.format(i))
@@ -245,15 +279,15 @@ def main() -> None:
 		# Ck = combinations(L1.keys(), i) # creates list of combinations depending on iteration -- this is the basic implementation
 				
 		# scan database to find frequency for each itemset		
-		print('Getting frequency counts...')
+		print('\tGetting frequency counts...')
 		freq_counts = get_frequency_counts(datafile, Ck, i)
 				
 		# filter out items that don't meet min_sup
-		print('Checking min_sup...')
+		print('\tChecking min_sup...')
 		Lk = get_frequent_items(freq_counts, num_transactions, min_sup) 
 
 		# get association rule
-		print('Getting association rules...')
+		print('\tGetting association rules...')
 		get_association_rules(Lk, num_transactions, min_conf)
 						
 		i+=1
@@ -261,9 +295,6 @@ def main() -> None:
 	# STEP 4: Again, find the significant items based on the support threshold
 
 	# STEP 5: Now, make a set of three items that are bought together based on the significant items from Step 4
-
-	print("\nThere are {} transactions in the csv file,".format(num_transactions))
-
 
 	# sort frequent_items
 	sorted_freq = sorted(FREQUENT_ITEMS.items(), key=lambda x: x[1], reverse=True)
@@ -273,7 +304,7 @@ def main() -> None:
 	
 	# PRINT RESULTS
 
-	with open("output3.txt", "w") as f:
+	with open("output4.txt", "w") as f:
 		f.write("==Frequent itemsets (min_sup={}%)\n".format((min_sup*100)))
 		for elem in sorted_freq:		
 			if isinstance(elem[0], str):				
@@ -290,7 +321,7 @@ def main() -> None:
 
 	end_time = datetime.datetime.now()
 
-	print('Time Taken: {}'.format(end_time-start_time))
+	print('Algorithm Time Taken: {}'.format(end_time-start_time))
 		
 
 """
