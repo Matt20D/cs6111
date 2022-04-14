@@ -1,3 +1,28 @@
+------------------------------------------------------------
+Proj 3: Readme 
+Matthew Duran (md3420)
+Ethan Garry (epg2136)
+------------------------------------------------------------
+    --------------------------------------
+    Directory Structure of proj2
+    --------------------------------------
+
+├── proj3/
+    ├── readme.txt <-- You are reading this file 
+    ├── mining.py 
+    ├── integrated_data_final.csv
+    ├── setup.sh* [Note: ensure that the shell file has executable permissions]   
+    ├── run.sh* [Note: ensure that the shell file has executable permissions]   
+    ├── requirements.txt
+
+    ------------------------------------
+    How to install and run our software
+    ------------------------------------
+
+    1) source setup.sh to install our package dependenciess
+    2) ensure that integrated_data_final.csv is within the same dir
+    3) Feel free to use run.sh to test, or of course use the command line
+    
 -------------------------------------
 proj3 data sources
 -------------------------------------
