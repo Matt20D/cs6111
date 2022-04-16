@@ -11,17 +11,15 @@ Ethan Garry (epg2136)
     ├── readme.txt <-- You are reading this file 
     ├── mining.py 
     ├── integrated_data_final.csv
-    ├── setup.sh* [Note: ensure that the shell file has executable permissions]   
     ├── run.sh* [Note: ensure that the shell file has executable permissions]   
-    ├── requirements.txt
     ├── example-run.txt
 
     ------------------------------------
     How to install and run our software
     ------------------------------------
 
-    1) source setup.sh to install our package dependenciess
-    2) ensure that integrated_data_final.csv is within the same dir
+    1) Our Code should work out of the box, we just use builtins
+    2) Ensure that integrated_data_final.csv is within the same dir
     3) Feel free to use run.sh to test, or of course use the command line
     
 -------------------------------------
@@ -151,6 +149,8 @@ For example:
 How To reproduce the Dataset
 -------------------------------------
 
+The Numbers refer to the links above in 'Proj3 Data Sources'
+
 *) retrieve (2), and clean the NTA codes, by breaking them up into single
 neighborhoods.
 
@@ -175,7 +175,7 @@ Final File
 integrated_data_final.csv will contain the union of the most interesting
 columns of data from the above 5 sources. This was not a trivial process.
 Took about 2 days of data wrangling and sourcing 5 different NYC open
-datasets.
+datasets. There are 7645 rows in the CSV.
 
 -------------------------------------
 A Priori Implementation
