@@ -4,13 +4,13 @@ Description: File which extracts association rules from desired dataset
 Authors: Matthew Duran and Ethan Garry
 """
 
-from ast import Del
-from enum import unique
+#from ast import Del
+#from itertools import combinations
+#from enum import unique
+#from tracemalloc import start
 import sys
 import csv
 from collections import defaultdict
-from itertools import combinations
-from tracemalloc import start
 import datetime
 
 FREQUENT_ITEMS = {} # tracks all itemsets that are above a certain min_supp threshold
@@ -288,7 +288,7 @@ def main() -> None:
 	
 	# Write results to output.txt
 
-	with open("example-run.txt", "w") as f:
+	with open("output.txt", "w") as f:
 		f.write("==Frequent itemsets (min_sup={}%)\n".format((min_sup*100)))
 		for elem in sorted_freq:		
 			if isinstance(elem[0], str):				
