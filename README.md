@@ -1,4 +1,6 @@
-# cs6111
+# Advanced Databases
+
+In this course we moved beyond traditional RDBMs to learn how to source and process text databases efficiently. We also learned how to web scrape and exrtract information and data relations from text data. Lastly, using real world data that we wrangled we learn how to mine rule associations using support and confidence metrics with an Apriori Algorithm.
 
 Matt Duran and Ethan Garry Homework Assignments for cs6111
 
