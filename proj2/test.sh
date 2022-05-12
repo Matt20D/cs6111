@@ -1,20 +1,21 @@
 # actual tests
 
-#python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 2 0.7 "bill gates microsoft" 10
-# python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 1 0.7 "mark zuckerberg harvard" 10
- python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 2 0.7 "sundar pichai google" 40
-# python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 3 0.7 "megan repinoe redding" 2
+#python3 iterative-set-expansion.py <engine-key> <client-key> 2 0.7 "bill gates microsoft" 10
+# python3 iterative-set-expansion.py <engine-key> <client-key> 1 0.7 "mark zuckerberg harvard" 10
+ python3 iterative-set-expansion.py <engine-key> <client-key> 2 0.7 "sundar pichai google" 40
+# python3 iterative-set-expansion.py <engine-key> <client-key> 3 0.7 "megan repinoe redding" 2
+
 
 # uncomment to produce transcripts
 
 #echo "test 1"
-#python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 2 0.7 "bill gates microsoft" 10 > bill_gates_microsoft.txt
+#python3 iterative-set-expansion.py <engine-key> <client-key> 2 0.7 "bill gates microsoft" 10 > bill_gates_microsoft.txt
 #echo "test 2"
-# python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 1 0.7 "mark zuckerberg harvard" 10 > mark_zuckerberg_harvard.txt
+# python3 iterative-set-expansion.py <engine-key> <client-key> 1 0.7 "mark zuckerberg harvard" 10 > mark_zuckerberg_harvard.txt
 #echo "test 3"
-# python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 2 0.7 "sundar pichai google" 40 > sundar_pichai_google.txt
+# python3 iterative-set-expansion.py <engine-key> <client-key> 2 0.7 "sundar pichai google" 40 > sundar_pichai_google.txt
 #echo "test 4"
-#  python3 iterative-set-expansion.py AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME 7c642eecbff553d82 3 0.7 "megan repinoe redding" 2 > megan_repinoe_redding.txt
+#  python3 iterative-set-expansion.py <engine-key> <client-key> 3 0.7 "megan repinoe redding" 2 > megan_repinoe_redding.txt
 
 # format of program, and tests
 #  python3 google-query.py <google API Key> <google engine id> <r> <t> <"seed query"> <k>

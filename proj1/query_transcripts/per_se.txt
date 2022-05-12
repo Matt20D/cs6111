@@ -3,8 +3,8 @@
 +                     Written by Matt Duran and Ethan Garry                      +
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
- Engine Key                     = 7c642eecbff553d82
+ Client Key                     = <client-key>
+ Engine Key                     = <engine-key>
  Desired Precision              = 0.9
  Calculated Precision@10        = N/A
  Query                          = per se
@@ -98,8 +98,8 @@
  calculating n_gram probabilities for ['per', 'se', 'cocktails', 'bakery'] ...
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
- Engine Key                     = 7c642eecbff553d82
+ Client Key                     = <client-key>
+ Engine Key                     = <engine-key>
  Desired Precision              = 0.9
  Calculated Precision@10        = 0.4
  Query                          = cocktails bakery per se
@@ -193,8 +193,8 @@
  calculating n_gram probabilities for ['cocktails', 'bakery', 'per', 'se', 'bouchon', 'daily'] ...
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
- Engine Key                     = 7c642eecbff553d82
+ Client Key                     = <client-key>
+ Engine Key                     = <engine-key>
  Desired Precision              = 0.9
  Calculated Precision@10        = 0.8
  Query                          = daily cocktails per se bouchon bakery

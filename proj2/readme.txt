@@ -5,8 +5,8 @@ Ethan Garry (epg2136)
 ------------------------------------------------------------
 ------------------------------------------------------------
 credentials for Google Programmable Search Engine:        
-search_engine_id=7c642eecbff553d82                        
-JSON_API_KEY=AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME      
+search_engine_id=<client-key>                        
+JSON_API_KEY=<api-key>     
 project=cs6111                                            
 ------------------------------------------------------------
 

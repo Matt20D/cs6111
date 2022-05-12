@@ -3,8 +3,8 @@
 +                     Written by Matt Duran and Ethan Garry                      +
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
- Engine Key                     = 7c642eecbff553d82
+ Client Key                     = <client-key>
+ Engine Key                     = <engine-key>
  Desired Precision              = 0.9
  Calculated Precision@10        = N/A
  Query                          = cases
@@ -98,8 +98,8 @@
  calculating n_gram probabilities for ['cases', 'data', 'covid'] ...
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Client Key                     = AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
- Engine Key                     = 7c642eecbff553d82
+ Client Key                     = <client-key>
+ Engine Key                     = <engine-key>
  Desired Precision              = 0.9
  Calculated Precision@10        = 0.6
  Query                          = cases covid data

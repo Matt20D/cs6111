@@ -5,8 +5,8 @@ Loading pre-trained spanBERT from ./pretrained_spanbert
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- Client Key  				= AIzaSyANgIgrPnITWd3HBYXVJpV_WM3mVQd8pME
- Engine Key  				= 7c642eecbff553d82
+ Client Key  				= <client-key>
+ Engine Key  				= <engine-key>
  Field to Extract			= per:cities_of_residence
  Confidence Threshold			= 0.7
  Desired Number of Tuples		= 2
